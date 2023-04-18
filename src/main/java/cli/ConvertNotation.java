@@ -8,6 +8,9 @@ import java.util.List;
 public class ConvertNotation
 {
 
+    /**
+     * Convert the data in infix to postfix for compute
+     */
     private static List<String> convertInfix(List<String> data)
     {
         List<String> buff = new ArrayList<>();
@@ -34,6 +37,10 @@ public class ConvertNotation
         return buff;
     }
 
+
+    /**
+     * Convert the data in prefix to postfix for compute
+     */
     private static List<String> convertPrefix(List<String> data)
     {
         List<String> buff = new ArrayList<>();
@@ -42,6 +49,7 @@ public class ConvertNotation
 
         return buff;
     }
+
 
     /**
      * Convert the data in postif for compute

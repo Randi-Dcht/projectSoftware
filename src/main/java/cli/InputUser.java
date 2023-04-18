@@ -58,10 +58,7 @@ public class InputUser
     public static boolean isDecimalNumber(String input)
     {
         String[] parts = input.split(".");
-        if(parts.length != 0 && isNumber(parts[0]) && isNumber(parts[1])){
-            return true;
-        }
-        return false;
+        return parts.length != 0 && isNumber(parts[0]) && isNumber(parts[1]);
     }
 
     public static boolean isENotationNumber(String input)
@@ -191,6 +188,24 @@ public class InputUser
 
 
     /**
+     * Add bracket
+     */
+    protected List<String> preProcessInput(List<String> inputUser)
+    {
+        if (! inputUser.get(inputUser.size() - 1).equals(")") || ! inputUser.get(0).equals("("))
+        {
+            List<String> newInput = new ArrayList<>();
+            newInput.add("(");
+            newInput.addAll(inputUser);
+            newInput.add(")");
+            return newInput;
+        }
+        else
+            return inputUser;
+    }
+
+
+    /**
      * Compute the input of user
      * @param isVerbose : boolean to display the expression
      */
@@ -198,7 +213,7 @@ public class InputUser
     {
         //String operator = null;
         Expression e = null;
-        for (String s : ConvertNotation.transformNotation(Notation.INFIX, user_input_list, isVerbose))
+        for (String s : ConvertNotation.transformNotation(Notation.INFIX, preProcessInput(user_input_list), isVerbose))
         {
             s.replaceAll(",",".");
             if (isNumber(s))
