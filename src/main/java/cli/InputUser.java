@@ -53,7 +53,7 @@ public class InputUser
     public static boolean isDecimalNumber(String input)
     {
         String[] parts = input.split(".");
-        if(isNumber(parts[0])&&isNumber(parts[1])){
+        if(parts.length != 0 && isNumber(parts[0]) && isNumber(parts[1])){
             return true;
         }
         return false;
@@ -197,19 +197,22 @@ public class InputUser
             s.replaceAll(",",".");
             if (isNumber(s))
                 list_of_expression.add(new MyNumber(new BigDecimal(s)));
-
             else if (isOperator(s))
                 operator = s;
-
-            else if (isENotationNumber(s)) {
+            else if (isENotationNumber(s))
+            {
                 String[] parts = s.split("E");
                 list_of_expression.add(new MyNumber(new BigDecimal(parts[0]),Integer.parseInt(parts[1])));
             }
-            else if (isScientificNotationNumber(s)) {
+            else if (isScientificNotationNumber(s))
+            {
                 String[] parts = s.split("x10\\^");
                 list_of_expression.add(new MyNumber(new BigDecimal(parts[0]),Integer.parseInt(parts[1])));
             }
         }
+
+        ConvertNotation.transformNotation(Notation.INFIX, user_input_list);
+
         if (operator != null)
         {
             Expression e = getOperator(operator, list_of_expression, this.notation);
