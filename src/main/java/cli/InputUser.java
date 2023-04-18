@@ -47,7 +47,12 @@ public class InputUser
      */
     public static boolean isNumber(String input)
     {
-        return listNumbers.contains(input);
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     public static boolean isDecimalNumber(String input)
@@ -105,9 +110,9 @@ public class InputUser
         Notation notation;
         switch (input.toLowerCase())
         {
-            case "prefix"		->	notation = Notation.PREFIX;
-            case "postfix"		->	notation = Notation.POSTFIX;
-            default				->	notation = Notation.INFIX;
+            case "prefix" -> notation = Notation.PREFIX;
+            case "postfix" -> notation = Notation.POSTFIX;
+            default -> notation = Notation.INFIX;
         }
         return notation;
     }
@@ -126,11 +131,11 @@ public class InputUser
             //construct another type of operation depending on the input value
             //of the parameterised test
             switch (inputUser){
-                case "+"	->	e = new Plus(params, notation);
-                case "-"	->	e = new Minus(params, notation);
-                case "*"	->	e = new Times(params, notation);
-                case "/"	->	e = new Divides(params, notation);
-                default		->	System.out.println("Error"); //TODO : handle exception
+                case "+" -> e = new Plus(params, notation);
+                case "-" -> e = new Minus(params, notation);
+                case "*" -> e = new Times(params, notation);
+                case "/" -> e = new Divides(params, notation);
+                default -> System.out.println("Error"); //TODO : handle exception
             }
         } catch (IllegalConstruction ignored){}//TODO : handle exception
         return e;
@@ -191,14 +196,19 @@ public class InputUser
      */
     public MyNumber compute(boolean isVerbose)
     {
-        String operator = null;
-        for (String s : user_input_list)
+        //String operator = null;
+        Expression e = null;
+        for (String s : ConvertNotation.transformNotation(Notation.INFIX, user_input_list, isVerbose))
         {
             s.replaceAll(",",".");
             if (isNumber(s))
                 list_of_expression.add(new MyNumber(new BigDecimal(s)));
             else if (isOperator(s))
-                operator = s;
+            {
+                e = getOperator(s, list_of_expression, this.notation);
+                list_of_expression.clear();
+                list_of_expression.add(e);
+            }
             else if (isENotationNumber(s))
             {
                 String[] parts = s.split("E");
@@ -211,11 +221,8 @@ public class InputUser
             }
         }
 
-        ConvertNotation.transformNotation(Notation.INFIX, user_input_list);
-
-        if (operator != null)
+        if (e != null)
         {
-            Expression e = getOperator(operator, list_of_expression, this.notation);
             if (isVerbose)
                 System.out.println("$> " + e.toString());
             return new Calculator().eval(e);

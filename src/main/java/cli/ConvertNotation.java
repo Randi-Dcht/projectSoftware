@@ -46,13 +46,24 @@ public class ConvertNotation
     /**
      * Convert the data in postif for compute
      */
-    public static List<String> transformNotation(Notation notationIn, List<String> data)
+    public static List<String> transformNotation(Notation notationIn, List<String> data, boolean isPrint)
     {
+        List<String> array;
+
         if (notationIn.equals(Notation.INFIX))
-            return convertInfix(data);
+            array = convertInfix(data);
         else if (notationIn.equals(Notation.PREFIX))
-            return convertPrefix(data);
+            array = convertPrefix(data);
         else
-            return data;
+            array = data;
+
+        if (isPrint)
+        {
+            for (String word : array)
+                System.out.print(word + " ");
+            System.out.println(" ");
+        }
+
+        return array;
     }
 }
