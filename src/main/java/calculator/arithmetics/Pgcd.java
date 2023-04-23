@@ -58,7 +58,7 @@ public class Pgcd extends Operation
      * @param b : integer
      * @return a pgcd (integer)
      */
-    private int pgcd(int a, int b)
+    public static int pgcd(int a, int b)
     {
         if (a == 0)
             return b;

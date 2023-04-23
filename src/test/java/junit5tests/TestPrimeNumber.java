@@ -38,6 +38,7 @@ public class TestPrimeNumber
         assertEquals(1, op.calculate(6, 35));
         assertEquals(3, op.calculate(6, 27));
         assertEquals(5, op.calculate(5, 10));
+        assertEquals(0, op.calculate(0, 0));
     }
 
     @Test
