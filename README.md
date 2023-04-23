@@ -1,15 +1,19 @@
-Code quality: ![Maven Build](https://github.com/tommens/calculator-cucumber/actions/workflows/maven.yml/badge.svg)
+# Calculating arithmetic expressions
+
+## Code quality
+
+![Maven Build](https://github.com/tommens/calculator-cucumber/actions/workflows/maven.yml/badge.svg)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/6856a0f94d25446ca346cbc15a701d43)](https://www.codacy.com/gh/tommens/calculator-cucumber/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tommens/calculator-cucumber&amp;utm_campaign=Badge_Grade)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=tommens_calculator-cucumber&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=tommens_calculator-cucumber)
 
-Test coverage: ![Coverage](.github/badges/jacoco.svg)
+## Test coverage
+
+![Coverage](.github/badges/jacoco.svg)
 ![Branches](.github/badges/branches.svg)
 
 ## SonarCloud (informations)
 
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=Randi-Dcht_projectSoftware)](https://sonarcloud.io/summary/new_code?id=Randi-Dcht_projectSoftware)
-
-# Calculating arithmetic expressions
 
 ## About
 
