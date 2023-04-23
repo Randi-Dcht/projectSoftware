@@ -195,7 +195,6 @@ public class MyNumber implements Expression
 
         return switch (n) {
             case CARTESIAN ->
-                //String.format("%,.2f+%,.2fi", real, imag);
                 String.format("%s%s", "", (value.signum() == 0 && imaginary.signum() != 0) ? String.format("%si", format.format(imag)) :
                     (imaginary.signum() == 0) ? String.format("%s", format.format(real)) :
                             String.format("%s+%si", format.format(real),format.format(imag)));
@@ -210,13 +209,11 @@ public class MyNumber implements Expression
                             (Double.compare(O,0)!=0) ? String.format("*e^(%s*i)", O):"");
 
             case SCIENTIFIC ->
-                    //String.format(value.toString() + "x10^" + (exp)+" + "+ imaginary.toString() + "x10^" + (imaginaryExp)+"i");
                     String.format("%s%s", "", (value.signum() == 0 && imaginary.signum() != 0) ? String.format("i*%sx10^%s", imaginary,imaginaryExp) :
                             (imaginary.signum() == 0) ? String.format("%sx10^%s", value,exp) :
                                     String.format("%sx10^%s + i*%sx10^%s", value,exp,imaginary,imaginaryExp));
 
             case E_NOTATION ->
-                    //String.format(value.toString() + "E^" + (exp)+" + "+ imaginary.toString() + "E^" + (imaginaryExp)+"i");
             String.format("%s%s", "", (value.signum() == 0 && imaginary.signum() != 0) ? String.format("i*%sE^%s", imaginary,imaginaryExp) :
                     (imaginary.signum() == 0) ? String.format("%sE^%s", value,exp) :
                             String.format("%sE^%s + i*%sE^%s", value,exp,imaginary,imaginaryExp));

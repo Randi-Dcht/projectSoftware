@@ -43,25 +43,25 @@ public final class Minus extends Operation {
         neutral = 0;
     }
 
-    private MyNumber subtraction(BigDecimal l, int l_exp, BigDecimal r, int r_exp){
-        BigDecimal new_val;
+    private MyNumber subtraction(BigDecimal l, int lExp, BigDecimal r, int rExp){
+        BigDecimal newVal;
         int exp;
 
-        if (l_exp > r_exp) {
-            exp = l_exp;
-            int gap = l_exp - r_exp;
-            new_val = l.subtract(r.divide(BigDecimal.valueOf(pow(10,gap)), MathContext.DECIMAL128));
+        if (lExp > rExp) {
+            exp = lExp;
+            int gap = lExp - rExp;
+            newVal = l.subtract(r.divide(BigDecimal.valueOf(pow(10,gap)), MathContext.DECIMAL128));
 
-        } else if (l_exp < r_exp) {
-            exp = l_exp;
-            int gap = r_exp - l_exp;
-            new_val = l.subtract(r.multiply(BigDecimal.valueOf(pow(10,gap))), MathContext.DECIMAL128);
+        } else if (lExp < rExp) {
+            exp = lExp;
+            int gap = rExp - lExp;
+            newVal = l.subtract(r.multiply(BigDecimal.valueOf(pow(10,gap))), MathContext.DECIMAL128);
         } else {
-            exp = l_exp;
-            new_val = l.subtract(r);
+            exp = lExp;
+            newVal = l.subtract(r);
         }
 
-        return new MyNumber(new_val,exp);
+        return new MyNumber(newVal,exp);
 
     }
 
@@ -72,22 +72,21 @@ public final class Minus extends Operation {
      * @param r The second BigDecimal number that should be subtracted from the first
      * @return The BigDecimal number that is the result of the subtraction
      */
-    //public int op(int l, int r) {return (l-r);}
     public MyNumber op(MyNumber l, MyNumber r) {
 
-        BigDecimal l_val = l.getValue();
-        BigDecimal r_val = r.getValue();
-        int l_exp = l.getexp();
-        int r_exp = r.getexp();
+        BigDecimal lValue = l.getValue();
+        BigDecimal rValue = r.getValue();
+        int lExp = l.getexp();
+        int rExp = r.getexp();
 
-        MyNumber real = subtraction(l_val,l_exp,r_val,r_exp);
+        MyNumber real = subtraction(lValue,lExp,rValue,rExp);
 
-        BigDecimal li_val =  l.getImaginary();
-        BigDecimal ri_val =  r.getImaginary();
-        int li_exp = l.getImaginaryExp();
-        int ri_exp = r.getImaginaryExp();
+        BigDecimal lImaginary =  l.getImaginary();
+        BigDecimal rImaginary =  r.getImaginary();
+        int lImaginaryExp = l.getImaginaryExp();
+        int rImaginaryExp = r.getImaginaryExp();
 
-        MyNumber imaginary = subtraction(li_val,li_exp,ri_val,ri_exp);
+        MyNumber imaginary = subtraction(lImaginary,lImaginaryExp,rImaginary,rImaginaryExp);
 
         return new MyNumber(real.getValue(),real.getexp(),imaginary.getValue(),imaginary.getexp());
     }

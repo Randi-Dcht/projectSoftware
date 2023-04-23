@@ -61,15 +61,15 @@ public final class Divides extends Operation
         BigDecimal new_val2;
         int exp2;
 
-        int a_exp = l.getexp();
-        int c_exp = r.getexp();
-        int b_exp = l.getImaginaryExp();
-        int d_exp = r.getImaginaryExp();
+        int aExp = l.getexp();
+        int cExp = r.getexp();
+        int bExp = l.getImaginaryExp();
+        int dExp = r.getImaginaryExp();
 
-        MyNumber a = new MyNumber(l.getValue(),a_exp);
-        MyNumber b = new MyNumber(l.getImaginary(),b_exp);
-        MyNumber c = new MyNumber(r.getValue(),c_exp);
-        MyNumber d = new MyNumber(r.getImaginary(),d_exp);
+        MyNumber a = new MyNumber(l.getValue(),aExp);
+        MyNumber b = new MyNumber(l.getImaginary(),bExp);
+        MyNumber c = new MyNumber(r.getValue(),cExp);
+        MyNumber d = new MyNumber(r.getImaginary(),dExp);
 
         try{
             MyNumber den = additionOfMultiplication(c,c,d,d);
