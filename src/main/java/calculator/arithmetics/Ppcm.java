@@ -52,15 +52,7 @@ public class Ppcm extends Operation
     {
         if (l.getInteger() == 0 || r.getInteger() == 0)
             return new MyNumber(0);
-        try
-        {
-            return new MyNumber(ppcm(l.getInteger(), r.getInteger()));
-        }
-        catch (IllegalConstruction e)
-        {
-            e.printStackTrace();
-            return new MyNumber(-1);
-        }
+        return new MyNumber(ppcm(l.getInteger(), r.getInteger()));
     }
 
 
@@ -70,8 +62,8 @@ public class Ppcm extends Operation
      * @param b : integer
      * @return ppcm (integer)
      */
-    public int ppcm(int a, int b) throws IllegalConstruction
+    public int ppcm(int a, int b)
     {
-        return (a * b) / new Pgcd(args).op(new MyNumber(a),new MyNumber(b)).getInteger();
+        return (a * b) / Pgcd.pgcd(a, b);
     }
 }

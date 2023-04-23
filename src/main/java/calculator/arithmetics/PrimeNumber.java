@@ -61,13 +61,6 @@ public class PrimeNumber extends Operation
      */
     public int calculate(int a, int b)
     {
-        try
-        {
-            return new Pgcd(args).op(new MyNumber(a), new MyNumber(b)).getInteger();
-        }
-        catch (IllegalConstruction e)
-        {
-            return -1;
-        }
+        return Pgcd.pgcd(a, b);
     }
 }

@@ -37,4 +37,12 @@ public class TestPgcd
         assertEquals(1, op.op(new MyNumber(1), new MyNumber(1)).getInteger());
         assertEquals(1, op.op(new MyNumber(13), new MyNumber(7)).getInteger());
     }
+
+
+    @Test
+    void testCalculatePgcd2()
+    {
+        assertEquals(2, Pgcd.pgcd(8, 6));
+        assertEquals(20, Pgcd.pgcd(100, 40));
+    }
 }
