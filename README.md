@@ -5,6 +5,8 @@ Code quality: ![Maven Build](https://github.com/tommens/calculator-cucumber/acti
 Test coverage: ![Coverage](.github/badges/jacoco.svg)
 ![Branches](.github/badges/branches.svg)
 
+## SonarCloud (informations)
+
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=Randi-Dcht_projectSoftware)](https://sonarcloud.io/summary/new_code?id=Randi-Dcht_projectSoftware)
 
 # Calculating arithmetic expressions
