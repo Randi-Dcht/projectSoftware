@@ -50,7 +50,7 @@ public final class Times extends Operation {
 
     //public int op(int l, int r) { return (l*r); }
     public MyNumber op(MyNumber l, MyNumber r) {
-        BigDecimal new_val;
+        BigDecimal newVal;
         int exp;
         int exp2;
         int exp3;
@@ -58,29 +58,29 @@ public final class Times extends Operation {
 
         BigDecimal a = l.getValue();
         BigDecimal c = r.getValue();
-        int a_exp = l.getexp();
-        int c_exp = r.getexp();
+        int aExp = l.getexp();
+        int cExp = r.getexp();
 
         BigDecimal b = l.getImaginary();
         BigDecimal d = r.getImaginary();
-        int b_exp = l.getImaginaryExp();
-        int d_exp = r.getImaginaryExp();
+        int bExp = l.getImaginaryExp();
+        int dExp = r.getImaginaryExp();
 
-        new_val=a.multiply(c);
-        exp=a_exp+c_exp;
-        MyNumber tmp1 = new MyNumber(new_val,exp);
+        newVal=a.multiply(c);
+        exp=aExp+cExp;
+        MyNumber tmp1 = new MyNumber(newVal,exp);
 
-        new_val=b.multiply(d);
-        exp2=b_exp+d_exp;
-        MyNumber tmp2 = new MyNumber(new_val,exp2);
+        newVal=b.multiply(d);
+        exp2=bExp+dExp;
+        MyNumber tmp2 = new MyNumber(newVal,exp2);
 
-        new_val=a.multiply(d);
-        exp3=a_exp+d_exp;
-        MyNumber tmp3 = new MyNumber(new_val,exp3);
+        newVal=a.multiply(d);
+        exp3=aExp+dExp;
+        MyNumber tmp3 = new MyNumber(newVal,exp3);
 
-        new_val=b.multiply(c);
-        exp4=b_exp+c_exp;
-        MyNumber tmp4 = new MyNumber(new_val,exp4);
+        newVal=b.multiply(c);
+        exp4=bExp+cExp;
+        MyNumber tmp4 = new MyNumber(newVal,exp4);
 
         try{
             MyNumber real = new Minus(args).op(tmp1,tmp2);

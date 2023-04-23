@@ -29,7 +29,7 @@ public class Sqrt extends Operation
     public MyNumber op(MyNumber l, MyNumber r) {
         BigDecimal a = l.getValue();
         int exp = l.getexp();
-        int expi = l.getImaginaryExp();
+        int imaginaryExp = l.getImaginaryExp();
         BigDecimal real;
         BigDecimal imaginary;
         if(!l.isComplex()){
@@ -58,7 +58,7 @@ public class Sqrt extends Operation
                 real = tmp.getValue().sqrt(MathContext.DECIMAL128);
                 int expReal = tmp.getexp();
 
-                MyNumber li = new Divides(args).op(new MyNumber(b,expi),new MyNumber(b.abs(),expi));
+                MyNumber li = new Divides(args).op(new MyNumber(b,imaginaryExp),new MyNumber(b.abs(),imaginaryExp));
 
                 MyNumber numImaginary = new Minus(args).op(z,new MyNumber(a,exp));
                 MyNumber tmp2 = new Divides(args).op(numImaginary,den);
