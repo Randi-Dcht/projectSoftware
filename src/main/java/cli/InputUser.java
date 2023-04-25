@@ -1,6 +1,9 @@
 package cli;
 
 import calculator.*;
+import enums.TypeString;
+import parser.StringRegrex;
+import parser.Typos;
 
 
 import java.math.BigDecimal;
@@ -14,14 +17,6 @@ import java.util.List;
  */
 public class InputUser
 {
-
-    //--------------------STATIC--------------------//
-    /**List of operator*/
-    protected static String listOperators = "+-*/";
-    /**List of number*/
-    protected static String listNumbers = "0123456789";
-    //protected static String listRealNumbers = "0123456789.";
-
 
     /**
      * Method to clean the input of user (remove space)
@@ -42,49 +37,6 @@ public class InputUser
     }
 
 
-    /**
-     * @return boolean : is a number between 0 and 9
-     */
-    public static boolean isNumber(String input)
-    {
-        return listNumbers.contains(input);
-    }
-
-    public static boolean isDecimalNumber(String input)
-    {
-        String[] parts = input.split(".");
-        return isNumber(parts[0]) && isNumber(parts[1]);
-    }
-
-    public static boolean isENotationNumber(String input)
-    {
-        String[] parts = input.split("E");
-        if(isNumber(parts[0])&&isNumber(parts[1])){
-            return true;
-        }
-
-        return isDecimalNumber(parts[0]) && isNumber(parts[1]);
-    }
-
-    public static boolean isScientificNotationNumber(String input)
-    {
-        String[] parts = input.split("x10\\^");
-        if(isNumber(parts[0])&&isNumber(parts[1])){
-            return true;
-        }
-
-        return isDecimalNumber(parts[0]) && isNumber(parts[1]);
-    }
-
-
-    /**
-     * @return boolean : is an operator
-     */
-    public static boolean isOperator(String input)
-    {
-        return listOperators.contains(input);
-    }
-
 
     /**
      * @param input : string input of user
@@ -96,9 +48,9 @@ public class InputUser
         Notation notation;
         switch (input.toLowerCase())
         {
-            case "prefix"		->	notation = Notation.PREFIX;
-            case "postfix"		->	notation = Notation.POSTFIX;
-            default				->	notation = Notation.INFIX;
+            case "prefix" -> notation = Notation.PREFIX;
+            case "postfix" -> notation = Notation.POSTFIX;
+            default -> notation = Notation.INFIX;
         }
         return notation;
     }
@@ -117,23 +69,14 @@ public class InputUser
             //construct another type of operation depending on the input value
             //of the parameterised test
             switch (inputUser){
-                case "+"	->	e = new Plus(params, notation);
-                case "-"	->	e = new Minus(params, notation);
-                case "*"	->	e = new Times(params, notation);
-                case "/"	->	e = new Divides(params, notation);
-                default		->	System.out.println("Error"); //TODO : handle exception
+                case "+" -> e = new Plus(params, notation);
+                case "-" -> e = new Minus(params, notation);
+                case "*" -> e = new Times(params, notation);
+                case "/" -> e = new Divides(params, notation);
+                default -> System.out.println("Error"); //TODO : handle exception
             }
         } catch (IllegalConstruction ignored){}//TODO : handle exception
         return e;
-    }
-
-
-    /**
-     * @return boolean : is a boolean (true or false)
-     */
-    public static boolean isABoolean(String input)
-    {
-        return input.equalsIgnoreCase("true");
     }
 
 
@@ -143,7 +86,7 @@ public class InputUser
     /**Notation actual*/
     private Notation notation;
     /**List of string input of user without space*/
-    private List<String> user_input_list;
+    private List<Typos> user_input_list;
 
 
     /**
@@ -170,7 +113,7 @@ public class InputUser
      * Set the input of user
      * @param inputUser : list of string input of user without space
      */
-    public void setUserInput(List<String> inputUser)
+    public void setUserInput(List<Typos> inputUser)
     {
         this.user_input_list = inputUser;
     }
@@ -182,30 +125,33 @@ public class InputUser
      */
     public MyNumber compute(boolean isVerbose)
     {
-        String operator = null;
-        // System.out.println(user_input_list); // [2, +, 2]
-        for (String s : user_input_list)
+        //String operator = null;
+        Expression e = null;
+
+        for (Typos s : this.user_input_list)
         {
-            s.replaceAll(",",".");
-            if (isNumber(s))
-                list_of_expression.add(new MyNumber(new BigDecimal(s)));
-
-            else if (isOperator(s))
-                operator = s;
-
-            else if (isENotationNumber(s)) {
-                String[] parts = s.split("E");
+            if (s.getType().equals(TypeString.INTEGER))
+                list_of_expression.add(new MyNumber(new BigDecimal(s.getValue())));
+            else if (s.getType().equals(TypeString.OPERATOR))
+            {
+                e = getOperator(s.getValue(), list_of_expression, this.notation);
+                list_of_expression.clear();
+                list_of_expression.add(e);
+            }
+            else if (s.getType().equals(TypeString.E_NOTATION))
+            {
+                String[] parts = s.getValue().split("E");
                 list_of_expression.add(new MyNumber(new BigDecimal(parts[0]),Integer.parseInt(parts[1])));
             }
-            else if (isScientificNotationNumber(s)) {
-                String[] parts = s.split("x10\\^");
+            else if (s.getType().equals(TypeString.SCIENTIFIC))
+            {
+                String[] parts = s.getValue().split("x10\\^");
                 list_of_expression.add(new MyNumber(new BigDecimal(parts[0]),Integer.parseInt(parts[1])));
             }
         }
-        // System.out.println(list_of_expression); // [2, 2]
-        if (operator != null)
+
+        if (e != null)
         {
-            Expression e = getOperator(operator, list_of_expression, this.notation);
             if (isVerbose)
                 System.out.println("$> " + e.toString());
             return new Calculator().eval(e);

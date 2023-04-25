@@ -227,10 +227,10 @@ public class Memory {
      * convert a string expression to an object expression
      */
     public Expression analyzeString(String expressionString) {
-        List<Expression> expressions = new ArrayList<>();
+        List<Expression> expressions = new ArrayList<>();;
         // TODO : upgrade this part to handle recursive expressions
         String operator = null;
-        Notation notation = checkNotation(expressionString);
+        /*Notation notation = checkNotation(expressionString);
         for (int i = 0; i < expressionString.length(); i++) {
             if (isNumber(String.valueOf(expressionString.charAt(i)))) {
                 expressions.add(new MyNumber(new BigDecimal(expressionString.charAt(i))));
@@ -240,10 +240,13 @@ public class Memory {
             }
         }
         if (operator == null) {
-            return new MyNumber(new BigDecimal(expressionString));
+            Expression expression = new MyNumber(new BigDecimal(expressionString));
+            return expression;
         } else {
-            return getOperator(operator, expressions, notation);
-        }
+            Expression expression = getOperator(operator, expressions, notation);
+            return expression;
+        }*/
+        return null;
     }
 
     /**
@@ -267,13 +270,14 @@ public class Memory {
     }
 
     private Notation checkNotation(String expression) {
-        if (isOperator(String.valueOf(expression.charAt(0)))) {
+        /*if (isOperator(String.valueOf(expression.charAt(0)))) {
             return Notation.PREFIX;
         } else if (isOperator(String.valueOf(expression.charAt(expression.length() - 1)))) {
             return Notation.POSTFIX;
         } else {
             return Notation.INFIX;
-        }
+        }*/
+        return null;
     }
 
     /**
