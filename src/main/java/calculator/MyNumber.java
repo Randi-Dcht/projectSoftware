@@ -179,11 +179,11 @@ public class MyNumber implements Expression
         double O = Math.PI/2;
         if(value.signum()!=0) {
             MyNumber tmp1 = Divides.divNumber(new MyNumber(imaginary, imaginaryExp), new MyNumber(value, exp));
-            O = Math.atan(tmp1.getValue().multiply(BigDecimal.valueOf(pow(10, tmp1.getexp())).round(new MathContext(decimal_number))).doubleValue());
+            O = Math.atan(tmp1.getValue().multiply(BigDecimal.valueOf(pow(10, tmp1.getexp())).round(new MathContext(decimalNumber))).doubleValue());
 
         }
         MyNumber tmp2 = Modulus.modNumber(this);
-        double r = tmp2.getValue().multiply(BigDecimal.valueOf(pow(10, tmp2.getexp())).round(new MathContext(decimal_number))).doubleValue();
+        double r = tmp2.getValue().multiply(BigDecimal.valueOf(pow(10, tmp2.getexp())).round(new MathContext(decimalNumber))).doubleValue();
 
         return switch (n) {
             case CARTESIAN ->

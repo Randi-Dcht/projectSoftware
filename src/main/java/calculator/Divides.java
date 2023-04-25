@@ -87,7 +87,7 @@ public final class Divides extends Operation
         newVal2 = numImaginary.getValue().divide(den.getValue(),MathContext.DECIMAL128);
         exp2=numImaginary.getexp()-den.getexp();
 
-        return new MyNumber(new_val, exp, new_val2,exp2);
+        return new MyNumber(newVal, exp, newVal2,exp2);
     }
 
     /**
