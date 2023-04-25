@@ -14,7 +14,7 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestCombinatorial
+class TestCombinatorial
 {
     @Test
     void testConstructor1()

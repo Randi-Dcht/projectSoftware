@@ -2,7 +2,7 @@ package junit5tests;
 
 
 
-public class TestMyBigNumber //TODO
+class TestMyBigNumber //TODO
 {
     /*
     @Test
