@@ -4,7 +4,7 @@ import calculator.BasesNumber;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestBasesNumber
+class TestBasesNumber
 {
     @Test
     void testgetBasesNumber()

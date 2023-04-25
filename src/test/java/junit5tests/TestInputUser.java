@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-public class TestInputUser
+class TestInputUser
 {
     @Test
     void testCleanInput()
