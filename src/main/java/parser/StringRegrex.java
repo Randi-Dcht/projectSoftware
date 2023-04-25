@@ -21,7 +21,7 @@ public class StringRegrex
                 list.add(new Typos(s, TypeString.REAL));
             else if (s.matches(REGEX_OPERATOR))
                 list.add(new Typos(s, TypeString.OPERATOR));
-            else if (s.matches("()"))
+            else if (s.matches("[()]"))
                 list.add(new Typos(s, TypeString.BRACKET));
             else if (s.matches("true|false"))
                 list.add(new Typos(s, TypeString.BOOLEAN));

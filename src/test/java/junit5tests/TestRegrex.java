@@ -69,4 +69,16 @@ public class TestRegrex
         assertEquals(list.get(0).getType(), TypeString.SCIENTIFIC);
         assertEquals(list.get(1).getType(), TypeString.E_NOTATION);
     }
+
+    @Test
+    void test_Regrex()
+    {
+        String s = "( 1x10^2 1E2 )";
+        List<Typos> list = StringRegrex.analyse(s);
+        assertEquals(list.size(), 4);
+        assertEquals(list.get(0).getType(), TypeString.BRACKET);
+        assertEquals(list.get(3).getType(), TypeString.BRACKET);
+        assertEquals(list.get(1).getValue(), "1x10^2");
+        assertEquals(list.get(2).getValue(), "1E2");
+    }
 }
