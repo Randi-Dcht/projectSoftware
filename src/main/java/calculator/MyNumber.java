@@ -3,7 +3,6 @@ package calculator;
 import visitor.Visitor;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.math.MathContext;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ public class MyNumber implements Expression
   private final BigDecimal value;
   private final int exp;
 
-  private final int decimal_number = 15;
+  private final int decimalNumber = 15;
 
 
 
@@ -37,7 +36,7 @@ public class MyNumber implements Expression
 
     /** getter method to obtain the value contained in the object
      *
-     * @return BigDecimal number of the real part contained in the objectµ
+     * @return BigDecimal number of the real part contained in the object
      */
   public BigDecimal getValue() { return value; }
 
@@ -67,35 +66,35 @@ public class MyNumber implements Expression
 
 
     public /*constructor*/ MyNumber(BigDecimal v) {
-        value=v.round(new MathContext(decimal_number));
+        value=v.round(new MathContext(decimalNumber));
         exp=0;
 
         BigDecimal tmp = new BigDecimal(0);
-        imaginary = tmp.round(new MathContext(decimal_number));
+        imaginary = tmp.round(new MathContext(decimalNumber));
         imaginaryExp = 0;
 	  }
     public /*constructor*/ MyNumber(BigDecimal v, int e) {
-        value=v.round(new MathContext(decimal_number));
+        value=v.round(new MathContext(decimalNumber));
         exp=e;
 
         BigDecimal tmp = new BigDecimal(0);
-        imaginary = tmp.round(new MathContext(decimal_number));
+        imaginary = tmp.round(new MathContext(decimalNumber));
         imaginaryExp = 0;
     }
 
     public /*constructor*/ MyNumber(BigDecimal v, BigDecimal i) {
-        value=v.round(new MathContext(decimal_number));
+        value=v.round(new MathContext(decimalNumber));
         exp=0;
 
-        imaginary = i.round(new MathContext(decimal_number));
+        imaginary = i.round(new MathContext(decimalNumber));
         imaginaryExp = 0;
     }
 
     public /*constructor*/ MyNumber(BigDecimal v, int e, BigDecimal i, int ie) {
-        value=v.round(new MathContext(decimal_number));
+        value=v.round(new MathContext(decimalNumber));
         exp=e;
 
-        imaginary = i.round(new MathContext(decimal_number));
+        imaginary = i.round(new MathContext(decimalNumber));
         imaginaryExp = ie;
     }
 
@@ -168,10 +167,12 @@ public class MyNumber implements Expression
         return toString(notation);
     }
 
-    public final String toString(NumberNotation n) {
 
-        Double real = applyExp(this.value,this.exp).round(new MathContext(decimal_number)).doubleValue();
-        Double imag = applyExp(this.imaginary,this.imaginaryExp).round(new MathContext(decimal_number)).doubleValue();
+    public final String toString(NumberNotation n)
+    {
+
+        Double real = applyExp(this.value,this.exp).round(new MathContext(decimalNumber)).doubleValue();
+        Double imag = applyExp(this.imaginary,this.imaginaryExp).round(new MathContext(decimalNumber)).doubleValue();
 
         Double r;
 
@@ -183,10 +184,10 @@ public class MyNumber implements Expression
             O = Math.PI/2;
             if(value.signum()!=0) {
                 MyNumber tmp1 = new Divides(args).op(new MyNumber(imaginary, imaginaryExp), new MyNumber(value, exp));
-                O = Math.atan(tmp1.getValue().multiply(BigDecimal.valueOf(pow(10, tmp1.getexp())).round(new MathContext(decimal_number))).doubleValue());
+                O = Math.atan(tmp1.getValue().multiply(BigDecimal.valueOf(pow(10, tmp1.getexp())).round(new MathContext(decimalNumber))).doubleValue());
             }
             MyNumber tmp2 = new Modulus(args).op(this);
-            r = tmp2.getValue().multiply(BigDecimal.valueOf(pow(10, tmp2.getexp())).round(new MathContext(decimal_number))).doubleValue();
+            r = tmp2.getValue().multiply(BigDecimal.valueOf(pow(10, tmp2.getexp())).round(new MathContext(decimalNumber))).doubleValue();
 
         }
         catch(IllegalConstruction e) {

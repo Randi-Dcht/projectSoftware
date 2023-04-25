@@ -47,8 +47,6 @@ public final class Times extends Operation {
      * @param r The second BigDecimal number that should be multiplied with the first
      * @return The BigDecimal number that is the result of the multiplication
      */
-
-    //public int op(int l, int r) { return (l*r); }
     public MyNumber op(MyNumber l, MyNumber r) {
         BigDecimal newVal;
         int exp;

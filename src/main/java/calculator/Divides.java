@@ -56,9 +56,9 @@ public final class Divides extends Operation
      * @return The BigDecimal number that is the result of the division
      */
     public MyNumber op(MyNumber l, MyNumber r) {
-        BigDecimal new_val;
+        BigDecimal newVal;
         int exp;
-        BigDecimal new_val2;
+        BigDecimal newVal2;
         int exp2;
 
         int aExp = l.getexp();
@@ -76,21 +76,22 @@ public final class Divides extends Operation
 
             MyNumber numReal = additionOfMultiplication(a,c,b,d);
 
-            new_val = numReal.getValue().divide(den.getValue(),MathContext.DECIMAL128);
+            newVal = numReal.getValue().divide(den.getValue(),MathContext.DECIMAL128);
             exp=numReal.getexp()-den.getexp();
 
             MyNumber numImaginary1 = new Times(args).op(b,c);
             MyNumber numImaginary2 = new Times(args).op(a,d);
             MyNumber numImaginary = new Minus(args).op(numImaginary1,numImaginary2);
 
-            new_val2 = numImaginary.getValue().divide(den.getValue(),MathContext.DECIMAL128);
+            newVal2 = numImaginary.getValue().divide(den.getValue(),MathContext.DECIMAL128);
             exp2=numImaginary.getexp()-den.getexp();
 
-            return new MyNumber(new_val, exp, new_val2,exp2);
+            return new MyNumber(newVal, exp, newVal2,exp2);
         }
         catch (IllegalConstruction e)
         {
-            return l;
+            System.err.println("IllegalConstruction in Divides.op");
+            return null;
         }
     }
 }
