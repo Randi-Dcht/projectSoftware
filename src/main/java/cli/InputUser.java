@@ -68,10 +68,7 @@ public class InputUser
             return true;
         }
 
-        if(isDecimalNumber(parts[0])&&isNumber(parts[1])){
-            return true;
-        }
-        return false;
+        return isDecimalNumber(parts[0]) && isNumber(parts[1]);
     }
 
     public static boolean isScientificNotationNumber(String input)
@@ -81,10 +78,7 @@ public class InputUser
             return true;
         }
 
-        if(isDecimalNumber(parts[0])&&isNumber(parts[1])){
-            return true;
-        }
-        return false;
+        return isDecimalNumber(parts[0]) && isNumber(parts[1]);
     }
 
 
@@ -215,7 +209,7 @@ public class InputUser
         Expression e = null;
         for (String s : ConvertNotation.transformNotation(Notation.INFIX, preProcessInput(user_input_list), isVerbose))
         {
-            s.replaceAll(",",".");
+            s = s.replaceAll(",",".");
             if (isNumber(s))
                 list_of_expression.add(new MyNumber(new BigDecimal(s)));
             else if (isOperator(s))
