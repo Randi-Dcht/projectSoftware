@@ -133,7 +133,7 @@ public class InputUser
 
         for (Typos s : ConvertNotation.transformNotation(Notation.INFIX, this.user_input_list, isVerbose))
         {
-            if (s.getType().equals(TypeString.INTEGER))
+            if (s.getType().equals(TypeString.INTEGER) || s.getType().equals(TypeString.REAL))
                 stack.push(new MyNumber(new BigDecimal(s.getValue())));
             else if (s.getType().equals(TypeString.OPERATOR))
             {
