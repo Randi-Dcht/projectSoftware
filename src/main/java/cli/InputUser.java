@@ -1,6 +1,9 @@
 package cli;
 
 import calculator.*;
+import enums.TypeString;
+import parser.StringRegrex;
+import parser.Typos;
 
 
 import java.math.BigDecimal;
@@ -14,14 +17,6 @@ import java.util.List;
  */
 public class InputUser
 {
-
-    //--------------------STATIC--------------------//
-    /**List of operator*/
-    protected static String listOperators = "+-*/";
-    /**List of number*/
-    protected static String listNumbers = "0123456789";
-    //protected static String listRealNumbers = "0123456789.";
-
 
     /**
      * Method to clean the input of user (remove space)
@@ -41,54 +36,6 @@ public class InputUser
         return listInput;
     }
 
-
-    /**
-     * @return boolean : is a number between 0 and 9
-     */
-    public static boolean isNumber(String input)
-    {
-        try {
-            Integer.parseInt(input);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    public static boolean isDecimalNumber(String input)
-    {
-        String[] parts = input.split(".");
-        return parts.length != 0 && isNumber(parts[0]) && isNumber(parts[1]);
-    }
-
-    public static boolean isENotationNumber(String input)
-    {
-        String[] parts = input.split("E");
-        if(isNumber(parts[0])&&isNumber(parts[1])){
-            return true;
-        }
-
-        return isDecimalNumber(parts[0]) && isNumber(parts[1]);
-    }
-
-    public static boolean isScientificNotationNumber(String input)
-    {
-        String[] parts = input.split("x10\\^");
-        if(isNumber(parts[0])&&isNumber(parts[1])){
-            return true;
-        }
-
-        return isDecimalNumber(parts[0]) && isNumber(parts[1]);
-    }
-
-
-    /**
-     * @return boolean : is an operator
-     */
-    public static boolean isOperator(String input)
-    {
-        return listOperators.contains(input);
-    }
 
 
     /**
@@ -148,7 +95,7 @@ public class InputUser
     /**Notation actual*/
     private Notation notation;
     /**List of string input of user without space*/
-    private List<String> user_input_list;
+    private List<Typos> user_input_list;
 
 
     /**
@@ -175,7 +122,7 @@ public class InputUser
      * Set the input of user
      * @param inputUser : list of string input of user without space
      */
-    public void setUserInput(List<String> inputUser)
+    public void setUserInput(List<Typos> inputUser)
     {
         this.user_input_list = inputUser;
     }
@@ -207,25 +154,25 @@ public class InputUser
     {
         //String operator = null;
         Expression e = null;
-        for (String s : ConvertNotation.transformNotation(Notation.INFIX, preProcessInput(user_input_list), isVerbose))
+
+        for (Typos s : this.user_input_list)
         {
-            s = s.replaceAll(",",".");
-            if (isNumber(s))
-                list_of_expression.add(new MyNumber(new BigDecimal(s)));
-            else if (isOperator(s))
+            if (s.getType().equals(TypeString.INTEGER))
+                list_of_expression.add(new MyNumber(new BigDecimal(s.getValue())));
+            else if (s.getType().equals(TypeString.OPERATOR))
             {
-                e = getOperator(s, list_of_expression, this.notation);
+                e = getOperator(s.getValue(), list_of_expression, this.notation);
                 list_of_expression.clear();
                 list_of_expression.add(e);
             }
-            else if (isENotationNumber(s))
+            else if (s.getType().equals(TypeString.E_NOTATION))
             {
-                String[] parts = s.split("E");
+                String[] parts = s.getValue().split("E");
                 list_of_expression.add(new MyNumber(new BigDecimal(parts[0]),Integer.parseInt(parts[1])));
             }
-            else if (isScientificNotationNumber(s))
+            else if (s.getType().equals(TypeString.SCIENTIFIC))
             {
-                String[] parts = s.split("x10\\^");
+                String[] parts = s.getValue().split("x10\\^");
                 list_of_expression.add(new MyNumber(new BigDecimal(parts[0]),Integer.parseInt(parts[1])));
             }
         }

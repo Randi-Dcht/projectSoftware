@@ -1,5 +1,6 @@
 package parser;
 
+import cli.InputUser;
 import enums.TypeString;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ public class StringRegrex
     public static List<Typos> analyse(String str)
     {
         List<Typos> list = new ArrayList<>();
-        for (String s : str.split(" "))
+        for (String s : InputUser.cleanInput(str))
         {
             if (s.matches("[0-9]+"))
                 list.add(new Typos(s, TypeString.INTEGER));
@@ -22,6 +23,12 @@ public class StringRegrex
                 list.add(new Typos(s, TypeString.OPERATOR));
             else if (s.matches("()"))
                 list.add(new Typos(s, TypeString.BRACKET));
+            else if (s.matches("true|false"))
+                list.add(new Typos(s, TypeString.BOOLEAN));
+            else if (s.matches("[0-9]+E[0-9]+"))
+                list.add(new Typos(s, TypeString.E_NOTATION));
+            else if (s.matches("[0-9]+x10\\^[0-9]+"))
+                list.add(new Typos(s, TypeString.SCIENTIFIC));
         }
         return list;
     }

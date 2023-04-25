@@ -2,6 +2,7 @@ package cli;
 
 import calculator.Memory;
 import calculator.Notation;
+import parser.StringRegrex;
 
 import java.util.List;
 import java.util.Scanner;
@@ -73,7 +74,7 @@ public class Main
 
             else
             {
-                inputUser_instance.setUserInput(listInput);
+                inputUser_instance.setUserInput(StringRegrex.analyse(inputUser));
                 System.out.println("$> " + inputUser_instance.compute(verbose));
             }
         }

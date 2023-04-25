@@ -5,5 +5,8 @@ public enum TypeString
     INTEGER,
     OPERATOR,
     BRACKET,
-    REAL
+    REAL,
+    BOOLEAN,
+    E_NOTATION,
+    SCIENTIFIC,
 }
