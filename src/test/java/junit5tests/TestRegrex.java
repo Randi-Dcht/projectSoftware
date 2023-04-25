@@ -48,4 +48,25 @@ public class TestRegrex
         assertEquals(t.getValue(), "(");
         assertEquals(t.getType(), TypeString.BRACKET);
     }
+
+
+    @Test
+    void testBoolean()
+    {
+        String s = "true 1";
+        List<Typos> list = StringRegrex.analyse(s);
+        assertEquals(list.size(), 2);
+        assertEquals(list.get(0).getType(), TypeString.BOOLEAN);
+        assertEquals(list.get(1).getType(), TypeString.INTEGER);
+    }
+
+    @Test
+    void testScientific_ENotation()
+    {
+        String s = "1x10^2 1E2";
+        List<Typos> list = StringRegrex.analyse(s);
+        assertEquals(list.size(), 2);
+        assertEquals(list.get(0).getType(), TypeString.SCIENTIFIC);
+        assertEquals(list.get(1).getType(), TypeString.E_NOTATION);
+    }
 }
