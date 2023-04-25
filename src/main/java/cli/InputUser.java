@@ -2,12 +2,8 @@ package cli;
 
 import calculator.*;
 import enums.TypeString;
-import parser.StringRegrex;
 import parser.Typos;
-
-
 import java.math.BigDecimal;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -82,8 +78,6 @@ public class InputUser
 
 
     //--------------------INSTANCE--------------------//
-    /**List of expression*/
-    private final List<Expression> list_of_expression = new ArrayList<>();
     /**Notation actual*/
     private Notation notation;
     /**List of string input of user without space*/
@@ -119,6 +113,16 @@ public class InputUser
         this.user_input_list = inputUser;
     }
 
+    public List<Typos> getUserInput()
+    {
+        return this.user_input_list;
+    }
+
+    public Notation getNotation()
+    {
+        return this.notation;
+    }
+
 
     /**
      * Compute the input of user
@@ -131,7 +135,7 @@ public class InputUser
         List<Expression> list_of_expression_data = new ArrayList<>();
         Stack<Expression> stack = new Stack<>();
 
-        for (Typos s : ConvertNotation.transformNotation(Notation.INFIX, this.user_input_list, isVerbose))
+        for (Typos s : ConvertNotation.transformNotation(notation, this.user_input_list, isVerbose))
         {
             if (s.getType().equals(TypeString.INTEGER) || s.getType().equals(TypeString.REAL))
                 stack.push(new MyNumber(new BigDecimal(s.getValue())));
@@ -152,12 +156,12 @@ public class InputUser
             else if (s.getType().equals(TypeString.E_NOTATION))
             {
                 String[] parts = s.getValue().split("E");
-                list_of_expression.add(new MyNumber(new BigDecimal(parts[0]),Integer.parseInt(parts[1])));
+                stack.push(new MyNumber(new BigDecimal(parts[0]),Integer.parseInt(parts[1])));
             }
             else if (s.getType().equals(TypeString.SCIENTIFIC))
             {
                 String[] parts = s.getValue().split("x10\\^");
-                list_of_expression.add(new MyNumber(new BigDecimal(parts[0]),Integer.parseInt(parts[1])));
+                stack.push(new MyNumber(new BigDecimal(parts[0]),Integer.parseInt(parts[1])));
             }
         }
 

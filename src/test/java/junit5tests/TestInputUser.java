@@ -1,17 +1,15 @@
 package junit5tests;
 
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import calculator.*;
 import cli.InputUser;
 import org.junit.jupiter.api.Test;
+import parser.StringRegrex;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class TestInputUser
 {
@@ -50,5 +48,31 @@ class TestInputUser
     {
         InputUser inputUser = new InputUser(Notation.PREFIX);
         assertTrue(inputUser instanceof InputUser);
+    }
+
+    @Test
+    void testInstance2()
+    {
+        InputUser inputUser = new InputUser(Notation.INFIX);
+        assertSame(inputUser.getNotation(), Notation.INFIX);
+        inputUser.setNotation(Notation.POSTFIX);
+        assertSame(inputUser.getNotation(), Notation.POSTFIX);
+
+        inputUser.setUserInput(StringRegrex.analyse("1 + 2"));
+        assertEquals(inputUser.getUserInput().size(), 3);
+        assertEquals(inputUser.getUserInput().get(0).getValue(), "1");
+        assertEquals(inputUser.getUserInput().get(1).getValue(), "+");
+        assertEquals(inputUser.getUserInput().get(2).getValue(), "2");
+    }
+
+    @Test
+    void testCompute()
+    {
+        InputUser inputUser = new InputUser(Notation.INFIX);
+        inputUser.setUserInput(StringRegrex.analyse("1 + 2"));
+        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(3)));
+
+        inputUser.setUserInput(StringRegrex.analyse("2 * 3 + 2 * 3"));
+        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(12)));
     }
 }
