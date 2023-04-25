@@ -126,18 +126,28 @@ public class InputUser
      */
     public MyNumber compute(boolean isVerbose)
     {
-        //String operator = null;
         Expression e = null;
+        int args = 0;
+        List<Expression> list_of_expression_data = new ArrayList<>();
+        Stack<Expression> stack = new Stack<>();
 
         for (Typos s : ConvertNotation.transformNotation(Notation.INFIX, this.user_input_list, isVerbose))
         {
             if (s.getType().equals(TypeString.INTEGER))
-                list_of_expression.add(new MyNumber(new BigDecimal(s.getValue())));
+                stack.push(new MyNumber(new BigDecimal(s.getValue())));
             else if (s.getType().equals(TypeString.OPERATOR))
             {
-                e = getOperator(s.getValue(), list_of_expression, Notation.POSTFIX);
-                list_of_expression.clear();
-                list_of_expression.add(e);
+               while(!stack.isEmpty() && s.getOperator().getNumberArgs() > args)
+               {
+                   list_of_expression_data.add(stack.pop());
+                   args++;
+               }
+                args = 0;
+
+                e = getOperator(s.getValue(), list_of_expression_data, Notation.POSTFIX);
+                list_of_expression_data.clear();
+
+                stack.push(e);
             }
             else if (s.getType().equals(TypeString.E_NOTATION))
             {
