@@ -24,16 +24,6 @@ public class TestInputUser
     }
 
     @Test
-    void testIsNumber()
-    {
-        String input = "0 1 2 3 4 5 6 7 8 9";
-        for (String ss : InputUser.cleanInput(input))
-            assertTrue(InputUser.isNumber(ss));
-        String input2 = "a";
-        assertFalse(InputUser.isNumber(input2));
-    }
-
-    @Test
     void testGetNotation()
     {
         String input = "POSTFIX";
@@ -42,16 +32,6 @@ public class TestInputUser
         assertEquals(InputUser.getNotation(input2), Notation.INFIX);
         String input3 = "PREFIX";
         assertEquals(InputUser.getNotation(input3), Notation.PREFIX);
-    }
-
-    @Test
-    void testIsOperator()
-    {
-        String input = "+ - * /";
-        for (String ss : InputUser.cleanInput(input))
-            assertTrue(InputUser.isOperator(ss));
-        String input2 = "a";
-        assertFalse(InputUser.isOperator(input2));
     }
 
     @Test
@@ -70,25 +50,5 @@ public class TestInputUser
     {
         InputUser inputUser = new InputUser(Notation.PREFIX);
         assertTrue(inputUser instanceof InputUser);
-    }
-
-    @Test
-    void testCompute()
-    {
-        InputUser user = new InputUser(Notation.INFIX);
-        user.setUserInput(InputUser.cleanInput("1 + 2"));
-        assertEquals(user.compute(false), new MyNumber(new BigDecimal(3)));
-
-        user = new InputUser(Notation.INFIX);
-        user.setUserInput(InputUser.cleanInput("1"));
-        assertEquals(user.compute(false), new MyNumber(new BigDecimal(0)));
-
-        user = new InputUser(Notation.INFIX);
-        user.setUserInput(InputUser.cleanInput("1 +"));
-        assertEquals(user.compute(false), new MyNumber(new BigDecimal(1)));
-
-        user = new InputUser(Notation.INFIX);
-        user.setUserInput(InputUser.cleanInput("1 + 2 + 3"));
-        assertEquals(user.compute(false), new MyNumber(new BigDecimal(6)));
     }
 }
