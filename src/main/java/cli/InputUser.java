@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 
 /**
@@ -128,15 +129,13 @@ public class InputUser
         //String operator = null;
         Expression e = null;
 
-        ConvertNotation.transformNotation(Notation.INFIX, this.user_input_list, true);
-
-        for (Typos s : this.user_input_list)
+        for (Typos s : ConvertNotation.transformNotation(Notation.INFIX, this.user_input_list, isVerbose))
         {
             if (s.getType().equals(TypeString.INTEGER))
                 list_of_expression.add(new MyNumber(new BigDecimal(s.getValue())));
             else if (s.getType().equals(TypeString.OPERATOR))
             {
-                e = getOperator(s.getValue(), list_of_expression, this.notation);
+                e = getOperator(s.getValue(), list_of_expression, Notation.POSTFIX);
                 list_of_expression.clear();
                 list_of_expression.add(e);
             }

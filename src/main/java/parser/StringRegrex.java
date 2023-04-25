@@ -3,9 +3,9 @@ package parser;
 import cli.InputUser;
 import enums.ListOperator;
 import enums.TypeString;
-
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class StringRegrex
 {
