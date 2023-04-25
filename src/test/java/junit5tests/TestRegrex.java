@@ -7,7 +7,7 @@ import parser.Typos;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 
-public class TestRegrex
+class TestRegrex
 {
     @Test
     void testRegrex()

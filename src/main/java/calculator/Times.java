@@ -39,6 +39,14 @@ public final class Times extends Operation {
         neutral = 1;
     }
 
+
+    /**
+     * The actual computation of the (binary) arithmetic multiplication of two BigDecimal number
+     *
+     * @param l The first BigDecimal number
+     * @param r The second BigDecimal number that should be multiplied with the first
+     * @return The BigDecimal number that is the result of the multiplication
+     */
     public static MyNumber timesNumber(MyNumber l, MyNumber r){
         BigDecimal tmpVal;
         int exp;

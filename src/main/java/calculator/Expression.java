@@ -2,8 +2,6 @@ package calculator;
 
 import visitor.Visitor;
 
-import java.math.BigInteger;
-
 /**
  * Expression is an abstract class that represents arithmetic expressions.
  * It has two concrete subclasses Operation and MyNumber.

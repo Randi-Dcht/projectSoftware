@@ -48,11 +48,19 @@ public final class Divides extends Operation
 
     }
 
+    /**
+     * The actual computation of the (binary) arithmetic division of two BigDecimal number
+     *
+     * @param l The first BigDecimal number
+     * @param r The second BigDecimal number that should divide the first
+     * @return The BigDecimal number that is the result of the division
+     */
+
     public static  MyNumber divNumber(MyNumber l, MyNumber r){
 
-        BigDecimal new_val;
+        BigDecimal newVal;
         int exp;
-        BigDecimal new_val2;
+        BigDecimal newVal2;
         int exp2;
 
         int aExp = l.getexp();
@@ -69,18 +77,17 @@ public final class Divides extends Operation
 
         MyNumber numReal = additionOfMultiplication(a,c,b,d);
 
-        new_val = numReal.getValue().divide(den.getValue(),MathContext.DECIMAL128);
+        newVal = numReal.getValue().divide(den.getValue(),MathContext.DECIMAL128);
         exp=numReal.getexp()-den.getexp();
 
         MyNumber numImaginary1 = Times.timesNumber(b,c);
         MyNumber numImaginary2 = Times.timesNumber(a,d);
         MyNumber numImaginary = Minus.minNumber(numImaginary1,numImaginary2);
 
-        new_val2 = numImaginary.getValue().divide(den.getValue(),MathContext.DECIMAL128);
+        newVal2 = numImaginary.getValue().divide(den.getValue(),MathContext.DECIMAL128);
         exp2=numImaginary.getexp()-den.getexp();
 
         return new MyNumber(new_val, exp, new_val2,exp2);
-
     }
 
     /**

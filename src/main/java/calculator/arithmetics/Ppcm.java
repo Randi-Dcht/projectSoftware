@@ -2,7 +2,6 @@ package calculator.arithmetics;
 
 import calculator.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 
