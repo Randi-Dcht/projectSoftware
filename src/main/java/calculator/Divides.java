@@ -41,10 +41,10 @@ public final class Divides extends Operation
         neutral = 1;
     }
 
-    private MyNumber additionOfMultiplication(MyNumber a, MyNumber b, MyNumber c, MyNumber d) throws IllegalConstruction{
-        MyNumber den1 = new Times(args).op(a,b);
-        MyNumber den2 = new Times(args).op(c,d);
-        return new Plus(args).op(den1,den2);
+    public static MyNumber additionOfMultiplication(MyNumber a, MyNumber b, MyNumber c, MyNumber d){
+        MyNumber den1 = Times.timesNumber(a,b);
+        MyNumber den2 = Times.timesNumber(c,d);
+        return Plus.addNumber(den1,den2);
 
     }
 
@@ -55,7 +55,9 @@ public final class Divides extends Operation
      * @param r The second BigDecimal number that should divide the first
      * @return The BigDecimal number that is the result of the division
      */
-    public MyNumber op(MyNumber l, MyNumber r) {
+
+    public static  MyNumber divNumber(MyNumber l, MyNumber r){
+
         BigDecimal newVal;
         int exp;
         BigDecimal newVal2;
@@ -71,27 +73,29 @@ public final class Divides extends Operation
         MyNumber c = new MyNumber(r.getValue(),cExp);
         MyNumber d = new MyNumber(r.getImaginary(),dExp);
 
-        try{
-            MyNumber den = additionOfMultiplication(c,c,d,d);
+        MyNumber den = additionOfMultiplication(c,c,d,d);
 
-            MyNumber numReal = additionOfMultiplication(a,c,b,d);
+        MyNumber numReal = additionOfMultiplication(a,c,b,d);
 
-            newVal = numReal.getValue().divide(den.getValue(),MathContext.DECIMAL128);
-            exp=numReal.getexp()-den.getexp();
+        newVal = numReal.getValue().divide(den.getValue(),MathContext.DECIMAL128);
+        exp=numReal.getexp()-den.getexp();
 
-            MyNumber numImaginary1 = new Times(args).op(b,c);
-            MyNumber numImaginary2 = new Times(args).op(a,d);
-            MyNumber numImaginary = new Minus(args).op(numImaginary1,numImaginary2);
+        MyNumber numImaginary1 = Times.timesNumber(b,c);
+        MyNumber numImaginary2 = Times.timesNumber(a,d);
+        MyNumber numImaginary = Minus.minNumber(numImaginary1,numImaginary2);
 
-            newVal2 = numImaginary.getValue().divide(den.getValue(),MathContext.DECIMAL128);
-            exp2=numImaginary.getexp()-den.getexp();
+        newVal2 = numImaginary.getValue().divide(den.getValue(),MathContext.DECIMAL128);
+        exp2=numImaginary.getexp()-den.getexp();
 
-            return new MyNumber(newVal, exp, newVal2,exp2);
-        }
-        catch (IllegalConstruction e)
-        {
-            System.err.println("IllegalConstruction in Divides.op");
-            return null;
-        }
+        return new MyNumber(newVal, exp, newVal2,exp2);
     }
+
+    /**
+     * The actual computation of the (binary) arithmetic division of two BigDecimal number
+     *
+     * @param l The first BigDecimal number
+     * @param r The second BigDecimal number that should divide the first
+     * @return The BigDecimal number that is the result of the division
+     */
+    public MyNumber op(MyNumber l, MyNumber r) {return divNumber(l,r);}
 }

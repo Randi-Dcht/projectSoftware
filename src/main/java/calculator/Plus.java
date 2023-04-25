@@ -44,7 +44,7 @@ public final class Plus extends Operation
   	neutral = 0;
   }
 
-private MyNumber addition(BigDecimal l, int lExp, BigDecimal r, int rExp){
+public static MyNumber addition(BigDecimal l, int lExp, BigDecimal r, int rExp){
     BigDecimal newVal;
     int exp;
 
@@ -66,6 +66,27 @@ private MyNumber addition(BigDecimal l, int lExp, BigDecimal r, int rExp){
     return new MyNumber(newVal,exp);
 }
 
+public static MyNumber addNumber(MyNumber l, MyNumber r){
+
+    BigDecimal lValue =  l.getValue();
+    BigDecimal rValue =  r.getValue();
+    int lExp = l.getexp();
+    int rExp = r.getexp();
+
+    MyNumber real = addition(lValue,lExp,rValue,rExp);
+
+    BigDecimal lImaginary =  l.getImaginary();
+    BigDecimal rImaginary =  r.getImaginary();
+    int lImaginaryExp = l.getImaginaryExp();
+    int rImaginaryExp = r.getImaginaryExp();
+
+    MyNumber imaginary = addition(lImaginary,lImaginaryExp,rImaginary,rImaginaryExp);
+
+
+    return new MyNumber(real.getValue(),real.getexp(),imaginary.getValue(),imaginary.getexp());
+
+}
+
   /**
    * The actual computation of the (binary) arithmetic addition of two integers
    *
@@ -73,24 +94,6 @@ private MyNumber addition(BigDecimal l, int lExp, BigDecimal r, int rExp){
    * @param r The second BigDecimal number that should be added to the first
    * @return The BigDecimal number that is the result of the addition
    */
-  public MyNumber op(MyNumber l, MyNumber r) {
-
-      BigDecimal lValue =  l.getValue();
-      BigDecimal rValue =  r.getValue();
-      int lExp = l.getexp();
-      int rExp = r.getexp();
-
-      MyNumber real = addition(lValue,lExp,rValue,rExp);
-
-      BigDecimal lImaginary =  l.getImaginary();
-      BigDecimal rImaginary =  r.getImaginary();
-      int lImaginaryExp = l.getImaginaryExp();
-      int rImaginaryExp = r.getImaginaryExp();
-
-      MyNumber imaginary = addition(lImaginary,lImaginaryExp,rImaginary,rImaginaryExp);
-
-
-      return new MyNumber(real.getValue(),real.getexp(),imaginary.getValue(),imaginary.getexp());
-  }
+  public MyNumber op(MyNumber l, MyNumber r) {return addNumber(l,r);}
 
 }

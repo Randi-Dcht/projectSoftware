@@ -174,25 +174,16 @@ public class MyNumber implements Expression
         Double real = applyExp(this.value,this.exp).round(new MathContext(decimalNumber)).doubleValue();
         Double imag = applyExp(this.imaginary,this.imaginaryExp).round(new MathContext(decimalNumber)).doubleValue();
 
-        Double r;
-
-        double O;
 
         DecimalFormat format = new DecimalFormat("0.#");
-        try {
-            List<Expression> args = new ArrayList<>();
-            O = Math.PI/2;
-            if(value.signum()!=0) {
-                MyNumber tmp1 = new Divides(args).op(new MyNumber(imaginary, imaginaryExp), new MyNumber(value, exp));
-                O = Math.atan(tmp1.getValue().multiply(BigDecimal.valueOf(pow(10, tmp1.getexp())).round(new MathContext(decimalNumber))).doubleValue());
-            }
-            MyNumber tmp2 = new Modulus(args).op(this);
-            r = tmp2.getValue().multiply(BigDecimal.valueOf(pow(10, tmp2.getexp())).round(new MathContext(decimalNumber))).doubleValue();
+        double O = Math.PI/2;
+        if(value.signum()!=0) {
+            MyNumber tmp1 = Divides.divNumber(new MyNumber(imaginary, imaginaryExp), new MyNumber(value, exp));
+            O = Math.atan(tmp1.getValue().multiply(BigDecimal.valueOf(pow(10, tmp1.getexp())).round(new MathContext(decimalNumber))).doubleValue());
 
         }
-        catch(IllegalConstruction e) {
-            return String.format("%s", format.format(real));
-        }
+        MyNumber tmp2 = Modulus.modNumber(this);
+        double r = tmp2.getValue().multiply(BigDecimal.valueOf(pow(10, tmp2.getexp())).round(new MathContext(decimalNumber))).doubleValue();
 
         return switch (n) {
             case CARTESIAN ->
