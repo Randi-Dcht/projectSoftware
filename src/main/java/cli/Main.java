@@ -1,9 +1,7 @@
 package cli;
 
-import calculator.Memory;
 import calculator.Notation;
 import parser.StringRegrex;
-
 import java.util.List;
 import java.util.Scanner;
 
@@ -66,7 +64,7 @@ public class Main
                 System.out.println("$> Notation : " + notation.toString());
             }
             else if (listInput.get(0).equals(".verbose") && listInput.size() == 2)
-                verbose = InputUser.isABoolean(listInput.get(1));
+                verbose = listInput.get(1).equals("true");
             else if (listInput.get(0).equals(".help"))
                 printHelp();
             else if (listInput.get(0).equals(".log"))

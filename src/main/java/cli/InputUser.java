@@ -80,15 +80,6 @@ public class InputUser
     }
 
 
-    /**
-     * @return boolean : is a boolean (true or false)
-     */
-    public static boolean isABoolean(String input)
-    {
-        return input.equalsIgnoreCase("true");
-    }
-
-
     //--------------------INSTANCE--------------------//
     /**List of expression*/
     private final List<Expression> list_of_expression = new ArrayList<>();
@@ -125,24 +116,6 @@ public class InputUser
     public void setUserInput(List<Typos> inputUser)
     {
         this.user_input_list = inputUser;
-    }
-
-
-    /**
-     * Add bracket
-     */
-    protected List<String> preProcessInput(List<String> inputUser)
-    {
-        if (! inputUser.get(inputUser.size() - 1).equals(")") || ! inputUser.get(0).equals("("))
-        {
-            List<String> newInput = new ArrayList<>();
-            newInput.add("(");
-            newInput.addAll(inputUser);
-            newInput.add(")");
-            return newInput;
-        }
-        else
-            return inputUser;
     }
 
 
