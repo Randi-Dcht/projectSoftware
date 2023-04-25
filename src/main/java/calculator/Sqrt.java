@@ -49,33 +49,27 @@ public class Sqrt extends Operation
 
             BigDecimal b = l.getImaginary();
 
-            try{
-                MyNumber z = new Modulus(args).op(l);
-                MyNumber den = new MyNumber(new BigDecimal("2"));
+            MyNumber z = Modulus.modNumber(l);
+            MyNumber den = new MyNumber(new BigDecimal("2"));
 
-                MyNumber numReal = new Plus(args).op(z,new MyNumber(a,exp));
-                MyNumber tmp = new Divides(args).op(numReal,den);
-                real = tmp.getValue().sqrt(MathContext.DECIMAL128);
-                int expReal = tmp.getexp();
+            MyNumber numReal = Plus.addNumber(z,new MyNumber(a,exp));
+            MyNumber tmp = Divides.divNumber(numReal,den);
+            real = tmp.getValue().sqrt(MathContext.DECIMAL128);
+            int expReal = tmp.getexp();
 
-                MyNumber li = new Divides(args).op(new MyNumber(b,imaginaryExp),new MyNumber(b.abs(),imaginaryExp));
+            MyNumber li = Divides.divNumber(new MyNumber(b,imaginaryExp),new MyNumber(b.abs(),imaginaryExp));
 
-                MyNumber numImaginary = new Minus(args).op(z,new MyNumber(a,exp));
-                MyNumber tmp2 = new Divides(args).op(numImaginary,den);
-                BigDecimal i = tmp2.getValue().sqrt(MathContext.DECIMAL128);
-                int e = tmp2.getexp();
+            MyNumber numImaginary = Minus.minNumber(z,new MyNumber(a,exp));
+            MyNumber tmp2 = Divides.divNumber(numImaginary,den);
+            BigDecimal i = tmp2.getValue().sqrt(MathContext.DECIMAL128);
+            int e = tmp2.getexp();
 
-                MyNumber n = new Times(args).op(li,new MyNumber(i,e));
+            MyNumber n = Times.timesNumber(li,new MyNumber(i,e));
 
-                imaginary = n.getValue();
-                int expImaginary = n.getexp();
+            imaginary = n.getValue();
+            int expImaginary = n.getexp();
 
-                return new MyNumber(real,expReal,imaginary,expImaginary);
-            }
-            catch (IllegalConstruction e)
-            {
-                return l;
-            }
+            return new MyNumber(real,expReal,imaginary,expImaginary);
         }
 
 

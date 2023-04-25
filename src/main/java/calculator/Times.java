@@ -39,18 +39,8 @@ public final class Times extends Operation {
         neutral = 1;
     }
 
-
-    /**
-     * The actual computation of the (binary) arithmetic multiplication of two BigDecimal number
-     *
-     * @param l The first BigDecimal number
-     * @param r The second BigDecimal number that should be multiplied with the first
-     * @return The BigDecimal number that is the result of the multiplication
-     */
-
-    //public int op(int l, int r) { return (l*r); }
-    public MyNumber op(MyNumber l, MyNumber r) {
-        BigDecimal newVal;
+    public static MyNumber timesNumber(MyNumber l, MyNumber r){
+        BigDecimal tmpVal;
         int exp;
         int exp2;
         int exp3;
@@ -66,31 +56,37 @@ public final class Times extends Operation {
         int bExp = l.getImaginaryExp();
         int dExp = r.getImaginaryExp();
 
-        newVal=a.multiply(c);
+        tmpVal=a.multiply(c);
         exp=aExp+cExp;
-        MyNumber tmp1 = new MyNumber(newVal,exp);
+        MyNumber tmp1 = new MyNumber(tmpVal,exp);
 
-        newVal=b.multiply(d);
+        tmpVal=b.multiply(d);
         exp2=bExp+dExp;
-        MyNumber tmp2 = new MyNumber(newVal,exp2);
+        MyNumber tmp2 = new MyNumber(tmpVal,exp2);
 
-        newVal=a.multiply(d);
+        tmpVal=a.multiply(d);
         exp3=aExp+dExp;
-        MyNumber tmp3 = new MyNumber(newVal,exp3);
+        MyNumber tmp3 = new MyNumber(tmpVal,exp3);
 
-        newVal=b.multiply(c);
+        tmpVal=b.multiply(c);
         exp4=bExp+cExp;
-        MyNumber tmp4 = new MyNumber(newVal,exp4);
+        MyNumber tmp4 = new MyNumber(tmpVal,exp4);
 
-        try{
-            MyNumber real = new Minus(args).op(tmp1,tmp2);
-            MyNumber imaginary = new Plus(args).op(tmp3,tmp4);
+        MyNumber real = Minus.minNumber(tmp1,tmp2);
+        MyNumber imaginary = Plus.addNumber(tmp3,tmp4);
 
-            return new MyNumber(real.getValue(), real.getexp(), imaginary.getValue(),imaginary.getexp());
-        }
-        catch (IllegalConstruction e)
-        {
-            return l;
-        }
+        return new MyNumber(real.getValue(), real.getexp(), imaginary.getValue(),imaginary.getexp());
     }
+
+
+    /**
+     * The actual computation of the (binary) arithmetic multiplication of two BigDecimal number
+     *
+     * @param l The first BigDecimal number
+     * @param r The second BigDecimal number that should be multiplied with the first
+     * @return The BigDecimal number that is the result of the multiplication
+     */
+
+    //public int op(int l, int r) { return (l*r); }
+    public MyNumber op(MyNumber l, MyNumber r) {return timesNumber(l,r);}
 }

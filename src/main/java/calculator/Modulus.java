@@ -26,24 +26,20 @@ public class Modulus extends Operation
         neutral = 1;
     }
 
-    public MyNumber op(MyNumber l, MyNumber r) {
+    public static MyNumber modNumber(MyNumber l){
         MyNumber a = new MyNumber(l.getValue(),l.getexp());
         MyNumber b = new MyNumber(l.getImaginary(),l.getImaginaryExp());
 
 
-        try{
-            MyNumber tmp1 = new Times(args).op(a,a);
-            MyNumber tmp2 = new Times(args).op(b,b);
-            MyNumber tmp = new Plus(args).op(tmp1,tmp2);
+        MyNumber tmp1 = Times.timesNumber(a,a);
+        MyNumber tmp2 = Times.timesNumber(b,b);
+        MyNumber tmp = Plus.addNumber(tmp1,tmp2);
 
-            BigDecimal sqrt = tmp.getValue().sqrt(MathContext.DECIMAL128);
-            return  new MyNumber(sqrt, tmp.getexp() /2);
-        }
-        catch (IllegalConstruction e)
-        {
-            return l;
-        }
+        BigDecimal sqrt = tmp.getValue().sqrt(MathContext.DECIMAL128);
+        return  new MyNumber(sqrt, tmp.getexp() /2);
     }
+
+    public MyNumber op(MyNumber l, MyNumber r) {return modNumber(l);}
 
     /**
      * The actual computation of the arithmetic modulus of a number

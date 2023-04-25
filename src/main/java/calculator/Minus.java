@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.List;
 
+import static java.lang.Math.min;
 import static java.lang.Math.pow;
 
 /** This class represents the arithmetic operation "-".
@@ -43,7 +44,7 @@ public final class Minus extends Operation {
         neutral = 0;
     }
 
-    private MyNumber subtraction(BigDecimal l, int lExp, BigDecimal r, int rExp){
+    public static MyNumber subtraction(BigDecimal l, int lExp, BigDecimal r, int rExp){
         BigDecimal newVal;
         int exp;
 
@@ -65,15 +66,7 @@ public final class Minus extends Operation {
 
     }
 
-    /**
-     * The actual computation of the (binary) arithmetic subtraction of two integers
-     *
-     * @param l The first BigDecimal number
-     * @param r The second BigDecimal number that should be subtracted from the first
-     * @return The BigDecimal number that is the result of the subtraction
-     */
-    public MyNumber op(MyNumber l, MyNumber r) {
-
+    public static MyNumber minNumber(MyNumber l, MyNumber r){
         BigDecimal lValue = l.getValue();
         BigDecimal rValue = r.getValue();
         int lExp = l.getexp();
@@ -90,4 +83,14 @@ public final class Minus extends Operation {
 
         return new MyNumber(real.getValue(),real.getexp(),imaginary.getValue(),imaginary.getexp());
     }
+
+    /**
+     * The actual computation of the (binary) arithmetic subtraction of two integers
+     *
+     * @param l The first BigDecimal number
+     * @param r The second BigDecimal number that should be subtracted from the first
+     * @return The BigDecimal number that is the result of the subtraction
+     */
+    public MyNumber op(MyNumber l, MyNumber r) {return minNumber(l,r);}
+
 }
