@@ -210,7 +210,7 @@ public class Memory {
      * @param memoryFile the name of the file
      */
     private void save(String memoryFile) {
-        try {
+       /* try {
             FileWriter fileWriter = new FileWriter(path + memoryFile);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (Variable r : memory) {
@@ -220,7 +220,7 @@ public class Memory {
             bufferedWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     /**
@@ -253,7 +253,7 @@ public class Memory {
      *  Load the file in the memory
      */
     public void loadFile(File file)  {
-        try {
+        /*try {
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
@@ -266,7 +266,7 @@ public class Memory {
             }
         } catch (Exception e) {
             System.out.println("Error reading log or memory file");
-        }
+        }*/
     }
 
     private Notation checkNotation(String expression) {
