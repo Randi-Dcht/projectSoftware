@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import static java.lang.Integer.parseInt;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.fail;
 
@@ -386,6 +387,15 @@ public class CalculatorSteps {
 		assertNotEquals(number,null);
 		assertNotEquals(number,a);
 
+	}
 
+
+	@Given("one number to refactor with parameters {string} and {int} and the refactor {string} and {int}")
+	public void oneNumberToRefactorWithParametersArgAndArgAndTheRefactorArgAndArg(String arg0, int arg1, String arg2, int arg3) {
+		String[] list;
+		MyNumber number = new MyNumber(new BigDecimal(arg0),arg1);
+		list = number.decimalRefactor(new BigDecimal(arg0),arg1);
+		assertEquals(new BigDecimal(list[0]).compareTo(new BigDecimal(arg2)),0);
+		assertEquals((parseInt(list[1])),arg3);
 	}
 }

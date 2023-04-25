@@ -71,3 +71,11 @@ Feature: Integer Arithmetic Expressions
     Examples:
       | arg0  | arg1  |
       | "1"   | 1     |
+
+  Scenario Outline: Refactor of a MyNumber
+    Given one number to refactor with parameters <arg0> and <arg1> and the refactor <arg2> and <arg3>
+    Examples:
+      | arg0  | arg1  | arg2  | arg3  |
+      | "1"   | 1     | "1"   | 1     |
+      | "0.01"| 0     | "0.1" | 1     |
+      | "-1"  | 1     | "-1"  | 1     |
