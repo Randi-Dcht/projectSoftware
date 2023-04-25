@@ -128,6 +128,8 @@ public class InputUser
         //String operator = null;
         Expression e = null;
 
+        ConvertNotation.transformNotation(Notation.INFIX, this.user_input_list, true);
+
         for (Typos s : this.user_input_list)
         {
             if (s.getType().equals(TypeString.INTEGER))

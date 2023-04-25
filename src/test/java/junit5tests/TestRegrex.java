@@ -1,5 +1,6 @@
 package junit5tests;
 
+import enums.ListOperator;
 import enums.TypeString;
 import org.junit.jupiter.api.Test;
 import parser.StringRegrex;
@@ -80,5 +81,30 @@ class TestRegrex
         assertEquals(list.get(3).getType(), TypeString.BRACKET);
         assertEquals(list.get(1).getValue(), "1x10^2");
         assertEquals(list.get(2).getValue(), "1E2");
+    }
+
+    @Test
+    void test_operator()
+    {
+        String s = "+ - * /";
+        List<Typos> list = StringRegrex.analyse(s);
+        assertEquals(list.size(), 4);
+        assertEquals(list.get(0).getOperator(), ListOperator.ADD);
+        assertEquals(list.get(1).getOperator(), ListOperator.SUB);
+        assertEquals(list.get(2).getOperator(), ListOperator.MUL);
+        assertEquals(list.get(3).getOperator(), ListOperator.DIV);
+    }
+
+
+    @Test
+    void test_operator_2()
+    {
+        String s = "+ - * /";
+        List<Typos> list = StringRegrex.analyse(s);
+        assertEquals(list.size(), 4);
+        assertEquals(list.get(0).getPriority(), 1);
+        assertEquals(list.get(1).getPriority(), 1);
+        assertEquals(list.get(2).getPriority(), 2);
+        assertEquals(list.get(3).getPriority(), 2);
     }
 }

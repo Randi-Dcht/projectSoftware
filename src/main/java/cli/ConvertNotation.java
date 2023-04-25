@@ -1,9 +1,12 @@
 package cli;
 
 import calculator.Notation;
-
+import enums.TypeString;
+import parser.Typos;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
+
 
 public class ConvertNotation
 {
@@ -11,28 +14,34 @@ public class ConvertNotation
     /**
      * Convert the data in infix to postfix for compute
      */
-    private static List<String> convertInfix(List<String> data)
+    private static List<Typos> convertInfix(List<Typos> data)
     {
-        List<String> buff = new ArrayList<>();
-        String stock= "";
-        int openBracket = 0;
+        List<Typos> buff = new ArrayList<>();
+        Stack<Typos> stack = new Stack<>();
 
-        for (String word : data)
+        for(Typos e : data)
         {
-            switch (word)
+            if (e.getType().equals(TypeString.OPERATOR))
             {
-                case "(" -> openBracket++;
-                case ")" -> {
-                    buff.add(stock);
-                    openBracket--;
+                if (stack.empty())
+                    stack.push(e);
+                else
+                {
+                    if (e.getPriority() > stack.peek().getPriority())
+                        stack.push(e);
+                    else
+                    {
+                        while (!stack.empty() && e.getPriority() <= stack.peek().getPriority())
+                            buff.add(stack.pop());
+                        stack.push(e);
+                    }
                 }
-                case "+", "-", "*", "/" -> stock = word; //TODO replace this because same case in switch
-                default -> buff.add(word);
             }
+            else
+                buff.add(e);
         }
-
-        if (openBracket != 0)
-            throw new IllegalArgumentException("Error: open bracket not close");
+        while (!stack.empty())
+            buff.add(stack.pop());
 
         return buff;
     }
@@ -41,11 +50,22 @@ public class ConvertNotation
     /**
      * Convert the data in prefix to postfix for compute
      */
-    private static List<String> convertPrefix(List<String> data)
+    private static List<Typos> convertPrefix(List<Typos> data)
     {
-        List<String> buff = new ArrayList<>();
+        List<Typos> buff = new ArrayList<>();
+        Stack<Typos> stack = new Stack<>();
 
-
+        for(Typos e : data)
+        {
+            if (e.getType().equals(TypeString.OPERATOR))
+                stack.push(e);
+            else
+            {
+                buff.add(e);
+                if (!stack.empty())
+                    buff.add(stack.pop());
+            }
+        }
 
         return buff;
     }
@@ -54,9 +74,9 @@ public class ConvertNotation
     /**
      * Convert the data in postif for compute
      */
-    public static List<String> transformNotation(Notation notationIn, List<String> data, boolean isPrint)
+    public static List<Typos> transformNotation(Notation notationIn, List<Typos> data, boolean isPrint)
     {
-        List<String> array;
+        List<Typos> array;
 
         if (notationIn.equals(Notation.INFIX))
             array = convertInfix(data);
@@ -67,8 +87,8 @@ public class ConvertNotation
 
         if (isPrint)
         {
-            for (String word : array)
-                System.out.print(word + " ");
+            for (Typos word : array)
+                System.out.print(word.getValue() + " ");
             System.out.println(" ");
         }
 
