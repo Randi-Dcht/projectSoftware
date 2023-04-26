@@ -145,7 +145,7 @@ public class InputUser
             {
                while(!stack.isEmpty() && s.getOperator().getNumberArgs() > args)
                {
-                   list_of_expression_data.add(stack.pop());
+                   list_of_expression_data.add(0, stack.pop());
                    args++;
                }
                 args = 0;
