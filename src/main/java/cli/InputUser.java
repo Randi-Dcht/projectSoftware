@@ -1,6 +1,7 @@
 package cli;
 
 import calculator.*;
+import calculator.arithmetics.*;
 import enums.TypeString;
 import parser.Typos;
 import java.math.BigDecimal;
@@ -70,6 +71,15 @@ public class InputUser
                 case SUB -> e = new Minus(params, notation);
                 case MUL -> e = new Times(params, notation);
                 case DIV -> e = new Divides(params, notation);
+                case COMB -> e = new Combinatorial(params, notation);
+                case GCD -> e = new Eucledian(params, notation);
+                case EUCLIDEAN -> e = new EuclidianDivides(params, notation);
+                case FACTO -> e = new Facto(params, notation);
+                case MODULO -> e = new Modulo(params, notation);
+                case PGCD -> e = new Pgcd(params, notation);
+                case PPCM -> e = new Ppcm(params, notation);
+                case POW -> e = new Pow(params, notation);
+                case PRIME -> e = new PrimeNumber(params, notation);
                 default -> System.out.println("Error"); //TODO : handle exception
             }
         } catch (IllegalConstruction ignored){}//TODO : handle exception
