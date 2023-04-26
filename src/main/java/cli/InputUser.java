@@ -29,8 +29,10 @@ public class InputUser
             if (!cut_list.equals("") && !cut_list.equals(" "))
             {
                 listInput.add(cut_list);
+
             }
         }
+
         return listInput;
     }
 
@@ -147,8 +149,10 @@ public class InputUser
 
         for (Typos s : ConvertNotation.transformNotation(notation, this.user_input_list, isVerbose))
         {
+
             if (s.getType().equals(TypeString.INTEGER) || s.getType().equals(TypeString.REAL))
                 stack.push(new MyNumber(new BigDecimal(s.getValue())));
+
             else if (s.getType().equals(TypeString.COMPLEX) || s.getType().equals(TypeString.REAL_COMPLEX)){
                 if(s.getValue().contains("-"))
                     stack.push(new MyNumber("0"+s.getValue()));
@@ -164,9 +168,9 @@ public class InputUser
                    args++;
                }
                 args = 0;
-
                 e = getOperator(s, list_of_expression_data, Notation.POSTFIX);
                 list_of_expression_data.clear();
+
 
                 stack.push(e);
             }

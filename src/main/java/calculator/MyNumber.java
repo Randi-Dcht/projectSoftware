@@ -196,7 +196,7 @@ public class MyNumber implements Expression
     public String[] decimalRefactor(BigDecimal v, int e){
         while ( v.compareTo(BigDecimal.valueOf(0.1)) < 0 && v.compareTo(BigDecimal.valueOf(-0.1)) > 0 && !((v.round(new MathContext(decimalNumber))).compareTo(BigDecimal.ZERO) == 0))  {
             v = (v.multiply(BigDecimal.valueOf(10)));
-            e = e+1;
+            e = e-1;
         }
         String[] list = new String[2];
         list[0]=(v.round(new MathContext(decimalNumber))).toString();
@@ -218,8 +218,7 @@ public class MyNumber implements Expression
         Double real = applyExp(this.value,this.exp).round(new MathContext(decimalNumber)).doubleValue();
         Double imag = applyExp(this.imaginary,this.imaginaryExp).round(new MathContext(decimalNumber)).doubleValue();
 
-
-        DecimalFormat format = new DecimalFormat("0.#");
+        DecimalFormat format = new DecimalFormat("0.###############");
         DecimalFormat imFormat = new DecimalFormat("+#,##0.#;-#");
         double O = Math.PI/2;
         if(value.signum()!=0) {
@@ -229,6 +228,7 @@ public class MyNumber implements Expression
         }
         MyNumber tmp2 = Modulus.modNumber(this);
         double r = tmp2.getValue().multiply(BigDecimal.valueOf(pow(10, tmp2.getexp())).round(new MathContext(decimalNumber))).doubleValue();
+
 
         return switch (n) {
             case CARTESIAN ->

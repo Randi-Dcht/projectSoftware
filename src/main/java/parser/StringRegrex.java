@@ -39,11 +39,12 @@ public class StringRegrex
                 list.add(new Typos(s, TypeString.BRACKET));
             else if (s.matches("true|false"))
                 list.add(new Typos(s, TypeString.BOOLEAN));
-            else if (s.matches("[0-9]+E[0-9]+"))
+            else if (s.matches("[+-]?+[0-9]+E+[+-]?+[0-9]+"))
                 list.add(new Typos(s, TypeString.E_NOTATION));
-            else if (s.matches("[0-9]+x10\\^[0-9]+"))
+            else if (s.matches("[+-]?+[0-9]+x10\\^+[+-]?+[0-9]+"))
                 list.add(new Typos(s, TypeString.SCIENTIFIC));
         }
+
         return list;
     }
 }
