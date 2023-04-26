@@ -72,6 +72,8 @@ public class MyNumber implements Expression
     }
 
 
+
+
     public /*constructor*/ MyNumber(BigDecimal v) {
 
         list_val = decimalRefactor(v,0);
