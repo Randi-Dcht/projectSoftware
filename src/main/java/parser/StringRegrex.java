@@ -1,10 +1,11 @@
 package parser;
 
 import cli.InputUser;
+import enums.ListOperator;
 import enums.TypeString;
-
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class StringRegrex
 {
@@ -23,7 +24,13 @@ public class StringRegrex
             else if (s.matches("[0-9]+\\.[0-9]+"))
                 list.add(new Typos(s, TypeString.REAL));
             else if (s.matches(REGEX_OPERATOR))
-                list.add(new Typos(s, TypeString.OPERATOR));
+            {
+                for (ListOperator op : ListOperator.values())
+                {
+                    if (op.getValue().equals(s))
+                        list.add(new Typos(s, TypeString.OPERATOR, op));
+                }
+            }
             else if (s.matches("[()]"))
                 list.add(new Typos(s, TypeString.BRACKET));
             else if (s.matches("true|false"))

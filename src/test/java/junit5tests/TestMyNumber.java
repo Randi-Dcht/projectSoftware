@@ -12,14 +12,11 @@ import java.util.ArrayList;
 class TestMyNumber {
 
 	private final BigDecimal value = new BigDecimal (8);
-
 	private final BigDecimal imaginary = new BigDecimal (3);
 	private final int exp =2;
 	private MyNumber number;
 	private MyNumber realnumber;
-
 	private MyNumber complexNumber;
-
 	private  MyNumber onlyComplexNumber;
 	@BeforeEach
 	void setUp() {
@@ -64,7 +61,10 @@ class TestMyNumber {
 			assertNotEquals(new Times(new ArrayList<>()), number);
 		}
 		catch (IllegalConstruction e) {fail();}
+
+
 	}
+
 
 	@Test
 	void testToString() {

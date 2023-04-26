@@ -5,10 +5,11 @@ import visitor.Visitor;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
 
+
+import static java.lang.Integer.parseInt;
 import static java.lang.Math.pow;
+
 
 /**
  * MyNumber is a concrete class that represents arithmetic numbers,
@@ -29,6 +30,11 @@ public class MyNumber implements Expression
   private final BigDecimal imaginary;
 
   private final int imaginaryExp;
+
+  private String[] list_val = new String[2];
+  private String[] list_i = new String[2];
+
+
 
 
 
@@ -66,16 +72,22 @@ public class MyNumber implements Expression
 
 
     public /*constructor*/ MyNumber(BigDecimal v) {
-        value=v.round(new MathContext(decimalNumber));
-        exp=0;
+
+        list_val = decimalRefactor(v,0);
+        value=new BigDecimal(list_val[0]).round(new MathContext(decimalNumber));
+        exp= (parseInt( list_val[1]));
+
 
         BigDecimal tmp = new BigDecimal(0);
         imaginary = tmp.round(new MathContext(decimalNumber));
         imaginaryExp = 0;
-	  }
+    }
     public /*constructor*/ MyNumber(BigDecimal v, int e) {
-        value=v.round(new MathContext(decimalNumber));
-        exp=e;
+
+        list_val = decimalRefactor(v,e);
+        value=new BigDecimal(list_val[0]).round(new MathContext(decimalNumber));
+        exp= (parseInt( list_val[1]));
+
 
         BigDecimal tmp = new BigDecimal(0);
         imaginary = tmp.round(new MathContext(decimalNumber));
@@ -83,31 +95,50 @@ public class MyNumber implements Expression
     }
 
     public /*constructor*/ MyNumber(BigDecimal v, BigDecimal i) {
-        value=v.round(new MathContext(decimalNumber));
-        exp=0;
 
-        imaginary = i.round(new MathContext(decimalNumber));
-        imaginaryExp = 0;
+        list_val = decimalRefactor(v,0);
+        value=new BigDecimal(list_val[0]).round(new MathContext(decimalNumber));
+        exp= (parseInt( list_val[1]));
+
+        list_i = decimalRefactor(i,0);
+        imaginary=new BigDecimal(list_i[0]).round(new MathContext(decimalNumber));
+        imaginaryExp= (parseInt( list_i[1]));
     }
 
     public /*constructor*/ MyNumber(BigDecimal v, int e, BigDecimal i, int ie) {
-        value=v.round(new MathContext(decimalNumber));
-        exp=e;
 
-        imaginary = i.round(new MathContext(decimalNumber));
-        imaginaryExp = ie;
+        list_val = decimalRefactor(v,e);
+        value=new BigDecimal(list_val[0]).round(new MathContext(decimalNumber));
+        exp= (parseInt( list_val[1]));
+
+        list_i = decimalRefactor(i,ie);
+        imaginary=new BigDecimal(list_i[0]).round(new MathContext(decimalNumber));
+        imaginaryExp= (parseInt( list_i[1]));
+
     }
 
     public /*constructor*/ MyNumber(String number) {
+
         String[] parts = number.split("(?=[-+i])|(?<=[-+i])");
-        value = BigDecimal.valueOf(Double.parseDouble(parts[0]));
+        BigDecimal tmp_imaginary;
+        BigDecimal tmp_value = BigDecimal.valueOf(Double.parseDouble(parts[0]));
         if(parts[1].equals("-"))
-            imaginary = BigDecimal.valueOf(Double.parseDouble(parts[2]) * -1);
+            tmp_imaginary = BigDecimal.valueOf(Double.parseDouble(parts[2]) * -1);
         else
-            imaginary = BigDecimal.valueOf(Double.parseDouble(parts[2]));
-        exp = 0;
-        imaginaryExp = 0;
+            tmp_imaginary = BigDecimal.valueOf(Double.parseDouble(parts[2]));
+        int tmp_exp = 0;
+        int tmp_imaginaryExp = 0;
+
+        list_val = decimalRefactor(tmp_value,tmp_exp);
+        value=new BigDecimal(list_val[0]).round(new MathContext(decimalNumber));
+        exp= (parseInt( list_val[1]));
+
+        list_i = decimalRefactor(tmp_imaginary,tmp_imaginaryExp);
+        imaginary=new BigDecimal(list_i[0]).round(new MathContext(decimalNumber));
+        imaginaryExp= (parseInt( list_i[1]));
     }
+
+
 
     /**
      * accept method to implement the visitor design pattern to traverse arithmetic expressions.
@@ -160,12 +191,25 @@ public class MyNumber implements Expression
     public BigDecimal applyExp(BigDecimal v, int e){
         return v.multiply(BigDecimal.valueOf(pow(10, e)));
     }
+
+
+    public String[] decimalRefactor(BigDecimal v, int e){
+        while ( v.compareTo(BigDecimal.valueOf(0.1)) < 0 && v.compareTo(BigDecimal.valueOf(-0.1)) > 0 && !((v.round(new MathContext(decimalNumber))).compareTo(BigDecimal.ZERO) == 0))  {
+            v = (v.multiply(BigDecimal.valueOf(10)));
+            e = e+1;
+        }
+        String[] list = new String[2];
+        list[0]=(v.round(new MathContext(decimalNumber))).toString();
+        list[1]=Integer.toString(e);
+        return list;
+    }
     
 
     @Override
     public String toString() {
         return toString(notation);
     }
+
 
 
     public final String toString(NumberNotation n)

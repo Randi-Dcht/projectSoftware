@@ -2,14 +2,11 @@ package cli;
 
 import calculator.*;
 import enums.TypeString;
-import parser.StringRegrex;
 import parser.Typos;
-
-
 import java.math.BigDecimal;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 
 /**
@@ -57,22 +54,22 @@ public class InputUser
 
 
     /**
-     * @param inputUser : string input of user (operator)
+     * @param operator : string input of user (string -> operator)
      * @param params : list of expression (parameters)
      * @param notation : notation of the operation
      * @return expression of the operation
      */
-    public static Expression getOperator(String inputUser, List<Expression> params, Notation notation)
+    public static Expression getOperator(Typos operator, List<Expression> params, Notation notation)
     {
         Operation e = null;
         try {
             //construct another type of operation depending on the input value
             //of the parameterised test
-            switch (inputUser){
-                case "+" -> e = new Plus(params, notation);
-                case "-" -> e = new Minus(params, notation);
-                case "*" -> e = new Times(params, notation);
-                case "/" -> e = new Divides(params, notation);
+            switch (operator.getOperator()){
+                case ADD -> e = new Plus(params, notation);
+                case SUB -> e = new Minus(params, notation);
+                case MUL -> e = new Times(params, notation);
+                case DIV -> e = new Divides(params, notation);
                 default -> System.out.println("Error"); //TODO : handle exception
             }
         } catch (IllegalConstruction ignored){}//TODO : handle exception
@@ -81,8 +78,6 @@ public class InputUser
 
 
     //--------------------INSTANCE--------------------//
-    /**List of expression*/
-    private final List<Expression> list_of_expression = new ArrayList<>();
     /**Notation actual*/
     private Notation notation;
     /**List of string input of user without space*/
@@ -118,6 +113,16 @@ public class InputUser
         this.user_input_list = inputUser;
     }
 
+    public List<Typos> getUserInput()
+    {
+        return this.user_input_list;
+    }
+
+    public Notation getNotation()
+    {
+        return this.notation;
+    }
+
 
     /**
      * Compute the input of user
@@ -125,28 +130,38 @@ public class InputUser
      */
     public MyNumber compute(boolean isVerbose)
     {
-        //String operator = null;
         Expression e = null;
+        int args = 0;
+        List<Expression> list_of_expression_data = new ArrayList<>();
+        Stack<Expression> stack = new Stack<>();
 
-        for (Typos s : this.user_input_list)
+        for (Typos s : ConvertNotation.transformNotation(notation, this.user_input_list, isVerbose))
         {
-            if (s.getType().equals(TypeString.INTEGER))
-                list_of_expression.add(new MyNumber(new BigDecimal(s.getValue())));
+            if (s.getType().equals(TypeString.INTEGER) || s.getType().equals(TypeString.REAL))
+                stack.push(new MyNumber(new BigDecimal(s.getValue())));
             else if (s.getType().equals(TypeString.OPERATOR))
             {
-                e = getOperator(s.getValue(), list_of_expression, this.notation);
-                list_of_expression.clear();
-                list_of_expression.add(e);
+               while(!stack.isEmpty() && s.getOperator().getNumberArgs() > args)
+               {
+                   list_of_expression_data.add(stack.pop());
+                   args++;
+               }
+                args = 0;
+
+                e = getOperator(s, list_of_expression_data, Notation.POSTFIX);
+                list_of_expression_data.clear();
+
+                stack.push(e);
             }
             else if (s.getType().equals(TypeString.E_NOTATION))
             {
                 String[] parts = s.getValue().split("E");
-                list_of_expression.add(new MyNumber(new BigDecimal(parts[0]),Integer.parseInt(parts[1])));
+                stack.push(new MyNumber(new BigDecimal(parts[0]),Integer.parseInt(parts[1])));
             }
             else if (s.getType().equals(TypeString.SCIENTIFIC))
             {
                 String[] parts = s.getValue().split("x10\\^");
-                list_of_expression.add(new MyNumber(new BigDecimal(parts[0]),Integer.parseInt(parts[1])));
+                stack.push(new MyNumber(new BigDecimal(parts[0]),Integer.parseInt(parts[1])));
             }
         }
 

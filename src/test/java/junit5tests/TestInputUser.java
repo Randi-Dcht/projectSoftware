@@ -1,17 +1,16 @@
 package junit5tests;
 
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import calculator.*;
 import cli.InputUser;
+import enums.ListOperator;
+import enums.TypeString;
 import org.junit.jupiter.api.Test;
-
+import parser.StringRegrex;
+import parser.Typos;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import static org.junit.jupiter.api.Assertions.*;
 
 class TestInputUser
 {
@@ -38,10 +37,10 @@ class TestInputUser
     void testGetOperator() throws IllegalConstruction {
         ArrayList<Expression> lst = new ArrayList<>();
         lst.add(new MyNumber(new BigDecimal(1))); lst.add(new MyNumber(new BigDecimal(2)));
-        assertEquals(InputUser.getOperator("+", lst, Notation.INFIX), new Plus(lst));
-        assertEquals(InputUser.getOperator("-", lst, Notation.INFIX), new Minus(lst));
-        assertEquals(InputUser.getOperator("/", lst, Notation.INFIX), new Divides(lst));
-        assertEquals(InputUser.getOperator("*", lst, Notation.INFIX), new Times(lst));
+        assertEquals(InputUser.getOperator(new Typos("+", TypeString.OPERATOR, ListOperator.ADD), lst, Notation.INFIX), new Plus(lst));
+        assertEquals(InputUser.getOperator(new Typos("-", TypeString.OPERATOR, ListOperator.SUB), lst, Notation.INFIX), new Minus(lst));
+        assertEquals(InputUser.getOperator(new Typos("/", TypeString.OPERATOR, ListOperator.DIV), lst, Notation.INFIX), new Divides(lst));
+        assertEquals(InputUser.getOperator(new Typos("*", TypeString.OPERATOR, ListOperator.MUL), lst, Notation.INFIX), new Times(lst));
 
     }
 
@@ -50,5 +49,37 @@ class TestInputUser
     {
         InputUser inputUser = new InputUser(Notation.PREFIX);
         assertTrue(inputUser instanceof InputUser);
+    }
+
+    @Test
+    void testInstance2()
+    {
+        InputUser inputUser = new InputUser(Notation.INFIX);
+        assertSame(inputUser.getNotation(), Notation.INFIX);
+        inputUser.setNotation(Notation.POSTFIX);
+        assertSame(inputUser.getNotation(), Notation.POSTFIX);
+
+        inputUser.setUserInput(StringRegrex.analyse("1 + 2"));
+        assertEquals(inputUser.getUserInput().size(), 3);
+        assertEquals(inputUser.getUserInput().get(0).getValue(), "1");
+        assertEquals(inputUser.getUserInput().get(1).getValue(), "+");
+        assertEquals(inputUser.getUserInput().get(2).getValue(), "2");
+    }
+
+    @Test
+    void testCompute()
+    {
+        InputUser inputUser = new InputUser(Notation.INFIX);
+        inputUser.setUserInput(StringRegrex.analyse("1 + 2"));
+        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(3)));
+
+        inputUser.setUserInput(StringRegrex.analyse("2 * 3 + 2 * 3"));
+        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(12)));
+
+        inputUser.setUserInput(StringRegrex.analyse("( 2 + 2 ) * 3"));
+        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(12)));
+
+        inputUser.setUserInput(StringRegrex.analyse("( ( 2 + 2 ) * 3 )"));
+        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(12)));
     }
 }

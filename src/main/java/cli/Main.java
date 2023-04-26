@@ -10,8 +10,6 @@ public class Main
 {
     /**While loop to continue*/
     private static boolean isRunning = true;
-    /**List of input*/
-    private static List<String> listInput;
     /**Notation actual*/
     private static Notation notation = Notation.INFIX;
     /**is Verbose mode (print list of expression)*/
@@ -51,7 +49,8 @@ public class Main
         Scanner scanner = new Scanner(System.in);
         String inputUser = scanner.nextLine();
         InputUser inputUser_instance = new InputUser(notation);
-        listInput = InputUser.cleanInput(inputUser);
+        /**List of input*/
+        List<String> listInput = InputUser.cleanInput(inputUser);
         if (listInput.size() != 0)
         {
             if (listInput.get(0).equals(".quit"))
