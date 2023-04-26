@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import static cli.Main.printError;
+import static cli.Main.printing;
+
 
 /**
  * Class to process the input of user
@@ -80,9 +83,13 @@ public class InputUser
                 case PPCM -> e = new Ppcm(params, notation);
                 case POW -> e = new Pow(params, notation);
                 case PRIME -> e = new PrimeNumber(params, notation);
-                default -> System.out.println("Error"); //TODO : handle exception
+                default -> printError("Operator not found");
             }
-        } catch (IllegalConstruction ignored){}//TODO : handle exception
+        }
+        catch (IllegalConstruction ill)
+        {
+            printError("Illegal construction " + ill.getMessage());
+        }
         return e;
     }
 
@@ -185,7 +192,7 @@ public class InputUser
         if (e != null)
         {
             if (isVerbose)
-                System.out.println("$> " + e.toString());
+                printing("$> " + e.toString(), true);
             return new Calculator().eval(e);
         }
         return new MyNumber(new BigDecimal(0),0);
