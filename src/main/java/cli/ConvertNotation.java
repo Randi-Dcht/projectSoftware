@@ -59,30 +59,6 @@ public class ConvertNotation
 
 
     /**
-     * Convert the data in prefix to postfix for compute
-     */
-    /*private static List<Typos> convertPrefix(List<Typos> data)
-    {
-        List<Typos> buff = new ArrayList<>();
-        Stack<Typos> stack = new Stack<>();
-
-        for(Typos e : data)
-        {
-            if (e.getType().equals(TypeString.OPERATOR))
-                stack.push(e);
-            else
-            {
-                buff.add(e);
-                if (!stack.empty())
-                    buff.add(stack.pop());
-            }
-        }
-
-        return buff;
-    }*/
-
-
-    /**
      * Convert the data in postif for compute
      */
     public static List<Typos> transformNotation(Notation notationIn, List<Typos> data, boolean isPrint)
@@ -91,8 +67,6 @@ public class ConvertNotation
 
         if (notationIn.equals(Notation.INFIX))
             array = convertInfix(data);
-        //else if (notationIn.equals(Notation.PREFIX))
-        //    array = convertPrefix(data);
         else
             array = data;
 
