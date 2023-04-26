@@ -74,5 +74,11 @@ class TestInputUser
 
         inputUser.setUserInput(StringRegrex.analyse("2 * 3 + 2 * 3"));
         assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(12)));
+
+        inputUser.setUserInput(StringRegrex.analyse("( 2 + 2 ) * 3"));
+        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(12)));
+
+        inputUser.setUserInput(StringRegrex.analyse("( ( 2 + 2 ) * 3 )"));
+        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(12)));
     }
 }

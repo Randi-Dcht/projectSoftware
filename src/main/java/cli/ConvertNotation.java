@@ -37,6 +37,17 @@ public class ConvertNotation
                     }
                 }
             }
+            else if (e.getType().equals(TypeString.BRACKET))
+            {
+                if (e.getValue().equals(")"))
+                {
+                    while (!stack.empty() && !stack.peek().getValue().equals("("))
+                        buff.add(stack.pop());
+                    stack.pop();
+                }
+                else
+                    stack.push(e);
+            }
             else
                 buff.add(e);
         }
@@ -50,7 +61,7 @@ public class ConvertNotation
     /**
      * Convert the data in prefix to postfix for compute
      */
-    private static List<Typos> convertPrefix(List<Typos> data)
+    /*private static List<Typos> convertPrefix(List<Typos> data)
     {
         List<Typos> buff = new ArrayList<>();
         Stack<Typos> stack = new Stack<>();
@@ -68,7 +79,7 @@ public class ConvertNotation
         }
 
         return buff;
-    }
+    }*/
 
 
     /**
@@ -80,8 +91,8 @@ public class ConvertNotation
 
         if (notationIn.equals(Notation.INFIX))
             array = convertInfix(data);
-        else if (notationIn.equals(Notation.PREFIX))
-            array = convertPrefix(data);
+        //else if (notationIn.equals(Notation.PREFIX))
+        //    array = convertPrefix(data);
         else
             array = data;
 
