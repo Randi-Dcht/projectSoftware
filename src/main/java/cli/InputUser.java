@@ -139,8 +139,13 @@ public class InputUser
         {
             if (s.getType().equals(TypeString.INTEGER) || s.getType().equals(TypeString.REAL))
                 stack.push(new MyNumber(new BigDecimal(s.getValue())));
-            else if (s.getType().equals(TypeString.COMPLEX) || s.getType().equals(TypeString.REAL_COMPLEX))
-                stack.push(new MyNumber("0+"+s.getValue()));
+            else if (s.getType().equals(TypeString.COMPLEX) || s.getType().equals(TypeString.REAL_COMPLEX)){
+                if(s.getValue().contains("-"))
+                    stack.push(new MyNumber("0"+s.getValue()));
+                else
+                    stack.push(new MyNumber("0+"+s.getValue()));
+            }
+
             else if (s.getType().equals(TypeString.OPERATOR))
             {
                while(!stack.isEmpty() && s.getOperator().getNumberArgs() > args)
