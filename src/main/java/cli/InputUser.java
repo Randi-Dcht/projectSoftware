@@ -54,22 +54,22 @@ public class InputUser
 
 
     /**
-     * @param inputUser : string input of user (operator)
+     * @param operator : string input of user (string -> operator)
      * @param params : list of expression (parameters)
      * @param notation : notation of the operation
      * @return expression of the operation
      */
-    public static Expression getOperator(String inputUser, List<Expression> params, Notation notation)
+    public static Expression getOperator(Typos operator, List<Expression> params, Notation notation)
     {
         Operation e = null;
         try {
             //construct another type of operation depending on the input value
             //of the parameterised test
-            switch (inputUser){
-                case "+" -> e = new Plus(params, notation);
-                case "-" -> e = new Minus(params, notation);
-                case "*" -> e = new Times(params, notation);
-                case "/" -> e = new Divides(params, notation);
+            switch (operator.getOperator()){
+                case ADD -> e = new Plus(params, notation);
+                case SUB -> e = new Minus(params, notation);
+                case MUL -> e = new Times(params, notation);
+                case DIV -> e = new Divides(params, notation);
                 default -> System.out.println("Error"); //TODO : handle exception
             }
         } catch (IllegalConstruction ignored){}//TODO : handle exception
@@ -148,7 +148,7 @@ public class InputUser
                }
                 args = 0;
 
-                e = getOperator(s.getValue(), list_of_expression_data, Notation.POSTFIX);
+                e = getOperator(s, list_of_expression_data, Notation.POSTFIX);
                 list_of_expression_data.clear();
 
                 stack.push(e);

@@ -3,8 +3,11 @@ package junit5tests;
 
 import calculator.*;
 import cli.InputUser;
+import enums.ListOperator;
+import enums.TypeString;
 import org.junit.jupiter.api.Test;
 import parser.StringRegrex;
+import parser.Typos;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -36,10 +39,10 @@ class TestInputUser
     void testGetOperator() throws IllegalConstruction {
         ArrayList<Expression> lst = new ArrayList<>();
         lst.add(new MyNumber(new BigDecimal(1))); lst.add(new MyNumber(new BigDecimal(2)));
-        assertEquals(InputUser.getOperator("+", lst, Notation.INFIX), new Plus(lst));
-        assertEquals(InputUser.getOperator("-", lst, Notation.INFIX), new Minus(lst));
-        assertEquals(InputUser.getOperator("/", lst, Notation.INFIX), new Divides(lst));
-        assertEquals(InputUser.getOperator("*", lst, Notation.INFIX), new Times(lst));
+        assertEquals(InputUser.getOperator(new Typos("+", TypeString.OPERATOR, ListOperator.ADD), lst, Notation.INFIX), new Plus(lst));
+        assertEquals(InputUser.getOperator(new Typos("-", TypeString.OPERATOR, ListOperator.SUB), lst, Notation.INFIX), new Minus(lst));
+        assertEquals(InputUser.getOperator(new Typos("/", TypeString.OPERATOR, ListOperator.DIV), lst, Notation.INFIX), new Divides(lst));
+        assertEquals(InputUser.getOperator(new Typos("*", TypeString.OPERATOR, ListOperator.MUL), lst, Notation.INFIX), new Times(lst));
 
     }
 
