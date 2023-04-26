@@ -68,6 +68,10 @@ public final class Divides extends Operation
         int bExp = l.getImaginaryExp();
         int dExp = r.getImaginaryExp();
 
+        if(((l.getValue().round(new MathContext(15))).compareTo(BigDecimal.ZERO)) == 0){
+            return new MyNumber(-1);
+        }
+
         MyNumber a = new MyNumber(l.getValue(),aExp);
         MyNumber b = new MyNumber(l.getImaginary(),bExp);
         MyNumber c = new MyNumber(r.getValue(),cExp);
