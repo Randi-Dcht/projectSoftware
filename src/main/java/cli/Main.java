@@ -1,5 +1,6 @@
 package cli;
 
+import calculator.MyNumber;
 import calculator.Notation;
 import calculator.NumberNotation;
 import enums.ListOperator;
@@ -17,6 +18,7 @@ public class Main
     private static NumberNotation mode = NumberNotation.CARTESIAN;
     /**is Verbose mode (print list of expression)*/
     private static boolean verbose = false;
+    private static MyNumber result = null;
 
 
     /**
@@ -103,7 +105,11 @@ public class Main
             else
             {
                 inputUser_instance.setUserInput(StringRegrex.analyse(inputUser));
-                printing("$> " + inputUser_instance.compute(verbose), true);
+                result = inputUser_instance.compute(verbose);
+                if (result != null)
+                    printing("$> " + result.toString(), true);
+                else
+                    printError("Error in the expression");
             }
         }
         else
@@ -121,7 +127,14 @@ public class Main
         printOperator();
         while(isRunning)
         {
-            get_input();
+            try
+            {
+                get_input();
+            }
+            catch (Exception e)
+            {
+                printError(e.getMessage());
+            }
         }
         printing("$> Bye bye !", true);
     }

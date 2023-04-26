@@ -213,6 +213,6 @@ public class InputUser
                 printing("$> " + e.toString(), true);
             return new Calculator().eval(e);
         }
-        return new MyNumber(new BigDecimal(0),0);
+        return null;
     }
 }
