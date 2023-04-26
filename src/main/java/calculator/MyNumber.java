@@ -220,6 +220,7 @@ public class MyNumber implements Expression
 
 
         DecimalFormat format = new DecimalFormat("0.#");
+        DecimalFormat imFormat = new DecimalFormat("+#,##0.#;-#");
         double O = Math.PI/2;
         if(value.signum()!=0) {
             MyNumber tmp1 = Divides.divNumber(new MyNumber(imaginary, imaginaryExp), new MyNumber(value, exp));
@@ -233,7 +234,7 @@ public class MyNumber implements Expression
             case CARTESIAN ->
                 String.format("%s%s", "", (value.signum() == 0 && imaginary.signum() != 0) ? String.format("%si", format.format(imag)) :
                     (imaginary.signum() == 0) ? String.format("%s", format.format(real)) :
-                            String.format("%s+%si", format.format(real),format.format(imag)));
+                            String.format("%s%si", format.format(real),imFormat.format(imag)));
 
             case POLAR ->
                     String.format("%s%s",format.format(r),
