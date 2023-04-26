@@ -9,4 +9,6 @@ public enum TypeString
     BOOLEAN,
     E_NOTATION,
     SCIENTIFIC,
+    COMPLEX,
+    REAL_COMPLEX,
 }

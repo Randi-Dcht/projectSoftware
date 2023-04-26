@@ -19,7 +19,11 @@ public class StringRegrex
         List<Typos> list = new ArrayList<>();
         for (String s : InputUser.cleanInput(str))
         {
-            if (s.matches("[0-9]+"))
+            if (s.matches("[0-9]+i+"))
+            list.add(new Typos(s, TypeString.COMPLEX));
+            else if (s.matches("[0-9]+\\.[0-9]+i+"))
+                list.add(new Typos(s, TypeString.REAL_COMPLEX));
+            else if (s.matches("[0-9]+"))
                 list.add(new Typos(s, TypeString.INTEGER));
             else if (s.matches("[0-9]+\\.[0-9]+"))
                 list.add(new Typos(s, TypeString.REAL));
