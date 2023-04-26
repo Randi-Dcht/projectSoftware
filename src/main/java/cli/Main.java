@@ -1,6 +1,7 @@
 package cli;
 
 import calculator.Notation;
+import enums.ListOperator;
 import parser.StringRegrex;
 import java.util.List;
 import java.util.Scanner;
@@ -25,6 +26,7 @@ public class Main
         System.out.println("$> Quit program : .quit");
         System.out.println("$> Verbose mode : .verbose <true|false> ");
         printMenu();
+        printOperator();
         System.out.println("=== HELP END===\n");
     }
 
@@ -37,6 +39,14 @@ public class Main
         System.out.println("$> Please enter an expression to evaluate or .quit to exit ");
         System.out.println("$> To change the notation, use the command .mode <mode> where <mode> is normal, complex, XX "); //TODO : complete here
         System.out.println("$> To change the notation, use the command .notation <notation> where <notation> is infix, prefix, postfix ");
+    }
+
+    public static void printOperator()
+    {
+        System.out.print("$> List of operators : [");
+        for (ListOperator operator : ListOperator.values())
+            System.out.print("  " + operator.getValue());
+        System.out.println("]");
     }
 
 
@@ -87,6 +97,7 @@ public class Main
     {
         System.out.print("$> Calculator Cucumber\n This is a calculator that can be used to perform basic arithmetic operations.\n");
         printMenu();
+        printOperator();
         while(isRunning)
         {
             get_input();

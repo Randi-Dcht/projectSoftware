@@ -12,7 +12,7 @@ public class StringRegrex
     private StringRegrex() {}
 
 
-    public static final String REGEX_OPERATOR = "[+\\-*/]";
+    public static final String REGEX_OPERATOR = "[+\\-*/combgcd//!%^ppcmprime]";
 
     public static List<Typos> analyse(String str)
     {
