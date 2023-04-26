@@ -1,6 +1,7 @@
 package cli;
 
 import calculator.Notation;
+import calculator.NumberNotation;
 import enums.ListOperator;
 import parser.StringRegrex;
 import java.util.List;
@@ -13,6 +14,7 @@ public class Main
     private static boolean isRunning = true;
     /**Notation actual*/
     private static Notation notation = Notation.INFIX;
+    private static NumberNotation mode = NumberNotation.CARTESIAN;
     /**is Verbose mode (print list of expression)*/
     private static boolean verbose = false;
 
@@ -52,7 +54,7 @@ public class Main
     public static void printMenu()
     {
         printing("$> Please enter an expression to evaluate or .quit to exit ", true);
-        printing("$> To change the notation, use the command .mode <mode> where <mode> is normal, complex, XX ", true); //TODO : complete here
+        printing("$> To change the notation, use the command .mode <mode> where <mode> is cartesian, polar, exponential, scientific or e_notation ", true);
         printing("$> To change the notation, use the command .notation <notation> where <notation> is infix, prefix, postfix ", true);
     }
 
@@ -68,6 +70,8 @@ public class Main
     /**
      * Get the input of the user or wait the command
      */
+
+    public static NumberNotation get_Notation_Mode(){return mode;}
     public static void get_input()
     {
         printing("$>>> ", false);
@@ -80,8 +84,10 @@ public class Main
         {
             if (listInput.get(0).equals(".quit"))
                 isRunning = false;
-            else if (listInput.get(0).equals(".mode") && listInput.size() == 2)
-                printing("$> Mode changed to " + listInput.get(1), true);
+            else if (listInput.get(0).equals(".mode") && listInput.size() == 2){
+                mode = InputUser.getMode(listInput.get(1));
+                printing("$> Mode : " + mode.toString(), true);
+            }
             else if (listInput.get(0).equals(".notation") && listInput.size() == 2)
             {
                 notation = InputUser.getNotation(listInput.get(1));

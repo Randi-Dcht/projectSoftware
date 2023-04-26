@@ -7,6 +7,7 @@ import java.math.MathContext;
 import java.text.DecimalFormat;
 
 
+import static cli.Main.get_Notation_Mode;
 import static java.lang.Integer.parseInt;
 import static java.lang.Math.pow;
 
@@ -38,7 +39,7 @@ public class MyNumber implements Expression
 
 
 
-  public NumberNotation notation = NumberNotation.CARTESIAN;
+  public NumberNotation notation = get_Notation_Mode();
 
     /** getter method to obtain the value contained in the object
      *

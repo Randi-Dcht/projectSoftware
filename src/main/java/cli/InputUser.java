@@ -58,6 +58,20 @@ public class InputUser
         return notation;
     }
 
+    public static NumberNotation getMode(String input)
+    {
+        NumberNotation notation;
+        switch (input.toLowerCase())
+        {
+            case "e_notation" -> notation = NumberNotation.E_NOTATION;
+            case "scientific" -> notation = NumberNotation.SCIENTIFIC;
+            case "polar" -> notation = NumberNotation.POLAR;
+            case "exponential" -> notation = NumberNotation.EXPONENTIAL;
+            default -> notation = NumberNotation.CARTESIAN;
+        }
+        return notation;
+    }
+
 
     /**
      * @param operator : string input of user (string -> operator)
