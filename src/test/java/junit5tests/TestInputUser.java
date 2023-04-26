@@ -8,10 +8,8 @@ import enums.TypeString;
 import org.junit.jupiter.api.Test;
 import parser.StringRegrex;
 import parser.Typos;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestInputUser
