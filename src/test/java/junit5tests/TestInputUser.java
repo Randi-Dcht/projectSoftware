@@ -84,6 +84,9 @@ class TestInputUser
         inputUser.setUserInput(StringRegex.analyse("1 + 2"));
         assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(3)));
 
+        inputUser.setUserInput(StringRegex.analyse("1.3 + 2.5i"));
+        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal("1.3"),new BigDecimal("2.5")));
+
         inputUser.setUserInput(StringRegex.analyse("2 * 3 + 2 * 3"));
         assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(12)));
 
@@ -92,5 +95,11 @@ class TestInputUser
 
         inputUser.setUserInput(StringRegex.analyse("( ( 2 + 2 ) * 3 )"));
         assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(12)));
+
+        inputUser.setUserInput(StringRegex.analyse("( ( 2 + 2i ) * 3 )"));
+        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(6),new BigDecimal(6)));
+
+        inputUser.setUserInput(StringRegex.analyse("( ( 2i - -2i ) * 3 )"));
+        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(0),new BigDecimal(12)));
     }
 }
