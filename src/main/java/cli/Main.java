@@ -69,17 +69,22 @@ public class Main
     }
 
 
+    public static NumberNotation getMode() {
+        return mode;
+    }
+
     /**
      * Get the input of the user or wait the command
      */
 
-    public static NumberNotation get_Notation_Mode(){return mode;}
+
+
     public static void get_input()
     {
         printing("$>>> ", false);
         Scanner scanner = new Scanner(System.in);
         String inputUser = scanner.nextLine();
-        InputUser inputUser_instance = new InputUser(notation);
+        InputUser inputUser_instance = new InputUser(notation,mode);
         /**List of input*/
         List<String> listInput = InputUser.cleanInput(inputUser);
         if (listInput.size() != 0)

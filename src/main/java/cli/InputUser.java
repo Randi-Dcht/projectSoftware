@@ -72,6 +72,11 @@ public class InputUser
         return notation;
     }
 
+    public void setMode(NumberNotation mode)
+    {
+        this.mode = mode;
+    }
+
 
     /**
      * @param operator : string input of user (string -> operator)
@@ -115,6 +120,7 @@ public class InputUser
     //--------------------INSTANCE--------------------//
     /**Notation actual*/
     private Notation notation;
+    private NumberNotation mode;
     /**List of string input of user without space*/
     private List<Typos> user_input_list;
 
@@ -123,9 +129,10 @@ public class InputUser
      * Constructor
      * @param notation : notation of the operation
      */
-    public InputUser(Notation notation) //TODO : add mode
+    public InputUser(Notation notation, NumberNotation mode) //TODO : add mode
     {
         this.notation = notation;
+        this.mode = mode;
     }
 
 
@@ -158,6 +165,10 @@ public class InputUser
         return this.notation;
     }
 
+    public NumberNotation getMode()
+    {
+        return this.mode;
+    }
 
     /**
      * Compute the input of user
