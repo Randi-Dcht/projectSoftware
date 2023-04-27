@@ -130,10 +130,6 @@ class TestRegex
         list = StringRegex.analyse(s);
         assertEquals(list.get(0).getType(), TypeString.HEXADECIMAL);
 
-        s = "IVL";
-        list = StringRegex.analyse(s);
-        assertEquals(list.get(0).getType(), TypeString.ROMAN);
-
 
         Main.setMode("cartesian");
     }

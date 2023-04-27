@@ -29,8 +29,6 @@ public class StringRegex
                 list.add(new Typos(s, TypeString.OCTAL));
             else if (Main.getMode().equals(NumberNotation.BINARY) && s.matches("0x[0-9A-Fa-f]+"))
                 list.add(new Typos(s, TypeString.HEXADECIMAL));
-            else if (Main.getMode().equals(NumberNotation.BINARY) && s.matches("[IVXLCDM]+"))
-                list.add(new Typos(s, TypeString.ROMAN));
             else if (s.matches("[+-]?+[0-9]+i+"))
                 list.add(new Typos(s, TypeString.COMPLEX));
             else if (s.matches("[+-]?+[0-9]+\\.[0-9]+i+"))
