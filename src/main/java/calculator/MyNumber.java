@@ -226,8 +226,13 @@ public class MyNumber implements Expression
             printNumberdecimal.append("#");
         }
 
+        DecimalFormat format;
 
-        DecimalFormat format = new DecimalFormat("0."+printNumberdecimal);
+        if(printdecimalNumber==0){
+            format = new DecimalFormat("0");}
+        else{
+            format = new DecimalFormat("0."+printNumberdecimal);
+        }
         DecimalFormat imFormat = new DecimalFormat("+#,##0.#;-#");
         double O = Math.PI/2;
         if(value.signum()!=0) {
