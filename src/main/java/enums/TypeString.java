@@ -11,4 +11,6 @@ public enum TypeString
     SCIENTIFIC,
     COMPLEX,
     REAL_COMPLEX,
+    E_NOTATION_COMPLEX,
+    SCIENTIFIC_COMPLEX,
 }

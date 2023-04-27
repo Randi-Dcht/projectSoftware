@@ -25,6 +25,10 @@ public class StringRegex
             list.add(new Typos(s, TypeString.COMPLEX));
             else if (s.matches("[+-]?+[0-9]+\\.[0-9]+i+"))
                 list.add(new Typos(s, TypeString.REAL_COMPLEX));
+            else if (s.matches("[+-]?+[0-9]+E+[+-]?+[0-9]+i+"))
+                list.add(new Typos(s, TypeString.E_NOTATION_COMPLEX));
+            else if (s.matches("[+-]?+[0-9]+x10\\^+[+-]?+[0-9]+i+"))
+                list.add(new Typos(s, TypeString.SCIENTIFIC_COMPLEX));
             else if (s.matches("[+-]?+[0-9]+"))
                 list.add(new Typos(s, TypeString.INTEGER));
             else if (s.matches("[+-]?+[0-9]+\\.[0-9]+"))
