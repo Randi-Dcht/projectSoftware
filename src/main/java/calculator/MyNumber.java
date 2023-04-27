@@ -221,9 +221,9 @@ public class MyNumber implements Expression
         Double real = applyExp(this.value,this.exp).round(new MathContext(decimalNumber)).doubleValue();
         Double imag = applyExp(this.imaginary,this.imaginaryExp).round(new MathContext(decimalNumber)).doubleValue();
 
-        StringBuilder printNumberdecimal = new StringBuilder();
+        StringBuilder printNumberDecimal = new StringBuilder();
         for (int i = 0; i < printdecimalNumber; i++) {
-            printNumberdecimal.append("#");
+            printNumberDecimal.append("#");
         }
 
         DecimalFormat format;
@@ -231,7 +231,7 @@ public class MyNumber implements Expression
         if(printdecimalNumber==0){
             format = new DecimalFormat("0");}
         else{
-            format = new DecimalFormat("0."+printNumberdecimal);
+            format = new DecimalFormat("0."+printNumberDecimal);
         }
         DecimalFormat imFormat = new DecimalFormat("+#,##0.#;-#");
         double O = Math.PI/2;
