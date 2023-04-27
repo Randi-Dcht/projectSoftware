@@ -67,6 +67,7 @@ public class InputUser
             case "scientific" -> notation = NumberNotation.SCIENTIFIC;
             case "polar" -> notation = NumberNotation.POLAR;
             case "exponential" -> notation = NumberNotation.EXPONENTIAL;
+            case "binary" -> notation = NumberNotation.BINARY;
             default -> notation = NumberNotation.CARTESIAN;
         }
         return notation;
@@ -129,7 +130,7 @@ public class InputUser
      * Constructor
      * @param notation : notation of the operation
      */
-    public InputUser(Notation notation, NumberNotation mode) //TODO : add mode
+    public InputUser(Notation notation, NumberNotation mode)
     {
         this.notation = notation;
         this.mode = mode;

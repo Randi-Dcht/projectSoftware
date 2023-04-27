@@ -257,7 +257,8 @@ public class MyNumber implements Expression
             String.format("%s%s", "", (value.signum() == 0 && imaginary.signum() != 0) ? String.format("i*%sE^%s", imaginary,imaginaryExp) :
                     (imaginary.signum() == 0) ? String.format("%sE^%s", value,exp) :
                             String.format("%sE^%s + i*%sE^%s", value,exp,imaginary,imaginaryExp));
-          };
+            case BINARY -> null;
+        };
       }
 
 
