@@ -4,6 +4,7 @@ package junit5tests;
 import calculator.*;
 import calculator.arithmetics.*;
 import cli.InputUser;
+import cli.Main;
 import enums.ListOperator;
 import enums.TypeString;
 import org.junit.jupiter.api.Test;
@@ -169,6 +170,18 @@ class TestInputUser
 
         inputUser.setDecimalNumber(16);
         assertEquals(inputUser.getDecimalNumber(),16);
+
+        Main.setMode("binary");
+        inputUser.setUserInput(StringRegex.analyse("2x01 + 2x10"));
+        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(3)));
+
+        inputUser.setUserInput(StringRegex.analyse("16xA1 + 16xF2"));
+        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(403)));
+
+        inputUser.setUserInput(StringRegex.analyse("4x10 + 16xF2"));
+        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(246)));
+
+        Main.setMode(NumberNotation.CARTESIAN);
 
     }
 }
