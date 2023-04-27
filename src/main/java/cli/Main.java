@@ -73,6 +73,15 @@ public class Main
         return mode;
     }
 
+    public static void setMode(NumberNotation mode) {
+        Main.mode = mode;
+    }
+
+    public static void setMode(String mode)
+    {
+        setMode(InputUser.getMode(mode));
+    }
+
     /**
      * Get the input of the user or wait the command
      */
@@ -92,7 +101,7 @@ public class Main
             if (listInput.get(0).equals(".quit"))
                 isRunning = false;
             else if (listInput.get(0).equals(".mode") && listInput.size() == 2){
-                mode = InputUser.getMode(listInput.get(1));
+                setMode(listInput.get(1));
                 printing("$> Mode : " + mode.toString(), true);
             }
             else if (listInput.get(0).equals(".notation") && listInput.size() == 2)

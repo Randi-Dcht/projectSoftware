@@ -31,7 +31,7 @@ public class StringRegex
                 list.add(new Typos(s, TypeString.HEXADECIMAL));
             else if (Main.getMode().equals(NumberNotation.BINARY) && s.matches("[IVXLCDM]+"))
                 list.add(new Typos(s, TypeString.ROMAN));
-            if (s.matches("[+-]?+[0-9]+i+"))
+            else if (s.matches("[+-]?+[0-9]+i+"))
                 list.add(new Typos(s, TypeString.COMPLEX));
             else if (s.matches("[+-]?+[0-9]+\\.[0-9]+i+"))
                 list.add(new Typos(s, TypeString.REAL_COMPLEX));

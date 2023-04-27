@@ -1,5 +1,6 @@
 package junit5tests;
 
+import cli.Main;
 import enums.ListOperator;
 import enums.TypeString;
 import org.junit.jupiter.api.Test;
@@ -8,7 +9,7 @@ import parser.Typos;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 
-class TestRegrex
+class TestRegex
 {
     @Test
     void testRegrex()
@@ -106,5 +107,19 @@ class TestRegrex
         assertEquals(list.get(1).getPriority(), 1);
         assertEquals(list.get(2).getPriority(), 2);
         assertEquals(list.get(3).getPriority(), 2);
+    }
+
+    @Test
+    void test_binary()
+    {
+        Main.setMode("binary");
+        String s = "1 0 1 0101";
+        List<Typos> list = StringRegex.analyse(s);
+
+
+        assertEquals(list.size(), 4);
+        assertEquals(list.get(0).getType(), TypeString.BINARY);
+
+        Main.setMode("cartesian");
     }
 }
