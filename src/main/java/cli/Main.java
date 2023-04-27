@@ -132,7 +132,7 @@ public class Main
                 inputUser_instance.setUserInput(StringRegex.analyse(inputUser));
                 result = inputUser_instance.compute(verbose);
                 if (result != null)
-                    printing("$> " + result.toString(), true);
+                    printing("$> " + result, true);
                 else
                     printError("Error in the expression");
             }

@@ -59,7 +59,7 @@ public class ConvertNotation
 
 
     /**
-     * Convert the data in postif for compute
+     * Convert the data in postfix for compute
      */
     public static List<Typos> transformNotation(Notation notationIn, List<Typos> data, boolean isPrint)
     {

@@ -291,7 +291,7 @@ public class InputUser
         if (e != null)
         {
             if (isVerbose)
-                printing("$> " + e.toString(), true);
+                printing("$> " + e, true);
             return new Calculator().eval(e);
         }
         return null;

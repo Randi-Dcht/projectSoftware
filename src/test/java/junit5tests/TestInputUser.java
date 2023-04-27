@@ -166,6 +166,7 @@ class TestInputUser
 
         inputUser.setDecimalNumber(0);
         assertEquals(inputUser.getDecimalNumber(),0);
+
         inputUser.setDecimalNumber(16);
         assertEquals(inputUser.getDecimalNumber(),16);
 

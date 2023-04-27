@@ -16,7 +16,7 @@ import static cli.InputUser.*;
 public class Memory {
 
     /**
-     * The memory is a arraylist of variables
+     * The memory is an arraylist of variables
      */
     private ArrayList<Variable> memory;
 
@@ -227,7 +227,7 @@ public class Memory {
      * convert a string expression to an object expression
      */
     public Expression analyzeString(String expressionString) {
-        List<Expression> expressions = new ArrayList<>();;
+        List<Expression> expressions = new ArrayList<>();
         // TODO : upgrade this part to handle recursive expressions
         String operator = null;
         /*Notation notation = checkNotation(expressionString);

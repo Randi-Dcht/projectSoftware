@@ -49,8 +49,6 @@ class TestMyNumber {
 		assertNotEquals(onlyComplexNumber,null);
 
 
-		System.out.println(realnumber);
-		System.out.println(new MyNumber(value,exp));
 		assertEquals(new MyNumber(value,exp),realnumber);
 
 		assertNotEquals(realnumber,number);

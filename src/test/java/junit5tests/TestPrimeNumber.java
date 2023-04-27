@@ -4,7 +4,6 @@ import calculator.Expression;
 import calculator.IllegalConstruction;
 import calculator.MyNumber;
 import calculator.Notation;
-import calculator.arithmetics.Pgcd;
 import calculator.arithmetics.PrimeNumber;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +11,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TestPrimeNumber
 {
