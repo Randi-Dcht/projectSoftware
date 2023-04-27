@@ -113,12 +113,27 @@ class TestRegex
     void test_binary()
     {
         Main.setMode("binary");
+
+
         String s = "1 0 1 0101";
         List<Typos> list = StringRegex.analyse(s);
-
-
         assertEquals(list.size(), 4);
         assertEquals(list.get(0).getType(), TypeString.BINARY);
+
+
+        s = "0402";
+        list = StringRegex.analyse(s);
+        assertEquals(list.get(0).getType(), TypeString.OCTAL);
+
+
+        s = "0x1F";
+        list = StringRegex.analyse(s);
+        assertEquals(list.get(0).getType(), TypeString.HEXADECIMAL);
+
+        s = "IVL";
+        list = StringRegex.analyse(s);
+        assertEquals(list.get(0).getType(), TypeString.ROMAN);
+
 
         Main.setMode("cartesian");
     }
