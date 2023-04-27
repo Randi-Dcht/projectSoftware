@@ -14,7 +14,7 @@ public class StringRegex
 
 
     public static final String REGEX_OPERATOR = "[+\\-*/combgcd//!%^ppcmprimesqrtmodulus]";
-    public static final List<String> REGEX_STRING_OPERATOR = Arrays.asList("comb","gcd","ppcm","prime","sqrt","modulus");
+    public static final List<String> REGEX_STRING_OPERATOR = Arrays.asList("comb","gcd","ppcm","pgcd","prime","sqrt","modulus");
 
     public static List<Typos> analyse(String str)
     {
