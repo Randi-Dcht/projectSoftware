@@ -107,5 +107,8 @@ class TestInputUser
 
         inputUser.setUserInput(StringRegex.analyse("( ( 5E4 + 9E1i ) * 4 )"));
         assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(20),4,new BigDecimal(36),1));
+
+        inputUser.setUserInput(StringRegex.analyse("sqrt 16"));
+        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(4)));
     }
 }
