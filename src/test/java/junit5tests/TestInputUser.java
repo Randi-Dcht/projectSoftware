@@ -52,6 +52,24 @@ class TestInputUser
     }
 
     @Test
+    void testGetNumber()
+    {
+        String input = "0";
+        assertEquals(InputUser.getNumber(input), 0);
+        String input2 = "-1";
+        assertEquals(InputUser.getNumber(input2), 15);
+        String input5 = "5";
+        assertEquals(InputUser.getNumber(input5), 5);
+        String input3 = "a";
+        assertEquals(InputUser.getNumber(input3), 15);
+        String input6 = "8";
+        assertEquals(InputUser.getNumber(input6), 8);
+        String input4 = "";
+        assertEquals(InputUser.getNumber(input4), 15);
+
+    }
+
+    @Test
     void testGetOperator() throws IllegalConstruction {
         ArrayList<Expression> lst = new ArrayList<>();
         lst.add(new MyNumber(new BigDecimal(1))); lst.add(new MyNumber(new BigDecimal(2)));
@@ -75,14 +93,14 @@ class TestInputUser
     @Test
     void testInstance()
     {
-        InputUser inputUser = new InputUser(Notation.PREFIX,NumberNotation.CARTESIAN);
+        InputUser inputUser = new InputUser(Notation.PREFIX,NumberNotation.CARTESIAN,15);
         assertTrue(inputUser instanceof InputUser);
     }
 
     @Test
     void testInstance2()
     {
-        InputUser inputUser = new InputUser(Notation.INFIX,NumberNotation.CARTESIAN);
+        InputUser inputUser = new InputUser(Notation.INFIX,NumberNotation.CARTESIAN,15);
         assertSame(inputUser.getNotation(), Notation.INFIX);
         inputUser.setNotation(Notation.POSTFIX);
         assertSame(inputUser.getNotation(), Notation.POSTFIX);
@@ -97,7 +115,7 @@ class TestInputUser
     @Test
     void testCompute()
     {
-        InputUser inputUser = new InputUser(Notation.INFIX,NumberNotation.CARTESIAN);
+        InputUser inputUser = new InputUser(Notation.INFIX,NumberNotation.CARTESIAN,15);
 
         assertEquals(inputUser.getMode(),NumberNotation.CARTESIAN);
 
@@ -146,8 +164,10 @@ class TestInputUser
         inputUser.setMode(NumberNotation.POLAR);
         assertEquals(inputUser.getMode(),NumberNotation.POLAR);
 
-
-
+        inputUser.setDecimalNumber(0);
+        assertEquals(inputUser.getDecimalNumber(),0);
+        inputUser.setDecimalNumber(16);
+        assertEquals(inputUser.getDecimalNumber(),16);
 
     }
 }

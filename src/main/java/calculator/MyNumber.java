@@ -7,6 +7,7 @@ import java.math.MathContext;
 import java.text.DecimalFormat;
 
 
+import static cli.Main.getDecimalNumber;
 import static cli.Main.getMode;
 import static java.lang.Integer.parseInt;
 import static java.lang.Math.pow;
@@ -24,7 +25,7 @@ public class MyNumber implements Expression
   private final BigDecimal value;
   private final int exp;
 
-  private final int decimalNumber = 15;
+
 
 
 
@@ -35,11 +36,11 @@ public class MyNumber implements Expression
   private String[] list_val = new String[2];
   private String[] list_i = new String[2];
 
-
-
-
-
   public NumberNotation notation = getMode();
+  private final int printdecimalNumber = getDecimalNumber();
+  private final int decimalNumber = 15;
+
+
 
     /** getter method to obtain the value contained in the object
      *
@@ -217,11 +218,16 @@ public class MyNumber implements Expression
 
     public final String toString(NumberNotation n)
     {
-
         Double real = applyExp(this.value,this.exp).round(new MathContext(decimalNumber)).doubleValue();
         Double imag = applyExp(this.imaginary,this.imaginaryExp).round(new MathContext(decimalNumber)).doubleValue();
 
-        DecimalFormat format = new DecimalFormat("0.###############");
+        StringBuilder printNumberdecimal = new StringBuilder();
+        for (int i = 0; i < printdecimalNumber; i++) {
+            printNumberdecimal.append("#");
+        }
+
+
+        DecimalFormat format = new DecimalFormat("0."+printNumberdecimal);
         DecimalFormat imFormat = new DecimalFormat("+#,##0.#;-#");
         double O = Math.PI/2;
         if(value.signum()!=0) {

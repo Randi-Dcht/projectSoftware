@@ -58,6 +58,17 @@ public class InputUser
         return notation;
     }
 
+    public static int getNumber(String input){
+        try {
+            Integer.parseInt(input);
+        } catch (NumberFormatException e){
+            return 15;
+        }
+        if(Integer.parseInt(input)<0)
+            return 15;
+        return Integer.parseInt(input);
+    }
+
     public static NumberNotation getMode(String input)
     {
         NumberNotation notation;
@@ -73,10 +84,7 @@ public class InputUser
         return notation;
     }
 
-    public void setMode(NumberNotation mode)
-    {
-        this.mode = mode;
-    }
+
 
 
     /**
@@ -121,7 +129,13 @@ public class InputUser
     //--------------------INSTANCE--------------------//
     /**Notation actual*/
     private Notation notation;
+
+    /**Mode actual*/
     private NumberNotation mode;
+
+    /**Number of decimal actual*/
+    private int decimalNumber;
+
     /**List of string input of user without space*/
     private List<Typos> user_input_list;
 
@@ -130,10 +144,11 @@ public class InputUser
      * Constructor
      * @param notation : notation of the operation
      */
-    public InputUser(Notation notation, NumberNotation mode)
+    public InputUser(Notation notation, NumberNotation mode, int decimalNumber)
     {
         this.notation = notation;
         this.mode = mode;
+        this.decimalNumber = decimalNumber;
     }
 
 
@@ -145,6 +160,28 @@ public class InputUser
     {
         this.notation = notation;
     }
+
+    /**
+     * Set the mode
+     * @param mode : notation of the decimal
+     */
+
+    public void setMode(NumberNotation mode)
+    {
+        this.mode = mode;
+    }
+
+    /**
+     * Set the mode
+     * @param decimalNumber : notation of the decimal
+     */
+
+    public void setDecimalNumber(int decimalNumber)
+    {
+        this.decimalNumber =decimalNumber;
+    }
+
+
 
 
     /**
@@ -169,6 +206,11 @@ public class InputUser
     public NumberNotation getMode()
     {
         return this.mode;
+    }
+
+    public int getDecimalNumber()
+    {
+        return this.decimalNumber;
     }
 
     /**

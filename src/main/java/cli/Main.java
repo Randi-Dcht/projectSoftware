@@ -16,6 +16,8 @@ public class Main
     /**Notation actual*/
     private static Notation notation = Notation.INFIX;
     private static NumberNotation mode = NumberNotation.CARTESIAN;
+
+    private static int decimal_number = 15;
     /**is Verbose mode (print list of expression)*/
     private static boolean verbose = false;
     private static MyNumber result = null;
@@ -58,6 +60,7 @@ public class Main
         printing("$> Please enter an expression to evaluate or .quit to exit ", true);
         printing("$> To change the notation, use the command .mode <mode> where <mode> is cartesian, polar, exponential, scientific or e_notation ", true);
         printing("$> To change the notation, use the command .notation <notation> where <notation> is infix, prefix, postfix ", true);
+        printing("$> To change the number of decimal, use the command .decim <number> where <number> is the number of decimal you want (15 by default) ", true);
     }
 
     public static void printOperator()
@@ -82,6 +85,9 @@ public class Main
         setMode(InputUser.getMode(mode));
     }
 
+    public static int getDecimalNumber() {
+        return decimal_number;
+    }
     /**
      * Get the input of the user or wait the command
      */
@@ -93,7 +99,7 @@ public class Main
         printing("$>>> ", false);
         Scanner scanner = new Scanner(System.in);
         String inputUser = scanner.nextLine();
-        InputUser inputUser_instance = new InputUser(notation,mode);
+        InputUser inputUser_instance = new InputUser(notation,mode,decimal_number);
         /**List of input*/
         List<String> listInput = InputUser.cleanInput(inputUser);
         if (listInput.size() != 0)
@@ -108,6 +114,11 @@ public class Main
             {
                 notation = InputUser.getNotation(listInput.get(1));
                 printing("$> Notation : " + notation.toString(), true);
+            }
+            else if (listInput.get(0).equals(".decim") && listInput.size() == 2)
+            {
+                decimal_number = InputUser.getNumber(listInput.get(1));
+                printing("$> Number of decimals : " + decimal_number, true);
             }
             else if (listInput.get(0).equals(".verbose") && listInput.size() == 2)
                 verbose = listInput.get(1).equals("true");
