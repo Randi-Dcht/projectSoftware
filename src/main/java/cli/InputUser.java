@@ -58,6 +58,11 @@ public class InputUser
         return notation;
     }
 
+    /**
+     * @param input : string input of user
+     * @return int of the string
+     */
+
     public static int getNumber(String input){
         try {
             Integer.parseInt(input);
@@ -68,6 +73,12 @@ public class InputUser
             return 15;
         return Integer.parseInt(input);
     }
+
+    /**
+     * @param input : string input of user
+     * @return notation : E_notation, scientific, polar, exponential, binary, cartesian
+     *                       default : cartesian
+     */
 
     public static NumberNotation getMode(String input)
     {
@@ -180,8 +191,6 @@ public class InputUser
     {
         this.decimalNumber =decimalNumber;
     }
-
-
 
 
     /**
