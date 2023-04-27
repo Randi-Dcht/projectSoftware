@@ -289,7 +289,7 @@ public class MyNumber implements Expression
             case BINARY ->
                     String.format("%s%s", "", (value.signum() == 0 && imaginary.signum() != 0) ? String.format("i*%s", imaginary) :
                             (imaginary.signum() == 0) ? String.format("%s", value) :
-                                    String.format("%s + i*%s", value,imaginary));//TODO test this
+                                    String.format("%s + i*%s", value,imaginary));
         };
       }
 
