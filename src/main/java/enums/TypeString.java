@@ -13,4 +13,8 @@ public enum TypeString
     REAL_COMPLEX,
     E_NOTATION_COMPLEX,
     SCIENTIFIC_COMPLEX,
+    BINARY,
+    OCTAL,
+    HEXADECIMAL,
+    ROMAN,
 }

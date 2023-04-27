@@ -1,6 +1,8 @@
 package parser;
 
+import calculator.NumberNotation;
 import cli.InputUser;
+import cli.Main;
 import enums.ListOperator;
 import enums.TypeString;
 import java.util.ArrayList;
@@ -21,8 +23,16 @@ public class StringRegex
         List<Typos> list = new ArrayList<>();
         for (String s : InputUser.cleanInput(str))
         {
+            if (Main.getMode().equals(NumberNotation.BINARY) && s.matches("[01]+"))
+                list.add(new Typos(s, TypeString.BINARY));
+            else if (Main.getMode().equals(NumberNotation.BINARY) && s.matches("[0-7]+"))
+                list.add(new Typos(s, TypeString.OCTAL));
+            else if (Main.getMode().equals(NumberNotation.BINARY) && s.matches("[0-9A-Fa-f]+"))
+                list.add(new Typos(s, TypeString.HEXADECIMAL));
+            else if (Main.getMode().equals(NumberNotation.BINARY) && s.matches("[IVXLCDM]+"))
+                list.add(new Typos(s, TypeString.ROMAN));
             if (s.matches("[+-]?+[0-9]+i+"))
-            list.add(new Typos(s, TypeString.COMPLEX));
+                list.add(new Typos(s, TypeString.COMPLEX));
             else if (s.matches("[+-]?+[0-9]+\\.[0-9]+i+"))
                 list.add(new Typos(s, TypeString.REAL_COMPLEX));
             else if (s.matches("[+-]?+[0-9]+E+[+-]?+[0-9]+i+"))
