@@ -101,5 +101,11 @@ class TestInputUser
 
         inputUser.setUserInput(StringRegex.analyse("( ( 2i - -2i ) * 3 )"));
         assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(0),new BigDecimal(12)));
+
+        inputUser.setUserInput(StringRegex.analyse("( ( 2x10^2 + 2x10^2i ) * 3 )"));
+        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(6),2,new BigDecimal(6),2));
+
+        inputUser.setUserInput(StringRegex.analyse("( ( 5E4 + 9E1i ) * 4 )"));
+        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(20),4,new BigDecimal(36),1));
     }
 }
