@@ -6,7 +6,7 @@ import cli.InputUser;
 import enums.ListOperator;
 import enums.TypeString;
 import org.junit.jupiter.api.Test;
-import parser.StringRegrex;
+import parser.StringRegex;
 import parser.Typos;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -59,7 +59,7 @@ class TestInputUser
         inputUser.setNotation(Notation.POSTFIX);
         assertSame(inputUser.getNotation(), Notation.POSTFIX);
 
-        inputUser.setUserInput(StringRegrex.analyse("1 + 2"));
+        inputUser.setUserInput(StringRegex.analyse("1 + 2"));
         assertEquals(inputUser.getUserInput().size(), 3);
         assertEquals(inputUser.getUserInput().get(0).getValue(), "1");
         assertEquals(inputUser.getUserInput().get(1).getValue(), "+");
@@ -70,16 +70,16 @@ class TestInputUser
     void testCompute()
     {
         InputUser inputUser = new InputUser(Notation.INFIX);
-        inputUser.setUserInput(StringRegrex.analyse("1 + 2"));
+        inputUser.setUserInput(StringRegex.analyse("1 + 2"));
         assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(3)));
 
-        inputUser.setUserInput(StringRegrex.analyse("2 * 3 + 2 * 3"));
+        inputUser.setUserInput(StringRegex.analyse("2 * 3 + 2 * 3"));
         assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(12)));
 
-        inputUser.setUserInput(StringRegrex.analyse("( 2 + 2 ) * 3"));
+        inputUser.setUserInput(StringRegex.analyse("( 2 + 2 ) * 3"));
         assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(12)));
 
-        inputUser.setUserInput(StringRegrex.analyse("( ( 2 + 2 ) * 3 )"));
+        inputUser.setUserInput(StringRegex.analyse("( ( 2 + 2 ) * 3 )"));
         assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(12)));
     }
 }

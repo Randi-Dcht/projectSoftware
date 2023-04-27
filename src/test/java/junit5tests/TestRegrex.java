@@ -3,7 +3,7 @@ package junit5tests;
 import enums.ListOperator;
 import enums.TypeString;
 import org.junit.jupiter.api.Test;
-import parser.StringRegrex;
+import parser.StringRegex;
 import parser.Typos;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
@@ -14,7 +14,7 @@ class TestRegrex
     void testRegrex()
     {
         String s = "1 + 2";
-        List<Typos> list = StringRegrex.analyse(s);
+        List<Typos> list = StringRegex.analyse(s);
         assertEquals(list.size(), 3);
         assertEquals(list.get(0).getValue(), "1", "list contains 1");
         assertEquals(list.get(1).getValue(), "+", "list contains +");
@@ -25,7 +25,7 @@ class TestRegrex
     void integerVsReal()
     {
         String s = "1.0 2 2.8 5 8";
-        List<Typos> list = StringRegrex.analyse(s);
+        List<Typos> list = StringRegex.analyse(s);
         assertEquals(list.size(), 5);
         assertEquals(list.get(0).getType(), TypeString.REAL);
         assertEquals(list.get(1).getType(), TypeString.INTEGER);
@@ -55,7 +55,7 @@ class TestRegrex
     void testBoolean()
     {
         String s = "true 1";
-        List<Typos> list = StringRegrex.analyse(s);
+        List<Typos> list = StringRegex.analyse(s);
         assertEquals(list.size(), 2);
         assertEquals(list.get(0).getType(), TypeString.BOOLEAN);
         assertEquals(list.get(1).getType(), TypeString.INTEGER);
@@ -65,7 +65,7 @@ class TestRegrex
     void testScientific_ENotation()
     {
         String s = "1x10^2 1E2";
-        List<Typos> list = StringRegrex.analyse(s);
+        List<Typos> list = StringRegex.analyse(s);
         assertEquals(list.size(), 2);
         assertEquals(list.get(0).getType(), TypeString.SCIENTIFIC);
         assertEquals(list.get(1).getType(), TypeString.E_NOTATION);
@@ -75,7 +75,7 @@ class TestRegrex
     void test_Regrex()
     {
         String s = "( 1x10^2 1E2 )";
-        List<Typos> list = StringRegrex.analyse(s);
+        List<Typos> list = StringRegex.analyse(s);
         assertEquals(list.size(), 4);
         assertEquals(list.get(0).getType(), TypeString.BRACKET);
         assertEquals(list.get(3).getType(), TypeString.BRACKET);
@@ -87,7 +87,7 @@ class TestRegrex
     void test_operator()
     {
         String s = "+ - * /";
-        List<Typos> list = StringRegrex.analyse(s);
+        List<Typos> list = StringRegex.analyse(s);
         assertEquals(list.size(), 4);
         assertEquals(list.get(0).getOperator(), ListOperator.ADD);
         assertEquals(list.get(1).getOperator(), ListOperator.SUB);
@@ -100,7 +100,7 @@ class TestRegrex
     void test_operator_2()
     {
         String s = "+ - * /";
-        List<Typos> list = StringRegrex.analyse(s);
+        List<Typos> list = StringRegex.analyse(s);
         assertEquals(list.size(), 4);
         assertEquals(list.get(0).getPriority(), 1);
         assertEquals(list.get(1).getPriority(), 1);

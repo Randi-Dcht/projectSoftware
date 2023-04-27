@@ -4,15 +4,17 @@ import cli.InputUser;
 import enums.ListOperator;
 import enums.TypeString;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
-public class StringRegrex
+public class StringRegex
 {
-    private StringRegrex() {}
+    private StringRegex() {}
 
 
     public static final String REGEX_OPERATOR = "[+\\-*/combgcd//!%^ppcmprimesqrtmodulus]";
+    public static final List<String> REGEX_STRING_OPERATOR = Arrays.asList("comb","gcd","ppcm","prime","sqrt","modulus");
 
     public static List<Typos> analyse(String str)
     {
@@ -27,7 +29,7 @@ public class StringRegrex
                 list.add(new Typos(s, TypeString.INTEGER));
             else if (s.matches("[+-]?+[0-9]+\\.[0-9]+"))
                 list.add(new Typos(s, TypeString.REAL));
-            else if (s.matches(REGEX_OPERATOR))
+            else if (s.matches(REGEX_OPERATOR) || REGEX_STRING_OPERATOR.contains(s))
             {
                 for (ListOperator op : ListOperator.values())
                 {

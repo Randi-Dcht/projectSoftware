@@ -4,7 +4,7 @@ import calculator.MyNumber;
 import calculator.Notation;
 import calculator.NumberNotation;
 import enums.ListOperator;
-import parser.StringRegrex;
+import parser.StringRegex;
 import java.util.List;
 import java.util.Scanner;
 
@@ -104,7 +104,7 @@ public class Main
 
             else
             {
-                inputUser_instance.setUserInput(StringRegrex.analyse(inputUser));
+                inputUser_instance.setUserInput(StringRegex.analyse(inputUser));
                 result = inputUser_instance.compute(verbose);
                 if (result != null)
                     printing("$> " + result.toString(), true);
