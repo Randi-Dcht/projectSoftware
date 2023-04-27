@@ -284,7 +284,12 @@ public class MyNumber implements Expression
             String.format("%s%s", "", (value.signum() == 0 && imaginary.signum() != 0) ? String.format("i*%sE^%s", imaginary,imaginaryExp) :
                     (imaginary.signum() == 0) ? String.format("%sE^%s", value,exp) :
                             String.format("%sE^%s + i*%sE^%s", value,exp,imaginary,imaginaryExp));
-            case BINARY -> " ";
+
+            //string to print in the case of a binary number
+            case BINARY ->
+                    String.format("%s%s", "", (value.signum() == 0 && imaginary.signum() != 0) ? String.format("i*%s", imaginary) :
+                            (imaginary.signum() == 0) ? String.format("%s", value) :
+                                    String.format("%s + i*%s", value,imaginary));
         };
       }
 
