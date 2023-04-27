@@ -59,14 +59,17 @@ class TestInputUser
         assertEquals(InputUser.getOperator(new Typos("-", TypeString.OPERATOR, ListOperator.SUB), lst, Notation.INFIX), new Minus(lst));
         assertEquals(InputUser.getOperator(new Typos("/", TypeString.OPERATOR, ListOperator.DIV), lst, Notation.INFIX), new Divides(lst));
         assertEquals(InputUser.getOperator(new Typos("*", TypeString.OPERATOR, ListOperator.MUL), lst, Notation.INFIX), new Times(lst));
-        assertEquals(InputUser.getOperator(new Typos("pgcd", TypeString.OPERATOR, ListOperator.PGCD), lst, Notation.INFIX), new Pgcd(lst));
-        assertEquals(InputUser.getOperator(new Typos("pow", TypeString.OPERATOR, ListOperator.POW), lst, Notation.INFIX), new Pow(lst));
         assertEquals(InputUser.getOperator(new Typos("comb", TypeString.OPERATOR, ListOperator.COMB), lst, Notation.INFIX), new Combinatorial(lst));
-        assertEquals(InputUser.getOperator(new Typos("prime", TypeString.OPERATOR, ListOperator.PRIME), lst, Notation.INFIX), new PrimeNumber(lst));
-        assertEquals(InputUser.getOperator(new Typos("//", TypeString.OPERATOR, ListOperator.GCD), lst, Notation.INFIX), new Eucledian(lst));
-        assertEquals(InputUser.getOperator(new Typos("euclidian", TypeString.OPERATOR, ListOperator.EUCLIDEAN), lst, Notation.INFIX), new EuclidianDivides(lst));
-        assertEquals(InputUser.getOperator(new Typos("ppcm", TypeString.OPERATOR, ListOperator.PPCM), lst, Notation.INFIX), new Ppcm(lst));
+        assertEquals(InputUser.getOperator(new Typos("gcd", TypeString.OPERATOR, ListOperator.GCD), lst, Notation.INFIX), new Eucledian(lst));
+        assertEquals(InputUser.getOperator(new Typos("//", TypeString.OPERATOR, ListOperator.EUCLIDEAN), lst, Notation.INFIX), new EuclidianDivides(lst));
         assertEquals(InputUser.getOperator(new Typos("!", TypeString.OPERATOR, ListOperator.FACTO), lst, Notation.INFIX), new Facto(lst));
+        assertEquals(InputUser.getOperator(new Typos("%", TypeString.OPERATOR, ListOperator.MODULO), lst, Notation.INFIX), new Modulo(lst));
+        assertEquals(InputUser.getOperator(new Typos("pgcd", TypeString.OPERATOR, ListOperator.PGCD), lst, Notation.INFIX), new Pgcd(lst));
+        assertEquals(InputUser.getOperator(new Typos("ppcm", TypeString.OPERATOR, ListOperator.PPCM), lst, Notation.INFIX), new Ppcm(lst));
+        assertEquals(InputUser.getOperator(new Typos("^", TypeString.OPERATOR, ListOperator.POW), lst, Notation.INFIX), new Pow(lst));
+        assertEquals(InputUser.getOperator(new Typos("prime", TypeString.OPERATOR, ListOperator.PRIME), lst, Notation.INFIX), new PrimeNumber(lst));
+        assertEquals(InputUser.getOperator(new Typos("modulus", TypeString.OPERATOR, ListOperator.MODULUS), lst, Notation.INFIX), new Modulus(lst));
+        assertEquals(InputUser.getOperator(new Typos("sqrt", TypeString.OPERATOR, ListOperator.SQRT), lst, Notation.INFIX), new Sqrt(lst));
     }
 
     @Test
@@ -101,8 +104,8 @@ class TestInputUser
         inputUser.setUserInput(StringRegex.analyse("1 + 2"));
         assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(3)));
 
-        inputUser.setUserInput(StringRegex.analyse("3 - 4"));
-        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(-1)));
+        inputUser.setUserInput(StringRegex.analyse("1.3 + 2.5i"));
+        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal("1.3"),new BigDecimal("2.5")));
 
         inputUser.setUserInput(StringRegex.analyse("2 * 3 + 2 * 3"));
         assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(12)));
@@ -112,6 +115,21 @@ class TestInputUser
 
         inputUser.setUserInput(StringRegex.analyse("( ( 2 + 2 ) * 3 )"));
         assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(12)));
+
+        inputUser.setUserInput(StringRegex.analyse("( ( 2 + 2i ) * 3 )"));
+        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(6),new BigDecimal(6)));
+
+        inputUser.setUserInput(StringRegex.analyse("( ( 2i - -2i ) * 3 )"));
+        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(0),new BigDecimal(12)));
+
+        inputUser.setUserInput(StringRegex.analyse("( ( 2x10^2 + 2x10^2i ) * 3 )"));
+        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(6),2,new BigDecimal(6),2));
+
+        inputUser.setUserInput(StringRegex.analyse("( ( 5E4 + 9E1i ) * 4 )"));
+        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(20),4,new BigDecimal(36),1));
+
+        inputUser.setUserInput(StringRegex.analyse("sqrt 16"));
+        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(4)));
 
         inputUser.setMode(NumberNotation.SCIENTIFIC);
         assertEquals(inputUser.getMode(),NumberNotation.SCIENTIFIC);
@@ -127,6 +145,8 @@ class TestInputUser
 
         inputUser.setMode(NumberNotation.POLAR);
         assertEquals(inputUser.getMode(),NumberNotation.POLAR);
+
+
 
 
     }

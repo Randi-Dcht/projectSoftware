@@ -194,6 +194,20 @@ public class InputUser
                     stack.push(new MyNumber("0+"+s.getValue()));
             }
 
+            else if (s.getType().equals(TypeString.E_NOTATION_COMPLEX))
+            {
+                String[] parts = s.getValue().split("E");
+                String exp = parts[1].split("i")[0];
+                stack.push(new MyNumber(new BigDecimal(0), 0, new BigDecimal(parts[0]),Integer.parseInt(exp)));
+            }
+
+            else if (s.getType().equals(TypeString.SCIENTIFIC_COMPLEX)){
+                String[] parts = s.getValue().split("x10\\^");
+                String exp = parts[1].split("i")[0];
+                stack.push(new MyNumber(new BigDecimal(0), 0, new BigDecimal(parts[0]),Integer.parseInt(exp)));
+
+            }
+
             else if (s.getType().equals(TypeString.OPERATOR))
             {
                while(!stack.isEmpty() && s.getOperator().getNumberArgs() > args)
