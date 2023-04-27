@@ -190,6 +190,8 @@ public class InputUser
                    list_of_expression_data.add(0, stack.pop());
                    args++;
                }
+                if(s.getOperator().getNumberArgs()==1)
+                    list_of_expression_data.add(new MyNumber(new BigDecimal(0)));
                 args = 0;
                 e = getOperator(s, list_of_expression_data, Notation.POSTFIX);
                 list_of_expression_data.clear();
