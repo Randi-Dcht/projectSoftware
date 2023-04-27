@@ -3,6 +3,7 @@ package calculator;
 import visitor.Visitor;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.math.MathContext;
 import java.text.DecimalFormat;
 
@@ -39,6 +40,8 @@ public class MyNumber implements Expression
   public NumberNotation notation = getMode();
   private final int printdecimalNumber = getDecimalNumber();
   private final int decimalNumber = 15;
+
+  private int base = 10;
 
 
 
@@ -144,6 +147,15 @@ public class MyNumber implements Expression
 
 
 
+
+    public /*constructor*/ MyNumber(String binaryValue, int base)
+    {
+        this(new BigDecimal(new BigInteger(binaryValue, base)));
+        this.base = base;
+    }
+
+
+
     /**
      * accept method to implement the visitor design pattern to traverse arithmetic expressions.
      * Each number will pass itself to the visitor object to get processed by the visitor.
@@ -196,6 +208,10 @@ public class MyNumber implements Expression
         return v.multiply(BigDecimal.valueOf(pow(10, e)));
     }
 
+    public int getBase()
+    {
+        return base;
+    }
 
     public String[] decimalRefactor(BigDecimal v, int e){
         while ( v.compareTo(BigDecimal.valueOf(0.1)) < 0 && v.compareTo(BigDecimal.valueOf(-0.1)) > 0 && !((v.round(new MathContext(decimalNumber))).compareTo(BigDecimal.ZERO) == 0))  {
@@ -268,7 +284,7 @@ public class MyNumber implements Expression
             String.format("%s%s", "", (value.signum() == 0 && imaginary.signum() != 0) ? String.format("i*%sE^%s", imaginary,imaginaryExp) :
                     (imaginary.signum() == 0) ? String.format("%sE^%s", value,exp) :
                             String.format("%sE^%s + i*%sE^%s", value,exp,imaginary,imaginaryExp));
-            case BINARY -> null;
+            case BINARY -> " ";
         };
       }
 
