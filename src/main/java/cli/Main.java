@@ -78,6 +78,9 @@ public class Main
 
     public static void setMode(NumberNotation mode) {
         Main.mode = mode;
+
+        if (mode.equals(NumberNotation.BINARY))
+            printing("$> Warning : [base(integer)]x[notation]", true);
     }
 
     public static void setMode(String mode)

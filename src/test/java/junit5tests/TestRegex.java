@@ -115,20 +115,20 @@ class TestRegex
         Main.setMode("binary");
 
 
-        String s = "1 0 1 0101";
+        String s = "2x1 2x0 2x1 2x0101";
         List<Typos> list = StringRegex.analyse(s);
         assertEquals(list.size(), 4);
         assertEquals(list.get(0).getType(), TypeString.BINARY);
 
 
-        s = "0402";
+        s = "4x402";
         list = StringRegex.analyse(s);
-        assertEquals(list.get(0).getType(), TypeString.OCTAL);
+        assertEquals(list.get(0).getType(), TypeString.BINARY);
 
 
-        s = "0x1F";
+        s = "16x1F";
         list = StringRegex.analyse(s);
-        assertEquals(list.get(0).getType(), TypeString.HEXADECIMAL);
+        assertEquals(list.get(0).getType(), TypeString.BINARY);
 
 
         Main.setMode("cartesian");

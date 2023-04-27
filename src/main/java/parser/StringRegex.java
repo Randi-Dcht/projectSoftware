@@ -23,12 +23,8 @@ public class StringRegex
         List<Typos> list = new ArrayList<>();
         for (String s : InputUser.cleanInput(str))
         {
-            if (Main.getMode().equals(NumberNotation.BINARY) && s.matches("[01]+"))
+            if (Main.getMode().equals(NumberNotation.BINARY) && s.matches("[0-9]+x[0-9A-Za-z]+"))
                 list.add(new Typos(s, TypeString.BINARY));
-            else if (Main.getMode().equals(NumberNotation.BINARY) && s.matches("0[0-7]+"))
-                list.add(new Typos(s, TypeString.OCTAL));
-            else if (Main.getMode().equals(NumberNotation.BINARY) && s.matches("0x[0-9A-Fa-f]+"))
-                list.add(new Typos(s, TypeString.HEXADECIMAL));
             else if (s.matches("[+-]?+[0-9]+i+"))
                 list.add(new Typos(s, TypeString.COMPLEX));
             else if (s.matches("[+-]?+[0-9]+\\.[0-9]+i+"))

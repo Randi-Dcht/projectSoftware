@@ -14,7 +14,4 @@ public enum TypeString
     E_NOTATION_COMPLEX,
     SCIENTIFIC_COMPLEX,
     BINARY,
-    OCTAL,
-    HEXADECIMAL,
-    ROMAN,
 }

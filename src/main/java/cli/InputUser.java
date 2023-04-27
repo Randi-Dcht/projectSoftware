@@ -286,6 +286,11 @@ public class InputUser
                 String[] parts = s.getValue().split("x10\\^");
                 stack.push(new MyNumber(new BigDecimal(parts[0]),Integer.parseInt(parts[1])));
             }
+            else if (s.getType().equals(TypeString.BINARY))
+            {
+                String[] parts = s.getValue().split("x",2);
+                stack.push(new MyNumber(parts[1], Integer.parseInt(parts[0])));
+            }
         }
 
         if (e != null)
