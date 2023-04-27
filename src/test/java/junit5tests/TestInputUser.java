@@ -2,6 +2,7 @@ package junit5tests;
 
 
 import calculator.*;
+import calculator.arithmetics.*;
 import cli.InputUser;
 import enums.ListOperator;
 import enums.TypeString;
@@ -41,7 +42,17 @@ class TestInputUser
         assertEquals(InputUser.getOperator(new Typos("-", TypeString.OPERATOR, ListOperator.SUB), lst, Notation.INFIX), new Minus(lst));
         assertEquals(InputUser.getOperator(new Typos("/", TypeString.OPERATOR, ListOperator.DIV), lst, Notation.INFIX), new Divides(lst));
         assertEquals(InputUser.getOperator(new Typos("*", TypeString.OPERATOR, ListOperator.MUL), lst, Notation.INFIX), new Times(lst));
-
+        assertEquals(InputUser.getOperator(new Typos("comb", TypeString.OPERATOR, ListOperator.COMB), lst, Notation.INFIX), new Combinatorial(lst));
+        assertEquals(InputUser.getOperator(new Typos("gcd", TypeString.OPERATOR, ListOperator.GCD), lst, Notation.INFIX), new Eucledian(lst));
+        assertEquals(InputUser.getOperator(new Typos("//", TypeString.OPERATOR, ListOperator.EUCLIDEAN), lst, Notation.INFIX), new EuclidianDivides(lst));
+        assertEquals(InputUser.getOperator(new Typos("!", TypeString.OPERATOR, ListOperator.FACTO), lst, Notation.INFIX), new Facto(lst));
+        assertEquals(InputUser.getOperator(new Typos("%", TypeString.OPERATOR, ListOperator.MODULO), lst, Notation.INFIX), new Modulo(lst));
+        assertEquals(InputUser.getOperator(new Typos("pgcd", TypeString.OPERATOR, ListOperator.PGCD), lst, Notation.INFIX), new Pgcd(lst));
+        assertEquals(InputUser.getOperator(new Typos("ppcm", TypeString.OPERATOR, ListOperator.PPCM), lst, Notation.INFIX), new Ppcm(lst));
+        assertEquals(InputUser.getOperator(new Typos("^", TypeString.OPERATOR, ListOperator.POW), lst, Notation.INFIX), new Pow(lst));
+        assertEquals(InputUser.getOperator(new Typos("prime", TypeString.OPERATOR, ListOperator.PRIME), lst, Notation.INFIX), new PrimeNumber(lst));
+        assertEquals(InputUser.getOperator(new Typos("modulus", TypeString.OPERATOR, ListOperator.MODULUS), lst, Notation.INFIX), new Modulus(lst));
+        assertEquals(InputUser.getOperator(new Typos("sqrt", TypeString.OPERATOR, ListOperator.SQRT), lst, Notation.INFIX), new Sqrt(lst));
     }
 
     @Test
