@@ -99,6 +99,8 @@ public class InputUser
                 case PPCM -> e = new Ppcm(params, notation);
                 case POW -> e = new Pow(params, notation);
                 case PRIME -> e = new PrimeNumber(params, notation);
+                case MODULUS -> e = new Modulus(params, notation);
+                case SQRT -> e = new Sqrt(params, notation);
                 default -> printError("Operator not found");
             }
         }

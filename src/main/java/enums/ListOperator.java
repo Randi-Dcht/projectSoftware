@@ -15,7 +15,8 @@ public enum ListOperator
     POW("^", 5, 2),
     PPCM("ppcm", 4, 2),
     PRIME("prime", 4, 2),
-
+    MODULUS("modulus", 4, 1),
+    SQRT("sqrt", 4, 1),
     ;
 
     private final String value;
