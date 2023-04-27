@@ -77,5 +77,5 @@ Feature: Integer Arithmetic Expressions
     Examples:
       | arg0  | arg1  | arg2  | arg3  |
       | "1"   | 1     | "1"   | 1     |
-      | "0.01"| 0     | "0.1" | 1     |
+      | "0.01"| 0     | "0.1" | -1     |
       | "-1"  | 1     | "-1"  | 1     |

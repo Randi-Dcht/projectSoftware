@@ -22,8 +22,8 @@ public class Modulus extends Operation
      */
     public Modulus(List<Expression> elist, Notation n) throws IllegalConstruction {
         super(elist,n);
-        symbol = "||";
-        neutral = 1;
+        symbol = "modulus";
+        neutral = 0;
     }
 
     public static MyNumber modNumber(MyNumber l){

@@ -5,7 +5,6 @@ import calculator.IllegalConstruction;
 import calculator.MyNumber;
 import calculator.Notation;
 import calculator.arithmetics.EuclidianDivides;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

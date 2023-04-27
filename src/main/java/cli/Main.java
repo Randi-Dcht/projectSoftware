@@ -1,7 +1,10 @@
 package cli;
 
+import calculator.MyNumber;
 import calculator.Notation;
-import parser.StringRegrex;
+import calculator.NumberNotation;
+import enums.ListOperator;
+import parser.StringRegex;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,8 +15,12 @@ public class Main
     private static boolean isRunning = true;
     /**Notation actual*/
     private static Notation notation = Notation.INFIX;
+    private static NumberNotation mode = NumberNotation.CARTESIAN;
+
+    private static int decimal_number = 15;
     /**is Verbose mode (print list of expression)*/
     private static boolean verbose = false;
+    private static MyNumber result = null;
 
 
     /**
@@ -21,11 +28,27 @@ public class Main
      */
     public static void printHelp()
     {
-        System.out.println("=== HELP START===");
-        System.out.println("$> Quit program : .quit");
-        System.out.println("$> Verbose mode : .verbose <true|false> ");
+        printing("=== HELP START===", true);
+        printing("$> Quit program : .quit", true);
+        printing("$> Verbose mode : .verbose <true|false> ", true);
         printMenu();
-        System.out.println("=== HELP END===\n");
+        printOperator();
+        printing("=== HELP END===\n", true);
+    }
+
+
+    public static void printing(String message, boolean lineReturn)
+    {
+        if (lineReturn)
+            System.out.println(message);
+        else
+            System.out.print(message);
+    }
+
+
+    public static void printError(String message)
+    {
+        printing("!!> " + message, true);
     }
 
 
@@ -34,49 +57,91 @@ public class Main
      */
     public static void printMenu()
     {
-        System.out.println("$> Please enter an expression to evaluate or .quit to exit ");
-        System.out.println("$> To change the notation, use the command .mode <mode> where <mode> is normal, complex, XX "); //TODO : complete here
-        System.out.println("$> To change the notation, use the command .notation <notation> where <notation> is infix, prefix, postfix ");
+        printing("$> Please enter an expression to evaluate or .quit to exit ", true);
+        printing("$> To change the notation, use the command .mode <mode> where <mode> is cartesian, polar, exponential, scientific or e_notation ", true);
+        printing("$> To change the notation, use the command .notation <notation> where <notation> is infix, prefix, postfix ", true);
+        printing("$> To change the number of decimal, use the command .decim <number> where <number> is the number of decimal you want (15 by default) ", true);
+    }
+
+    public static void printOperator()
+    {
+        printing("$> List of operators : [", false);
+        for (ListOperator operator : ListOperator.values())
+            printing("  " + operator.getValue(), false);
+        printing("]", true);
     }
 
 
+    public static NumberNotation getMode() {
+        return mode;
+    }
+
+    public static void setMode(NumberNotation mode) {
+        Main.mode = mode;
+
+        if (mode.equals(NumberNotation.BINARY))
+            printing("$> Warning : [base(integer)]x[notation]", true);
+    }
+
+    public static void setMode(String mode)
+    {
+        setMode(InputUser.getMode(mode));
+    }
+
+    public static int getDecimalNumber() {
+        return decimal_number;
+    }
     /**
      * Get the input of the user or wait the command
      */
+
+
+
     public static void get_input()
     {
-        System.out.print("$>>> ");
+        printing("$>>> ", false);
         Scanner scanner = new Scanner(System.in);
         String inputUser = scanner.nextLine();
-        InputUser inputUser_instance = new InputUser(notation);
+        InputUser inputUser_instance = new InputUser(notation,mode,decimal_number);
         /**List of input*/
         List<String> listInput = InputUser.cleanInput(inputUser);
         if (listInput.size() != 0)
         {
             if (listInput.get(0).equals(".quit"))
                 isRunning = false;
-            else if (listInput.get(0).equals(".mode") && listInput.size() == 2)
-                System.out.println("$> Mode changed to " + listInput.get(1));
+            else if (listInput.get(0).equals(".mode") && listInput.size() == 2){
+                setMode(listInput.get(1));
+                printing("$> Mode : " + mode.toString(), true);
+            }
             else if (listInput.get(0).equals(".notation") && listInput.size() == 2)
             {
                 notation = InputUser.getNotation(listInput.get(1));
-                System.out.println("$> Notation : " + notation.toString());
+                printing("$> Notation : " + notation.toString(), true);
+            }
+            else if (listInput.get(0).equals(".decim") && listInput.size() == 2)
+            {
+                decimal_number = InputUser.getNumber(listInput.get(1));
+                printing("$> Number of decimals : " + decimal_number, true);
             }
             else if (listInput.get(0).equals(".verbose") && listInput.size() == 2)
                 verbose = listInput.get(1).equals("true");
             else if (listInput.get(0).equals(".help"))
                 printHelp();
             else if (listInput.get(0).equals(".log"))
-                System.out.println("$> Displaying the log of the last 10 operations: ");
+                printing("$> Displaying the log of the last 10 operations: ", true);
 
             else
             {
-                inputUser_instance.setUserInput(StringRegrex.analyse(inputUser));
-                System.out.println("$> " + inputUser_instance.compute(verbose));
+                inputUser_instance.setUserInput(StringRegex.analyse(inputUser));
+                result = inputUser_instance.compute(verbose);
+                if (result != null)
+                    printing("$> " + result, true);
+                else
+                    printError("Error in the expression");
             }
         }
         else
-            System.out.println("$> Please enter a valid expression !");
+            printing("$> Please enter a valid expression !", true);
     }
 
     /**
@@ -85,12 +150,20 @@ public class Main
      */
     public static void main(String[] args)
     {
-        System.out.print("$> Calculator Cucumber\n This is a calculator that can be used to perform basic arithmetic operations.\n");
+        printing("$> Calculator Cucumber\n This is a calculator that can be used to perform basic arithmetic operations.\n", false);
         printMenu();
+        printOperator();
         while(isRunning)
         {
-            get_input();
+            try
+            {
+                get_input();
+            }
+            catch (Exception e)
+            {
+                printError(e.getMessage());
+            }
         }
-        System.out.println("$> Bye bye !");
+        printing("$> Bye bye !", true);
     }
 }

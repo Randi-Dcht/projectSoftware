@@ -6,8 +6,17 @@ public enum ListOperator
     SUB("-", 1, 2),
     MUL("*", 2, 2),
     DIV("/", 2, 2),
-    FACT("fact", 4, 2),
-    MOD("mod", 4, 2),
+    COMB("comb", 4, 2),
+    GCD("gcd", 4, 2),
+    EUCLIDEAN("//", 4, 2),
+    FACTO("!", 4, 1),
+    MODULO("%", 4, 2),
+    PGCD("pgcd", 4, 2),
+    POW("^", 5, 2),
+    PPCM("ppcm", 4, 2),
+    PRIME("prime", 4, 2),
+    MODULUS("modulus", 4, 1),
+    SQRT("sqrt", 4, 1),
     ;
 
     private final String value;

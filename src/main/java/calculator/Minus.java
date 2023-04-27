@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.List;
 
-import static java.lang.Math.min;
 import static java.lang.Math.pow;
 
 /** This class represents the arithmetic operation "-".

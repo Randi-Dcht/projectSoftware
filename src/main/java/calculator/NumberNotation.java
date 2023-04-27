@@ -12,5 +12,7 @@ public enum NumberNotation {
 
     E_NOTATION,  // 6.022E23
 
+    BINARY,
+
 
 }

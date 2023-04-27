@@ -5,14 +5,13 @@ import calculator.IllegalConstruction;
 import calculator.MyNumber;
 import calculator.Notation;
 import calculator.arithmetics.Eucledian;
-import calculator.arithmetics.Modulo;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class TestEucledian
 {

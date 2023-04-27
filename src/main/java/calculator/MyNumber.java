@@ -3,10 +3,13 @@ package calculator;
 import visitor.Visitor;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.math.MathContext;
 import java.text.DecimalFormat;
 
 
+import static cli.Main.getDecimalNumber;
+import static cli.Main.getMode;
 import static java.lang.Integer.parseInt;
 import static java.lang.Math.pow;
 
@@ -23,7 +26,7 @@ public class MyNumber implements Expression
   private final BigDecimal value;
   private final int exp;
 
-  private final int decimalNumber = 15;
+
 
 
 
@@ -34,11 +37,13 @@ public class MyNumber implements Expression
   private String[] list_val = new String[2];
   private String[] list_i = new String[2];
 
+  public NumberNotation notation = getMode();
+  private final int printdecimalNumber = getDecimalNumber();
+  private final int decimalNumber = 15;
+
+  private int base = 10;
 
 
-
-
-  public NumberNotation notation = NumberNotation.CARTESIAN;
 
     /** getter method to obtain the value contained in the object
      *
@@ -69,6 +74,8 @@ public class MyNumber implements Expression
     {
         this(new BigDecimal(value));
     }
+
+
 
 
     public /*constructor*/ MyNumber(BigDecimal v) {
@@ -140,6 +147,15 @@ public class MyNumber implements Expression
 
 
 
+
+    public /*constructor*/ MyNumber(String binaryValue, int base)
+    {
+        this(new BigDecimal(new BigInteger(binaryValue, base)));
+        this.base = base;
+    }
+
+
+
     /**
      * accept method to implement the visitor design pattern to traverse arithmetic expressions.
      * Each number will pass itself to the visitor object to get processed by the visitor.
@@ -192,11 +208,15 @@ public class MyNumber implements Expression
         return v.multiply(BigDecimal.valueOf(pow(10, e)));
     }
 
+    public int getBase()
+    {
+        return base;
+    }
 
     public String[] decimalRefactor(BigDecimal v, int e){
         while ( v.compareTo(BigDecimal.valueOf(0.1)) < 0 && v.compareTo(BigDecimal.valueOf(-0.1)) > 0 && !((v.round(new MathContext(decimalNumber))).compareTo(BigDecimal.ZERO) == 0))  {
             v = (v.multiply(BigDecimal.valueOf(10)));
-            e = e+1;
+            e = e-1;
         }
         String[] list = new String[2];
         list[0]=(v.round(new MathContext(decimalNumber))).toString();
@@ -214,12 +234,22 @@ public class MyNumber implements Expression
 
     public final String toString(NumberNotation n)
     {
-
         Double real = applyExp(this.value,this.exp).round(new MathContext(decimalNumber)).doubleValue();
         Double imag = applyExp(this.imaginary,this.imaginaryExp).round(new MathContext(decimalNumber)).doubleValue();
 
+        StringBuilder printNumberDecimal = new StringBuilder();
+        for (int i = 0; i < printdecimalNumber; i++) {
+            printNumberDecimal.append("#");
+        }
 
-        DecimalFormat format = new DecimalFormat("0.#");
+        DecimalFormat format;
+
+        if(printdecimalNumber==0){
+            format = new DecimalFormat("0");}
+        else{
+            format = new DecimalFormat("0."+printNumberDecimal);
+        }
+        DecimalFormat imFormat = new DecimalFormat("+#,##0.#;-#");
         double O = Math.PI/2;
         if(value.signum()!=0) {
             MyNumber tmp1 = Divides.divNumber(new MyNumber(imaginary, imaginaryExp), new MyNumber(value, exp));
@@ -229,11 +259,12 @@ public class MyNumber implements Expression
         MyNumber tmp2 = Modulus.modNumber(this);
         double r = tmp2.getValue().multiply(BigDecimal.valueOf(pow(10, tmp2.getexp())).round(new MathContext(decimalNumber))).doubleValue();
 
+
         return switch (n) {
             case CARTESIAN ->
                 String.format("%s%s", "", (value.signum() == 0 && imaginary.signum() != 0) ? String.format("%si", format.format(imag)) :
                     (imaginary.signum() == 0) ? String.format("%s", format.format(real)) :
-                            String.format("%s+%si", format.format(real),format.format(imag)));
+                            String.format("%s%si", format.format(real),imFormat.format(imag)));
 
             case POLAR ->
                     String.format("%s%s",format.format(r),
@@ -253,7 +284,13 @@ public class MyNumber implements Expression
             String.format("%s%s", "", (value.signum() == 0 && imaginary.signum() != 0) ? String.format("i*%sE^%s", imaginary,imaginaryExp) :
                     (imaginary.signum() == 0) ? String.format("%sE^%s", value,exp) :
                             String.format("%sE^%s + i*%sE^%s", value,exp,imaginary,imaginaryExp));
-          };
+
+            //string to print in the case of a binary number
+            case BINARY ->
+                    String.format("%s%s", "", (value.signum() == 0 && imaginary.signum() != 0) ? String.format("i*%s", imaginary) :
+                            (imaginary.signum() == 0) ? String.format("%s", value) :
+                                    String.format("%s + i*%s", value,imaginary));
+        };
       }
 
 

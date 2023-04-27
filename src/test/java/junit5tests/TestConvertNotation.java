@@ -2,7 +2,7 @@ package junit5tests;
 
 import calculator.Notation;
 import org.junit.jupiter.api.Test;
-import parser.StringRegrex;
+import parser.StringRegex;
 import parser.Typos;
 import java.util.List;
 import static cli.ConvertNotation.transformNotation;
@@ -14,7 +14,7 @@ class TestConvertNotation
     void testConvertNotation_1_infix()
     {
         String s = "2 * 2 + 2";
-        List<Typos> list = StringRegrex.analyse(s);
+        List<Typos> list = StringRegex.analyse(s);
         List<Typos> listing = transformNotation(Notation.INFIX, list, false);
 
         assertEquals(listing.size(), 5);
@@ -29,7 +29,7 @@ class TestConvertNotation
     void testConvertNotation_2_infix()
     {
         String s = "1 * 2 + 3 * 4";
-        List<Typos> list = StringRegrex.analyse(s);
+        List<Typos> list = StringRegex.analyse(s);
         List<Typos> listing = transformNotation(Notation.INFIX, list, false);
 
         assertEquals(listing.size(), 7);
@@ -46,7 +46,7 @@ class TestConvertNotation
     void testConvertNotation_3_infix()
     {
         String s = "1 + 2 * 3 - 2 * 1";
-        List<Typos> list = StringRegrex.analyse(s);
+        List<Typos> list = StringRegex.analyse(s);
         List<Typos> listing = transformNotation(Notation.INFIX, list, false);
 
         assertEquals(listing.size(), 9);
@@ -65,7 +65,7 @@ class TestConvertNotation
     void testConvertNotation_bracket()
     {
         String s = "( 2 + 2 ) * 3";
-        List<Typos> list = StringRegrex.analyse(s);
+        List<Typos> list = StringRegex.analyse(s);
         List<Typos> listing = transformNotation(Notation.INFIX, list, false);
 
         assertEquals(listing.size(), 5);
