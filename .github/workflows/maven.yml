@@ -77,7 +77,7 @@ jobs:
         -Dsonar.host.url=https://sonarcloud.io
         -Dsonar.organization=randi-dcht
         -Dsonar.projectKey=Randi-Dcht_projectSoftware
-        -Dsonar.branch.name=master
+        -Dsonar.branch.name=adding-memory-feature-to-CLI
         -Dsonar.login=$SONAR_TOKEN
     
 #    - name: Build and analyze with Sonar Cloud
