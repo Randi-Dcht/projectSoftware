@@ -114,6 +114,14 @@ class TestInputUser
     }
 
     @Test
+    void testComputeNotation()
+    {
+        assertEquals(new InputUser(Notation.INFIX,NumberNotation.CARTESIAN,15).getNotationCompute(), Notation.POSTFIX);
+        assertEquals(new InputUser(Notation.POSTFIX,NumberNotation.CARTESIAN,15).getNotationCompute(), Notation.POSTFIX);
+        assertEquals(new InputUser(Notation.PREFIX,NumberNotation.CARTESIAN,15).getNotationCompute(), Notation.PREFIX);
+    }
+
+    @Test
     void testCompute()
     {
         InputUser inputUser = new InputUser(Notation.INFIX,NumberNotation.CARTESIAN,15);

@@ -12,6 +12,7 @@ import java.util.Stack;
  */
 public class ConvertNotation
 {
+    private ConvertNotation() {}
 
     /**
      * Convert the data in infix to postfix for compute
@@ -59,17 +60,6 @@ public class ConvertNotation
         return buff;
     }
 
-    /**
-     * Convert prefix to postfix
-     */
-    public static List<Typos> convertPrefix(List<Typos> data)
-    {
-        List<Typos> buff = new ArrayList<>();
-        Stack<Typos> stack = new Stack<>();
-
-        return buff;
-    }
-
 
     /**
      * Convert the data in postfix for compute
@@ -80,8 +70,6 @@ public class ConvertNotation
 
         if (notationIn.equals(Notation.INFIX))
             array = convertInfix(data);
-        else if (notationIn.equals(Notation.PREFIX))
-            array = convertPrefix(data);
         else
             array = data;
 
