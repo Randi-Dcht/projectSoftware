@@ -43,7 +43,12 @@ public final class Minus extends Operation {
     }
 
 
-    /**TODO*/
+    /**
+     * Return the minimum number between two number
+     * @param l : number
+     * @param r : number
+     * @return number
+     */
     public static MyNumber subtraction(BigDecimal l, int lExp, BigDecimal r, int rExp){
         BigDecimal newVal;
         int exp;

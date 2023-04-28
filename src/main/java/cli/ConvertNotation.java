@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-
+/**
+ * Class to process the input of user
+ */
 public class ConvertNotation
 {
 

@@ -30,7 +30,11 @@ public class Modulus extends Operation
     }
 
 
-    /***/
+    /**
+     * Return the modulus of a number
+     * @param l : number
+     * @return number
+     */
     public static MyNumber modNumber(MyNumber l){
         MyNumber a = new MyNumber(l.getValue(),l.getexp());
         MyNumber b = new MyNumber(l.getImaginary(),l.getImaginaryExp());
