@@ -67,30 +67,6 @@ public class ConvertNotation
         List<Typos> buff = new ArrayList<>();
         Stack<Typos> stack = new Stack<>();
 
-        for(Typos e : data)
-        {
-            if (e.getType().equals(TypeString.OPERATOR))
-            {
-                if (stack.empty())
-                    stack.push(e);
-                else
-                {
-                    if (e.getPriority() > stack.peek().getPriority())
-                        stack.push(e);
-                    else
-                    {
-                        while (!stack.empty() && e.getPriority() <= stack.peek().getPriority())
-                            buff.add(stack.pop());
-                        stack.push(e);
-                    }
-                }
-            }
-            else
-                buff.add(e);
-        }
-        while (!stack.empty())
-            buff.add(stack.pop());
-
         return buff;
     }
 
