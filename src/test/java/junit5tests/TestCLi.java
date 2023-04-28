@@ -1,7 +1,6 @@
 package junit5tests;
 
-import calculator.Notation;
-import calculator.NumberNotation;
+import calculator.*;
 import cli.Main;
 import org.junit.After;
 import org.junit.Before;
@@ -99,6 +98,21 @@ class TestCLi
         List<Typos> listing = transformNotation(Notation.INFIX, list, true);
         String txt = "2 2 + " + symbol;
         assertEquals(txt, outContent.toString());
+    }
+
+    @Test
+    void testPrintCalculator() throws IllegalConstruction
+    {
+        List<Expression> l = List.of(new MyNumber(1), new MyNumber(2));
+
+        new Calculator().print(new Plus(l, Notation.PREFIX));
+        String e1 = "The result of evaluating expression + (1, 2)" + symbol + "is: 3.\n" + symbol;
+        assertEquals(e1, outContent.toString());
+
+        new Calculator().printExpressionDetails(new Plus(l, Notation.PREFIX));
+        e1 += e1 + "It contains 1 levels of nested expressions, 1 operations and 2 numbers.\n" + symbol;
+        assertEquals(e1, outContent.toString());
+
     }
 
     @Test
