@@ -251,7 +251,6 @@ public class Memory {
                 memory.add(new Variable(name, number, expression, timeStamp));
             }
         }
-
         catch (IOException e){
             System.out.println("Error reading log or memory file");
             System.out.println(e.getMessage());
@@ -259,8 +258,6 @@ public class Memory {
         finally {
             sc.close();
         }
-
-
     }
 
     /**
