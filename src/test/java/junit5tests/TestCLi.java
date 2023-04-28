@@ -17,7 +17,7 @@ import java.io.PrintStream;
 import java.util.List;
 
 import static cli.ConvertNotation.transformNotation;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class TestCLi
 {
@@ -135,6 +135,56 @@ class TestCLi
         assertEquals(15, Main.getDecimalNumber());
 
         Main.setMode("cartesian");
+
+        assertTrue(Main.isRunning());
+        System.setIn(new ByteArrayInputStream(".quit".getBytes()));
+        Main.get_input();
+        assertFalse(Main.isRunning());
+
+        System.setIn(new ByteArrayInputStream(".verbose true".getBytes()));
+        Main.get_input();
+        assertTrue(Main.isVerbose());
+
+        System.setIn(new ByteArrayInputStream(".verbose false".getBytes()));
+        Main.get_input();
+        assertFalse(Main.isVerbose());
+
+        System.setIn(new ByteArrayInputStream(".notation infix".getBytes()));
+        Main.get_input();
+        assertSame(Notation.INFIX, Main.getNotation());
+
+        System.setIn(new ByteArrayInputStream(".notation prefix".getBytes()));
+        Main.get_input();
+        assertSame(Notation.PREFIX, Main.getNotation());
+
+        System.setIn(new ByteArrayInputStream(".notation postfix".getBytes()));
+        Main.get_input();
+        assertSame(Notation.POSTFIX, Main.getNotation());
+    }
+
+    @Test
+    void testErrorInput()
+    {
+        System.setIn(new ByteArrayInputStream(" ".getBytes()));
+        Main.get_input();
+        assertEquals("$>>> $> Please enter a valid expression !" + symbol, outContent.toString());
+    }
+
+    @Test
+    void testMain()
+    {
+        String[] args = new String[0];
+        System.setIn(new ByteArrayInputStream(".quit".getBytes()));
+        Main.main(args);
+
+        assertEquals("$> Calculator Cucumber" + symbol +
+                " This is a calculator that can be used to perform basic arithmetic operations." + symbol +
+                "$> Please enter an expression to evaluate or .quit to exit" + symbol +
+                "$> To change the notation, use the command .mode <mode> where <mode> is cartesian, polar, exponential, scientific or e_notation" + symbol +
+                "$> To change the notation, use the command .notation <notation> where <notation> is infix, prefix, postfix" + symbol +
+                "$> To change the number of decimal, use the command .decim <number> where <number> is the number of decimal you want (15 by default)" + symbol +
+                "$> List of operators : [  +  -  *  /  comb  gcd  //  !  %  pgcd  ^  ppcm  prime  modulus  sqrt]" +   symbol +
+                "$>>> $> Bye bye !" + symbol, outContent.toString());
     }
 
     @AfterEach

@@ -11,6 +11,9 @@ import java.util.Scanner;
 
 public class Main
 {
+    /**Constructor*/
+    private Main() {}
+
     /**While loop to continue*/
     private static boolean isRunning = true;
     /**Notation actual*/
@@ -50,6 +53,13 @@ public class Main
             System.out.print(message);
     }
 
+    /**
+     * @return is close while loop
+     */
+    public static boolean isRunning()
+    {
+        return isRunning;
+    }
 
     /**
      * Print the error in console
@@ -152,8 +162,6 @@ public class Main
                 verbose = listInput.get(1).equals("true");
             else if (listInput.get(0).equals(".help"))
                 printHelp();
-            else if (listInput.get(0).equals(".log"))
-                printing("$> Displaying the log of the last 10 operations: ", true);
 
             else
             {
@@ -190,5 +198,21 @@ public class Main
             }
         }
         printing("$> Bye bye !", true);
+    }
+
+    /**
+     * @return print all result
+     */
+    public static boolean isVerbose()
+    {
+        return verbose;
+    }
+
+    /**
+     * @return the notation
+     */
+    public static Notation getNotation()
+    {
+        return notation;
     }
 }
