@@ -207,13 +207,19 @@ public class Memory {
     public void save(String memoryFile) {
         try {
             FileWriter fileWriter = new FileWriter(path + memoryFile);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            try (BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)){
             for (Variable r : memory) {
                 bufferedWriter.write(r.getTimeStamp() + " %%% " + r.getName() + " %%% " + r.toString() + " %%% " + r.getExpression());
                 bufferedWriter.newLine();
             }
             bufferedWriter.close();
-            fileWriter.close();
+            fileWriter.close();}
+            catch (IOException e){
+                e.printStackTrace();
+            }
+            finally {
+                fileWriter.close();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
