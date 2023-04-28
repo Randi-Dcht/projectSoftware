@@ -67,7 +67,7 @@ class TestRegex
     {
         String s = "1x10^2 1E2";
         List<Typos> list = StringRegex.analyse(s);
-        assertEquals(list.size(), 2);
+        assertEquals(2, list.size());
         assertEquals(TypeString.SCIENTIFIC, list.get(0).getType());
         assertEquals(TypeString.E_NOTATION, list.get(1).getType());
     }
@@ -117,7 +117,7 @@ class TestRegex
 
         String s = "2x1 2x0 2x1 2x0101";
         List<Typos> list = StringRegex.analyse(s);
-        assertEquals(list.size(), 4);
+        assertEquals(4, list.size());
         assertEquals(TypeString.BINARY, list.get(0).getType());
 
 

@@ -86,7 +86,7 @@ class TestCLi
 
         System.setIn(new ByteArrayInputStream(".mode binary".getBytes()));
         Main.get_input();
-        assertEquals(Main.getMode(), NumberNotation.BINARY);
+        assertEquals(NumberNotation.BINARY, Main.getMode());
 
         System.setIn(new ByteArrayInputStream(".decim 5".getBytes()));
         Main.get_input();
