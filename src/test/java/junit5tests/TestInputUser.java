@@ -107,18 +107,18 @@ class TestInputUser
         assertSame(inputUser.getNotation(), Notation.POSTFIX);
 
         inputUser.setUserInput(StringRegex.analyse("1 + 2"));
-        assertEquals(inputUser.getUserInput().size(), 3);
-        assertEquals(inputUser.getUserInput().get(0).getValue(), "1");
-        assertEquals(inputUser.getUserInput().get(1).getValue(), "+");
-        assertEquals(inputUser.getUserInput().get(2).getValue(), "2");
+        assertEquals(3, inputUser.getUserInput().size());
+        assertEquals("1", inputUser.getUserInput().get(0).getValue());
+        assertEquals("+", inputUser.getUserInput().get(1).getValue());
+        assertEquals("2", inputUser.getUserInput().get(2).getValue());
     }
 
     @Test
     void testComputeNotation()
     {
-        assertEquals(new InputUser(Notation.INFIX,NumberNotation.CARTESIAN,15).getNotationCompute(), Notation.POSTFIX);
-        assertEquals(new InputUser(Notation.POSTFIX,NumberNotation.CARTESIAN,15).getNotationCompute(), Notation.POSTFIX);
-        assertEquals(new InputUser(Notation.PREFIX,NumberNotation.CARTESIAN,15).getNotationCompute(), Notation.PREFIX);
+        assertEquals(Notation.POSTFIX, new InputUser(Notation.INFIX,NumberNotation.CARTESIAN,15).getNotationCompute());
+        assertEquals( Notation.POSTFIX, new InputUser(Notation.POSTFIX,NumberNotation.CARTESIAN,15).getNotationCompute());
+        assertEquals(Notation.PREFIX, new InputUser(Notation.PREFIX,NumberNotation.CARTESIAN,15).getNotationCompute());
     }
 
     @Test
@@ -126,68 +126,68 @@ class TestInputUser
     {
         InputUser inputUser = new InputUser(Notation.INFIX,NumberNotation.CARTESIAN,15);
 
-        assertEquals(inputUser.getMode(),NumberNotation.CARTESIAN);
+        assertEquals(NumberNotation.CARTESIAN, inputUser.getMode());
 
         inputUser.setUserInput(StringRegex.analyse("1 + 2"));
-        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(3)));
+        assertEquals(new MyNumber(new BigDecimal(3)), inputUser.compute(false));
 
         inputUser.setUserInput(StringRegex.analyse("1.3 + 2.5i"));
-        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal("1.3"),new BigDecimal("2.5")));
+        assertEquals(new MyNumber(new BigDecimal("1.3"),new BigDecimal("2.5")), inputUser.compute(false));
 
         inputUser.setUserInput(StringRegex.analyse("2 * 3 + 2 * 3"));
-        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(12)));
+        assertEquals(new MyNumber(new BigDecimal(12)), inputUser.compute(false));
 
         inputUser.setUserInput(StringRegex.analyse("( 2 + 2 ) * 3"));
-        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(12)));
+        assertEquals( new MyNumber(new BigDecimal(12)), inputUser.compute(false));
 
         inputUser.setUserInput(StringRegex.analyse("( ( 2 + 2 ) * 3 )"));
-        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(12)));
+        assertEquals(new MyNumber(new BigDecimal(12)), inputUser.compute(false));
 
         inputUser.setUserInput(StringRegex.analyse("( ( 2 + 2i ) * 3 )"));
-        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(6),new BigDecimal(6)));
+        assertEquals(new MyNumber(new BigDecimal(6),new BigDecimal(6)), inputUser.compute(false));
 
         inputUser.setUserInput(StringRegex.analyse("( ( 2i - -2i ) * 3 )"));
-        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(0),new BigDecimal(12)));
+        assertEquals(new MyNumber(new BigDecimal(0),new BigDecimal(12)), inputUser.compute(false));
 
         inputUser.setUserInput(StringRegex.analyse("( ( 2x10^2 + 2x10^2i ) * 3 )"));
-        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(6),2,new BigDecimal(6),2));
+        assertEquals(new MyNumber(new BigDecimal(6),2,new BigDecimal(6),2), inputUser.compute(false));
 
         inputUser.setUserInput(StringRegex.analyse("( ( 5E4 + 9E1i ) * 4 )"));
-        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(20),4,new BigDecimal(36),1));
+        assertEquals(new MyNumber(new BigDecimal(20),4,new BigDecimal(36),1), inputUser.compute(false));
 
         inputUser.setUserInput(StringRegex.analyse("sqrt 16"));
-        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(4)));
+        assertEquals(new MyNumber(new BigDecimal(4)), inputUser.compute(false));
 
         inputUser.setMode(NumberNotation.SCIENTIFIC);
-        assertEquals(inputUser.getMode(),NumberNotation.SCIENTIFIC);
+        assertEquals(NumberNotation.SCIENTIFIC, inputUser.getMode());
 
         inputUser.setMode(NumberNotation.CARTESIAN);
-        assertEquals(inputUser.getMode(),NumberNotation.CARTESIAN);
+        assertEquals(NumberNotation.CARTESIAN, inputUser.getMode());
 
         inputUser.setMode(NumberNotation.E_NOTATION);
-        assertEquals(inputUser.getMode(),NumberNotation.E_NOTATION);
+        assertEquals(NumberNotation.E_NOTATION, inputUser.getMode());
 
         inputUser.setMode(NumberNotation.EXPONENTIAL);
-        assertEquals(inputUser.getMode(),NumberNotation.EXPONENTIAL);
+        assertEquals(NumberNotation.EXPONENTIAL, inputUser.getMode());
 
         inputUser.setMode(NumberNotation.POLAR);
-        assertEquals(inputUser.getMode(),NumberNotation.POLAR);
+        assertEquals(NumberNotation.POLAR, inputUser.getMode());
 
         inputUser.setDecimalNumber(0);
-        assertEquals(inputUser.getDecimalNumber(),0);
+        assertEquals(0, inputUser.getDecimalNumber());
 
         inputUser.setDecimalNumber(16);
-        assertEquals(inputUser.getDecimalNumber(),16);
+        assertEquals(16,inputUser.getDecimalNumber());
 
         Main.setMode("binary");
         inputUser.setUserInput(StringRegex.analyse("2x01 + 2x10"));
-        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(3)));
+        assertEquals( new MyNumber(new BigDecimal(3)), inputUser.compute(false));
 
         inputUser.setUserInput(StringRegex.analyse("16xA1 + 16xF2"));
-        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(403)));
+        assertEquals(new MyNumber(new BigDecimal(403)), inputUser.compute(false));
 
         inputUser.setUserInput(StringRegex.analyse("4x10 + 16xF2"));
-        assertEquals(inputUser.compute(false), new MyNumber(new BigDecimal(246)));
+        assertEquals(new MyNumber(new BigDecimal(246)), inputUser.compute(false));
 
         Main.setMode(NumberNotation.CARTESIAN);
 
