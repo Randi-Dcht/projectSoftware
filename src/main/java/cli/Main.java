@@ -4,7 +4,7 @@ import calculator.MyNumber;
 import calculator.Notation;
 import calculator.NumberNotation;
 import enums.ListOperator;
-import parser.StringRegex;
+import regex.StringRegex;
 import java.util.List;
 import java.util.Scanner;
 

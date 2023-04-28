@@ -4,8 +4,8 @@ import cli.Main;
 import enums.ListOperator;
 import enums.TypeString;
 import org.junit.jupiter.api.Test;
-import parser.StringRegex;
-import parser.Typos;
+import regex.StringRegex;
+import regex.Typos;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 

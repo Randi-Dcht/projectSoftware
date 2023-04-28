@@ -1,4 +1,4 @@
-package parser;
+package regex;
 
 import calculator.NumberNotation;
 import cli.InputUser;

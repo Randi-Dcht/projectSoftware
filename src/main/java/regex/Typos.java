@@ -1,4 +1,4 @@
-package parser;
+package regex;
 
 import enums.ListOperator;
 import enums.TypeString;

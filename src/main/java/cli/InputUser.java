@@ -3,7 +3,7 @@ package cli;
 import calculator.*;
 import calculator.arithmetics.*;
 import enums.TypeString;
-import parser.Typos;
+import regex.Typos;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -124,7 +124,6 @@ public class InputUser
                 case PRIME -> e = new PrimeNumber(params, notation);
                 case MODULUS -> e = new Modulus(params, notation);
                 case SQRT -> e = new Sqrt(params, notation);
-                default -> printError("Operator not found");
             }
         }
         catch (IllegalConstruction ill)

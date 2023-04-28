@@ -2,13 +2,11 @@ package junit5tests;
 
 import calculator.*;
 import cli.Main;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import parser.StringRegex;
-import parser.Typos;
+import regex.StringRegex;
+import regex.Typos;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

@@ -2,8 +2,8 @@ package junit5tests;
 
 import calculator.Notation;
 import org.junit.jupiter.api.Test;
-import parser.StringRegex;
-import parser.Typos;
+import regex.StringRegex;
+import regex.Typos;
 import java.util.List;
 import static cli.ConvertNotation.transformNotation;
 import static org.junit.jupiter.api.Assertions.assertEquals;

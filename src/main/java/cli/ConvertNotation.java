@@ -2,7 +2,7 @@ package cli;
 
 import calculator.Notation;
 import enums.TypeString;
-import parser.Typos;
+import regex.Typos;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;

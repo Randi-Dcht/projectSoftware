@@ -8,8 +8,8 @@ import cli.Main;
 import enums.ListOperator;
 import enums.TypeString;
 import org.junit.jupiter.api.Test;
-import parser.StringRegex;
-import parser.Typos;
+import regex.StringRegex;
+import regex.Typos;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
@@ -89,6 +89,8 @@ class TestInputUser
         assertEquals(new PrimeNumber(lst),InputUser.getOperator(new Typos("prime", TypeString.OPERATOR, ListOperator.PRIME), lst, Notation.INFIX));
         assertEquals(new Modulus(lst),InputUser.getOperator(new Typos("modulus", TypeString.OPERATOR, ListOperator.MODULUS), lst, Notation.INFIX));
         assertEquals(new Sqrt(lst),InputUser.getOperator(new Typos("sqrt", TypeString.OPERATOR, ListOperator.SQRT), lst, Notation.INFIX));
+
+        assertEquals(null ,InputUser.getOperator(new Typos("+", TypeString.OPERATOR, ListOperator.ADD), null, Notation.PREFIX));
     }
 
     @Test
