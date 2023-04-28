@@ -238,8 +238,9 @@ public class Memory {
      *  Load the file in the memory
      */
     public void loadFile(File file)  {
+        Scanner sc = null;
         try {
-            Scanner sc = new Scanner(file);
+            sc = new Scanner(file);
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 String[] data = line.split(" %%% ");
@@ -249,11 +250,17 @@ public class Memory {
                 Expression expression = convertStringToExpression(data[3]);
                 memory.add(new Variable(name, number, expression, timeStamp));
             }
-            sc.close();
-        } catch (Exception e) {
+        }
+
+        catch (IOException e){
             System.out.println("Error reading log or memory file");
             System.out.println(e.getMessage());
+            }
+        finally {
+            sc.close();
         }
+
+
     }
 
     /**
