@@ -15,6 +15,11 @@
 
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=Randi-Dcht_projectSoftware)](https://sonarcloud.io/summary/new_code?id=Randi-Dcht_projectSoftware)
 
+
+## See the wiki :
+
+> https://github.com/Randi-Dcht/projectSoftware/wiki
+
 ## About
 
 This repository contains Java 17 code for computing arithmetic expressions. It is deliberately incomplete as it serves to be the basis of all kinds of extensions, such as a more sophisticated Calculator application. The code was written to be used for educational purposes at the University of Mons, Belgium in the context of the software evolution course.
