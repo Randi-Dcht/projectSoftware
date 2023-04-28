@@ -23,50 +23,50 @@ class TestInputUser
     {
         String input = "  1 + 2  ";
         for (String ss : InputUser.cleanInput(input))
-            assertNotEquals(ss, " ");
+            assertNotEquals(" ", ss);
     }
 
     @Test
     void testGetNotation()
     {
         String input = "POSTFIX";
-        assertEquals(InputUser.getNotation(input), Notation.POSTFIX);
+        assertEquals(Notation.POSTFIX, InputUser.getNotation(input));
         String input2 = "INFIX";
-        assertEquals(InputUser.getNotation(input2), Notation.INFIX);
+        assertEquals(Notation.INFIX, InputUser.getNotation(input2));
         String input3 = "PREFIX";
-        assertEquals(InputUser.getNotation(input3), Notation.PREFIX);
+        assertEquals(Notation.PREFIX, InputUser.getNotation(input3));
     }
 
     @Test
     void testGetMode()
     {
         String input = "e_notation";
-        assertEquals(InputUser.getMode(input), NumberNotation.E_NOTATION);
+        assertEquals(NumberNotation.E_NOTATION, InputUser.getMode(input));
         String input2 = "scientific";
-        assertEquals(InputUser.getMode(input2), NumberNotation.SCIENTIFIC);
+        assertEquals(NumberNotation.SCIENTIFIC, InputUser.getMode(input2));
         String input3 = "polar";
-        assertEquals(InputUser.getMode(input3), NumberNotation.POLAR);
+        assertEquals(NumberNotation.POLAR, InputUser.getMode(input3));
         String input4 = "exponential";
-        assertEquals(InputUser.getMode(input4), NumberNotation.EXPONENTIAL);
+        assertEquals(NumberNotation.EXPONENTIAL, InputUser.getMode(input4));
         String input5 = "cartesian";
-        assertEquals(InputUser.getMode(input5), NumberNotation.CARTESIAN);
+        assertEquals(NumberNotation.CARTESIAN, InputUser.getMode(input5));
     }
 
     @Test
     void testGetNumber()
     {
         String input = "0";
-        assertEquals(InputUser.getNumber(input), 0);
+        assertEquals(0, InputUser.getNumber(input));
         String input2 = "-1";
-        assertEquals(InputUser.getNumber(input2), 15);
+        assertEquals(15,InputUser.getNumber(input2));
         String input5 = "5";
-        assertEquals(InputUser.getNumber(input5), 5);
+        assertEquals(5, InputUser.getNumber(input5));
         String input3 = "a";
-        assertEquals(InputUser.getNumber(input3), 15);
+        assertEquals(15, InputUser.getNumber(input3));
         String input6 = "8";
-        assertEquals(InputUser.getNumber(input6), 8);
+        assertEquals(8, InputUser.getNumber(input6));
         String input4 = "";
-        assertEquals(InputUser.getNumber(input4), 15);
+        assertEquals(15, InputUser.getNumber(input4));
 
     }
 
@@ -74,21 +74,21 @@ class TestInputUser
     void testGetOperator() throws IllegalConstruction {
         ArrayList<Expression> lst = new ArrayList<>();
         lst.add(new MyNumber(new BigDecimal(1))); lst.add(new MyNumber(new BigDecimal(2)));
-        assertEquals(InputUser.getOperator(new Typos("+", TypeString.OPERATOR, ListOperator.ADD), lst, Notation.INFIX), new Plus(lst));
-        assertEquals(InputUser.getOperator(new Typos("-", TypeString.OPERATOR, ListOperator.SUB), lst, Notation.INFIX), new Minus(lst));
-        assertEquals(InputUser.getOperator(new Typos("/", TypeString.OPERATOR, ListOperator.DIV), lst, Notation.INFIX), new Divides(lst));
-        assertEquals(InputUser.getOperator(new Typos("*", TypeString.OPERATOR, ListOperator.MUL), lst, Notation.INFIX), new Times(lst));
-        assertEquals(InputUser.getOperator(new Typos("comb", TypeString.OPERATOR, ListOperator.COMB), lst, Notation.INFIX), new Combinatorial(lst));
-        assertEquals(InputUser.getOperator(new Typos("gcd", TypeString.OPERATOR, ListOperator.GCD), lst, Notation.INFIX), new Eucledian(lst));
-        assertEquals(InputUser.getOperator(new Typos("//", TypeString.OPERATOR, ListOperator.EUCLIDEAN), lst, Notation.INFIX), new EuclidianDivides(lst));
-        assertEquals(InputUser.getOperator(new Typos("!", TypeString.OPERATOR, ListOperator.FACTO), lst, Notation.INFIX), new Facto(lst));
-        assertEquals(InputUser.getOperator(new Typos("%", TypeString.OPERATOR, ListOperator.MODULO), lst, Notation.INFIX), new Modulo(lst));
-        assertEquals(InputUser.getOperator(new Typos("pgcd", TypeString.OPERATOR, ListOperator.PGCD), lst, Notation.INFIX), new Pgcd(lst));
-        assertEquals(InputUser.getOperator(new Typos("ppcm", TypeString.OPERATOR, ListOperator.PPCM), lst, Notation.INFIX), new Ppcm(lst));
-        assertEquals(InputUser.getOperator(new Typos("^", TypeString.OPERATOR, ListOperator.POW), lst, Notation.INFIX), new Pow(lst));
-        assertEquals(InputUser.getOperator(new Typos("prime", TypeString.OPERATOR, ListOperator.PRIME), lst, Notation.INFIX), new PrimeNumber(lst));
-        assertEquals(InputUser.getOperator(new Typos("modulus", TypeString.OPERATOR, ListOperator.MODULUS), lst, Notation.INFIX), new Modulus(lst));
-        assertEquals(InputUser.getOperator(new Typos("sqrt", TypeString.OPERATOR, ListOperator.SQRT), lst, Notation.INFIX), new Sqrt(lst));
+        assertEquals(new Plus(lst),InputUser.getOperator(new Typos("+", TypeString.OPERATOR, ListOperator.ADD), lst, Notation.INFIX));
+        assertEquals(new Minus(lst),InputUser.getOperator(new Typos("-", TypeString.OPERATOR, ListOperator.SUB), lst, Notation.INFIX));
+        assertEquals(new Divides(lst),InputUser.getOperator(new Typos("/", TypeString.OPERATOR, ListOperator.DIV), lst, Notation.INFIX));
+        assertEquals(new Times(lst),InputUser.getOperator(new Typos("*", TypeString.OPERATOR, ListOperator.MUL), lst, Notation.INFIX));
+        assertEquals(new Combinatorial(lst),InputUser.getOperator(new Typos("comb", TypeString.OPERATOR, ListOperator.COMB), lst, Notation.INFIX));
+        assertEquals(new Eucledian(lst),InputUser.getOperator(new Typos("gcd", TypeString.OPERATOR, ListOperator.GCD), lst, Notation.INFIX));
+        assertEquals(new EuclidianDivides(lst),InputUser.getOperator(new Typos("//", TypeString.OPERATOR, ListOperator.EUCLIDEAN), lst, Notation.INFIX));
+        assertEquals(new Facto(lst),InputUser.getOperator(new Typos("!", TypeString.OPERATOR, ListOperator.FACTO), lst, Notation.INFIX));
+        assertEquals(new Modulo(lst),InputUser.getOperator(new Typos("%", TypeString.OPERATOR, ListOperator.MODULO), lst, Notation.INFIX));
+        assertEquals(new Pgcd(lst),InputUser.getOperator(new Typos("pgcd", TypeString.OPERATOR, ListOperator.PGCD), lst, Notation.INFIX));
+        assertEquals(new Ppcm(lst),InputUser.getOperator(new Typos("ppcm", TypeString.OPERATOR, ListOperator.PPCM), lst, Notation.INFIX));
+        assertEquals(new Pow(lst),InputUser.getOperator(new Typos("^", TypeString.OPERATOR, ListOperator.POW), lst, Notation.INFIX));
+        assertEquals(new PrimeNumber(lst),InputUser.getOperator(new Typos("prime", TypeString.OPERATOR, ListOperator.PRIME), lst, Notation.INFIX));
+        assertEquals(new Modulus(lst),InputUser.getOperator(new Typos("modulus", TypeString.OPERATOR, ListOperator.MODULUS), lst, Notation.INFIX));
+        assertEquals(new Sqrt(lst),InputUser.getOperator(new Typos("sqrt", TypeString.OPERATOR, ListOperator.SQRT), lst, Notation.INFIX));
     }
 
     @Test
