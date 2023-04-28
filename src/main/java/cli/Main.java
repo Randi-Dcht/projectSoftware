@@ -1,8 +1,6 @@
 package cli;
 
-import calculator.MyNumber;
-import calculator.Notation;
-import calculator.NumberNotation;
+import calculator.*;
 import enums.ListOperator;
 import parser.StringRegex;
 import java.util.List;
@@ -21,6 +19,9 @@ public class Main
     /**is Verbose mode (print list of expression)*/
     private static boolean verbose = false;
     private static MyNumber result = null;
+
+    private static Memory memory = new Memory();
+    private static Memory log = new Memory();
 
 
     /**
@@ -152,11 +153,103 @@ public class Main
                 verbose = listInput.get(1).equals("true");
             else if (listInput.get(0).equals(".help"))
                 printHelp();
-            else if (listInput.get(0).equals(".log"))
-                printing("$> Displaying the log of the last 10 operations: ", true);
-
+            else if (listInput.get(0).equals(".log")) {
+                if (listInput.size() == 1) {
+                    printing("$> Displaying all log", true);
+                    log.display();
+                } else {
+                    printing("$> Displaying last " + listInput.get(1) + " data", true);
+                    log.displayLastData(Integer.parseInt(listInput.get(1)));
+                }
+            }
+            else if (listInput.get(0).equals(".memory")) {
+                if (listInput.size() == 1) {
+                    printing("$> Displaying all memory", true);
+                    memory.display();
+                } else {
+                    printing("$> Displaying last " + listInput.get(1) + " data", true);
+                    memory.displayLastData(Integer.parseInt(listInput.get(1)));
+                }
+            }
+            else if (listInput.get(0).equals(".remove")) {
+                if (listInput.size() != 2) {
+                    printing("$> please enter valid syntax", true);
+                }
+                try {
+                    memory.remove(listInput.get(1));
+                    printing("$> Removing variable: "+ listInput.get(1), true);
+                } catch (IllegalArgumentException e) {
+                    printing("$> " + e.getMessage(), true);
+                }
+            }
+            else if (listInput.get(0).equals(".clear"))
+            {
+                if (listInput.size() != 2) {
+                    printing("$> please enter valid syntax", true);
+                }
+                if (listInput.get(1).equals("memory")) {
+                    printing("$> Clearing all variables in memory", true);
+                    memory.clear();
+                } else if (listInput.get(1).equals("log")) {
+                    printing("$> Clearing all variables in log", true);
+                    log.clear();
+                } else {
+                    printing("$> please enter valid syntax", true);
+                }
+            } else if (listInput.get(0).equals(".rename"))
+                try {
+                    if (listInput.size() != 4) {
+                        printing("$> please enter valid syntax", true);
+                    }
+                    if (listInput.get(1).equals("memory")) {
+                        Variable variable = memory.get(listInput.get(2));
+                        variable.setName(listInput.get(3));
+                        printing("$> Renaming variable: " + listInput.get(2) + " to " + listInput.get(3), true);
+                    } else if (listInput.get(1).equals("log")) {
+                        Variable variable = log.get(listInput.get(2));
+                        variable.setName(listInput.get(3));
+                        printing("$> Renaming variable: " + listInput.get(2) + " to " + listInput.get(3), true);
+                    } else {
+                        printing("$> please enter valid syntax", true);
+                    }
+                } catch (IllegalArgumentException e) {
+                    printing("$> " + e.getMessage(), true);
+                }
+            else if (listInput.get(0).equals(".set_size")) {
+                if (listInput.size() != 2) {
+                    printing("$> please enter valid syntax", true);
+                }
+                try {
+                    memory.setMaxSize(Integer.parseInt(listInput.get(1)));
+                    printing("$> Setting new size of memory: " + listInput.get(1), true);
+                } catch (IllegalArgumentException e) {
+                    printing("$> " + e.getMessage(), true);
+                }
+            }
+            else if (listInput.get(0).equals(".size")) {
+                if (memory.getMaxSize() == -1)
+                    printing("$> displaying maximum size of memory: unlimited", true);
+                else
+                    printing("$> displaying maximum size of memory: " + memory.getMaxSize(), true);
+            }
+            else if (listInput.get(0).equals(".store")) {
+                inputUser_instance.setLog(log);
+                inputUser_instance.setMemory(memory);
+                inputUser_instance.setName(listInput.get(1));
+                inputUser_instance.setUserInput(StringRegex.analyse(inputUser));
+                result = inputUser_instance.compute(verbose);
+                if (result != null) {
+                    printing("$> Adding new variable: " + listInput.get(1), true);
+                    printing("$> " + result, true);
+                } else {
+                    printError("Error in the expression");
+                }
+                inputUser_instance.setMemory(null);
+                inputUser_instance.setName(null);
+            }
             else
             {
+                inputUser_instance.setLog(log);
                 inputUser_instance.setUserInput(StringRegex.analyse(inputUser));
                 result = inputUser_instance.compute(verbose);
                 if (result != null)
@@ -178,6 +271,8 @@ public class Main
         printing("$> Calculator Cucumber\n This is a calculator that can be used to perform basic arithmetic operations.\n", false);
         printMenu();
         printOperator();
+        memory.loadMemory();
+        log.loadLog();
         while(isRunning)
         {
             try
@@ -189,6 +284,8 @@ public class Main
                 printError(e.getMessage());
             }
         }
+        memory.saveMemory();
+        log.saveLog();
         printing("$> Bye bye !", true);
     }
 }

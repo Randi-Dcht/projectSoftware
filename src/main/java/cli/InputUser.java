@@ -17,6 +17,8 @@ import static cli.Main.printing;
  * Class to process the input of user
  */
 public class InputUser
+
+
 {
 
     /**
@@ -148,6 +150,10 @@ public class InputUser
     /**List of string input of user without space*/
     private List<Typos> user_input_list;
 
+    protected static Memory memory;
+    protected static Memory log;
+    protected static String name;
+
 
     /**
      * Constructor
@@ -239,6 +245,18 @@ public class InputUser
         return this.decimalNumber;
     }
 
+    public void setLog(Memory log) {
+        InputUser.log = log;
+    }
+
+    public void setMemory(Memory memory) {
+        InputUser.memory = memory;
+    }
+
+    public void setName(String name) {
+        InputUser.name = name;
+    }
+
     /**
      * Compute the input of user
      * @param isVerbose : boolean to display the expression
@@ -275,19 +293,18 @@ public class InputUser
                 String exp = parts[1].split("i")[0];
                 stack.push(new MyNumber(new BigDecimal(0), 0, new BigDecimal(parts[0]),Integer.parseInt(exp)));
 
-            }
 
-            else if (s.getType().equals(TypeString.OPERATOR))
+            } else if (s.getType().equals(TypeString.OPERATOR))
             {
-               while(!stack.isEmpty() && s.getOperator().getNumberArgs() > args)
-               {
-                   list_of_expression_data.add(0, stack.pop());
-                   args++;
-               }
+                while(!stack.isEmpty() && s.getOperator().getNumberArgs() > args)
+                {
+                    list_of_expression_data.add(0, stack.pop());
+                    args++;
+                }
                 if(s.getOperator().getNumberArgs()==1)
                     list_of_expression_data.add(new MyNumber(new BigDecimal(0)));
                 args = 0;
-                e = getOperator(s, list_of_expression_data, getNotationCompute());
+                e = getOperator(s, list_of_expression_data, Notation.POSTFIX);
                 list_of_expression_data.clear();
 
 
@@ -312,9 +329,20 @@ public class InputUser
 
         if (e != null)
         {
+            MyNumber eval = new Calculator().eval(e);
             if (isVerbose)
                 printing("$> " + e, true);
-            return new Calculator().eval(e);
+            if (name != null) {
+                try {
+                    memory.add(name, eval, e);
+                    log.add(name, eval, e);
+                } catch (OutOfMemoryError ex) {
+                    System.out.println(ex.getMessage());
+                }
+            } else {
+                log.add(eval, e);
+            }
+            return eval;
         }
         return null;
     }
