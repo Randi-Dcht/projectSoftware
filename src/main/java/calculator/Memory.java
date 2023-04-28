@@ -1,5 +1,6 @@
 package calculator;
 
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -7,7 +8,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.*;
 
-import static cli.InputUser.*;
 
 /**
  * The memory class used to store the variables and the log
@@ -165,7 +165,7 @@ public class Memory {
 
     /**
      * display last n variables entered into memory
-     * @param n
+     * @param n number of lines to display
      */
     public void displayLastData(int n) {
         if (n > memory.size()) {

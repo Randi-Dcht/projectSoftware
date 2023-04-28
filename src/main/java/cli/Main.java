@@ -37,6 +37,18 @@ public class Main
         printing("=== HELP END===", true);
     }
 
+    public static void printMemory()
+    {
+        printing("$> To display the memory, use the command '.memory'", true);
+        printing("$> To display the log, use the command '.log' or 'log <number>' where number is the last lines of data in the memory", true);
+        printing("$> To store a variable in the memory, use the command '.store <variable name> <expression>'", true);
+        printing("$> To remove a variable in the memory, use the command '.remove <variable name>'", true);
+        printing("$> To change the name of a variable, use the command '.rename <type> <variable name> <new variable name>' where type is memory or log", true);
+        printing("$> To clear the memory, use the command '.clear' where type is memory or log", true);
+        printing("$> To display the maximum size of the memory, use the command '.size'", true);
+        printing("$> To set custom maximum size of the memory, use the command '.set_size <number>' where number is the maximum size of the memory", true);
+    }
+
 
     /**
      * Print on console
@@ -153,6 +165,8 @@ public class Main
                 verbose = listInput.get(1).equals("true");
             else if (listInput.get(0).equals(".help"))
                 printHelp();
+            else if (listInput.get(0).equals(".help_memory"))
+                printMemory();
             else if (listInput.get(0).equals(".log")) {
                 if (listInput.size() == 1) {
                     printing("$> Displaying all log", true);

@@ -69,6 +69,22 @@ class TestCLi
     }
 
     @Test
+    void testPrintMemory() {
+        Main.printMemory();
+        String text = "$> To display the memory, use the command '.memory'" + symbol +
+                "$> To display the log, use the command '.log' or 'log <number>' where number is the last lines of data in the memory" + symbol +
+                "$> To store a variable in the memory, use the command '.store <variable name> <expression>'" + symbol +
+                "$> To remove a variable in the memory, use the command '.remove <variable name>'"+ symbol +
+                "$> To change the name of a variable, use the command '.rename <type> <variable name> <new variable name>' where type is memory or log" + symbol +
+                "$> To clear the memory, use the command '.clear' where type is memory or log" + symbol +
+                "$> To display the maximum size of the memory, use the command '.size'" + symbol +
+                "$> To set custom maximum size of the memory, use the command '.set_size <number>' where number is the maximum size of the memory" + symbol;
+
+        assertEquals(text, outContent.toString());
+    }
+
+
+    @Test
     void testPrintMenu()
     {
         Main.printMenu();
@@ -92,6 +108,7 @@ class TestCLi
         System.setIn(new ByteArrayInputStream("1 + 2".getBytes()));
         Main.get_input();
         assertEquals("$>>> $> 3" +symbol, outContent.toString());
+
 
         System.setIn(new ByteArrayInputStream(".mode binary".getBytes()));
         Main.get_input();
