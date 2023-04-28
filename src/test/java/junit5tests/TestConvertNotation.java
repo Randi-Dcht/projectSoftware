@@ -32,7 +32,7 @@ class TestConvertNotation
         List<Typos> list = StringRegex.analyse(s);
         List<Typos> listing = transformNotation(Notation.INFIX, list, false);
 
-        assertEquals(listing.size(), 7);
+        assertEquals(7, listing.size());
         assertEquals("1",listing.get(0).getValue());
         assertEquals("2",listing.get(1).getValue());
         assertEquals("*",listing.get(2).getValue());

@@ -33,8 +33,8 @@ public class MyNumber implements Expression
 
   private final int imaginaryExp;
 
-  private String[] list_val = new String[2];
-  private String[] list_i = new String[2];
+  private String[] listVal = new String[2];
+  private String[] listI = new String[2];
 
   public NumberNotation notation = getMode();
   private final int printdecimalNumber = getDecimalNumber();
@@ -75,9 +75,9 @@ public class MyNumber implements Expression
     }
     public /*constructor*/ MyNumber(BigDecimal v) {
 
-        list_val = decimalRefactor(v,0);
-        value=new BigDecimal(list_val[0]).round(new MathContext(decimalNumber));
-        exp= (parseInt( list_val[1]));
+        listVal = decimalRefactor(v,0);
+        value=new BigDecimal(listVal[0]).round(new MathContext(decimalNumber));
+        exp= (parseInt( listVal[1]));
 
 
         BigDecimal tmp = new BigDecimal(0);
@@ -86,9 +86,9 @@ public class MyNumber implements Expression
     }
     public /*constructor*/ MyNumber(BigDecimal v, int e) {
 
-        list_val = decimalRefactor(v,e);
-        value=new BigDecimal(list_val[0]).round(new MathContext(decimalNumber));
-        exp= (parseInt( list_val[1]));
+        listVal = decimalRefactor(v,e);
+        value=new BigDecimal(listVal[0]).round(new MathContext(decimalNumber));
+        exp= (parseInt( listVal[1]));
 
 
         BigDecimal tmp = new BigDecimal(0);
@@ -97,23 +97,23 @@ public class MyNumber implements Expression
     }
     public /*constructor*/ MyNumber(BigDecimal v, BigDecimal i) {
 
-        list_val = decimalRefactor(v,0);
-        value=new BigDecimal(list_val[0]).round(new MathContext(decimalNumber));
-        exp= (parseInt( list_val[1]));
+        listVal = decimalRefactor(v,0);
+        value=new BigDecimal(listVal[0]).round(new MathContext(decimalNumber));
+        exp= (parseInt( listVal[1]));
 
-        list_i = decimalRefactor(i,0);
-        imaginary=new BigDecimal(list_i[0]).round(new MathContext(decimalNumber));
-        imaginaryExp= (parseInt( list_i[1]));
+        listI = decimalRefactor(i,0);
+        imaginary=new BigDecimal(listI[0]).round(new MathContext(decimalNumber));
+        imaginaryExp= (parseInt( listI[1]));
     }
     public /*constructor*/ MyNumber(BigDecimal v, int e, BigDecimal i, int ie) {
 
-        list_val = decimalRefactor(v,e);
-        value=new BigDecimal(list_val[0]).round(new MathContext(decimalNumber));
-        exp= (parseInt( list_val[1]));
+        listVal = decimalRefactor(v,e);
+        value=new BigDecimal(listVal[0]).round(new MathContext(decimalNumber));
+        exp= (parseInt( listVal[1]));
 
-        list_i = decimalRefactor(i,ie);
-        imaginary=new BigDecimal(list_i[0]).round(new MathContext(decimalNumber));
-        imaginaryExp= (parseInt( list_i[1]));
+        listI = decimalRefactor(i,ie);
+        imaginary=new BigDecimal(listI[0]).round(new MathContext(decimalNumber));
+        imaginaryExp= (parseInt( listI[1]));
 
     }
     public /*constructor*/ MyNumber(String number) {
@@ -128,13 +128,13 @@ public class MyNumber implements Expression
         int tmp_exp = 0;
         int tmp_imaginaryExp = 0;
 
-        list_val = decimalRefactor(tmp_value,tmp_exp);
-        value=new BigDecimal(list_val[0]).round(new MathContext(decimalNumber));
-        exp= (parseInt( list_val[1]));
+        listVal = decimalRefactor(tmp_value,tmp_exp);
+        value=new BigDecimal(listVal[0]).round(new MathContext(decimalNumber));
+        exp= (parseInt( listVal[1]));
 
-        list_i = decimalRefactor(tmp_imaginary,tmp_imaginaryExp);
-        imaginary=new BigDecimal(list_i[0]).round(new MathContext(decimalNumber));
-        imaginaryExp= (parseInt( list_i[1]));
+        listI = decimalRefactor(tmp_imaginary,tmp_imaginaryExp);
+        imaginary=new BigDecimal(listI[0]).round(new MathContext(decimalNumber));
+        imaginaryExp= (parseInt( listI[1]));
     }
     public /*constructor*/ MyNumber(String binaryValue, int base)
     {
@@ -183,7 +183,7 @@ public class MyNumber implements Expression
      * @return	The String that is the result of the conversion.
      */
     public boolean isComplex(){
-        return !(imaginary.signum() == 0);
+        return imaginary.signum() != 0;
     }
 
 

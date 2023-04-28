@@ -41,12 +41,12 @@ class TestMyNumber {
 		assertEquals(new MyNumber(value,imaginary), complexNumber);
 		assertNotEquals(complexNumber,number);
 		assertEquals(complexNumber, complexNumber);
-		assertNotEquals(complexNumber,null);
+		assertNotEquals(null, complexNumber);
 
 		assertEquals(new MyNumber(new BigDecimal("0"),imaginary), onlyComplexNumber);
 		assertNotEquals(complexNumber,onlyComplexNumber);
 		assertEquals(onlyComplexNumber, onlyComplexNumber);
-		assertNotEquals(onlyComplexNumber,null);
+		assertNotEquals(null, onlyComplexNumber);
 
 
 		assertEquals(new MyNumber(value,exp),realnumber);
