@@ -75,4 +75,17 @@ class TestConvertNotation
         assertEquals("3", listing.get(3).getValue());
         assertEquals("*", listing.get(4).getValue());
     }
+
+    @Test
+    void check_transform()
+    {
+        String s = "2 2 +";
+        List<Typos> list = StringRegex.analyse(s);
+        List<Typos> listing = transformNotation(Notation.POSTFIX, list, false);
+
+        assertEquals(3, listing.size());
+        assertEquals("2", listing.get(0).getValue());
+        assertEquals("2", listing.get(1).getValue());
+        assertEquals("+", listing.get(2).getValue());
+    }
 }

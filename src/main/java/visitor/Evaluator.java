@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /** Evaluation is a concrete visitor that serves to
  * compute and evaluate the results of arithmetic expressions.
  */
-public class Evaluator extends Visitor {
+public class Evaluator implements Visitor {
 
     /** The result of the evaluation will be stored in this private variable */
     private MyNumber computedValue;

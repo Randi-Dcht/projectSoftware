@@ -102,9 +102,9 @@ class TestInputUser
     void testInstance2()
     {
         InputUser inputUser = new InputUser(Notation.INFIX,NumberNotation.CARTESIAN,15);
-        assertSame(inputUser.getNotation(), Notation.INFIX);
+        assertSame(Notation.INFIX, inputUser.getNotation());
         inputUser.setNotation(Notation.POSTFIX);
-        assertSame(inputUser.getNotation(), Notation.POSTFIX);
+        assertSame(Notation.POSTFIX, inputUser.getNotation());
 
         inputUser.setUserInput(StringRegex.analyse("1 + 2"));
         assertEquals(3, inputUser.getUserInput().size());
