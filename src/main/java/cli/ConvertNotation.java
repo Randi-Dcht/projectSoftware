@@ -59,6 +59,41 @@ public class ConvertNotation
         return buff;
     }
 
+    /**
+     * Convert prefix to postfix
+     */
+    public static List<Typos> convertPrefix(List<Typos> data)
+    {
+        List<Typos> buff = new ArrayList<>();
+        Stack<Typos> stack = new Stack<>();
+
+        for(Typos e : data)
+        {
+            if (e.getType().equals(TypeString.OPERATOR))
+            {
+                if (stack.empty())
+                    stack.push(e);
+                else
+                {
+                    if (e.getPriority() > stack.peek().getPriority())
+                        stack.push(e);
+                    else
+                    {
+                        while (!stack.empty() && e.getPriority() <= stack.peek().getPriority())
+                            buff.add(stack.pop());
+                        stack.push(e);
+                    }
+                }
+            }
+            else
+                buff.add(e);
+        }
+        while (!stack.empty())
+            buff.add(stack.pop());
+
+        return buff;
+    }
+
 
     /**
      * Convert the data in postfix for compute
@@ -69,6 +104,8 @@ public class ConvertNotation
 
         if (notationIn.equals(Notation.INFIX))
             array = convertInfix(data);
+        else if (notationIn.equals(Notation.PREFIX))
+            array = convertPrefix(data);
         else
             array = data;
 

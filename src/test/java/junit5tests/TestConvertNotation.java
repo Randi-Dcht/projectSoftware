@@ -75,4 +75,19 @@ class TestConvertNotation
         assertEquals(listing.get(3).getValue(), "3");
         assertEquals(listing.get(4).getValue(), "*");
     }
+
+    @Test
+    void testConvertPrefix()
+    {
+        String s = "+ * 2 3 2";
+        List<Typos> list = StringRegex.analyse(s);
+        List<Typos> listing = transformNotation(Notation.PREFIX, list, false);
+
+        assertEquals(listing.size(), 5);
+        assertEquals(listing.get(0).getValue(), "2");
+        assertEquals(listing.get(1).getValue(), "3");
+        assertEquals(listing.get(2).getValue(), "2");
+        assertEquals(listing.get(3).getValue(), "*");
+        assertEquals(listing.get(4).getValue(), "+");
+    }
 }
