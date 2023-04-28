@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.List;
 
+/**
+ * Complex operation to compute the square root of a number
+ */
 public class Sqrt extends Operation
 {
     public /*constructor*/ Sqrt(List<Expression> elist) throws IllegalConstruction {
