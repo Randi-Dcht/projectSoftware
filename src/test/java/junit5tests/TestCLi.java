@@ -21,34 +21,43 @@ class TestCLi
     private final PrintStream originalOut = System.out;
     private final InputStream originalIn  = System.in;
 
+    private String symbol = "\n";
+
     @BeforeEach
     void setUpStreams()
     {
         System.setOut(new PrintStream(outContent));
+
+        if (System.getProperty("os.name").contains("Windows"))
+            symbol = "\r\n";
+        else if (System.getProperty("os.name").contains("Linux"))
+            symbol = "\n";
+        else if (System.getProperty("os.name").contains("Mac"))
+            symbol = "\r";
     }
 
     @Test
     void testPrinting()
     {
         Main.printing("test", true);
-        assertEquals("test\n", outContent.toString());
+        assertEquals("test"+symbol, outContent.toString());
         Main.printing("test", false);
-        assertEquals("test\ntest", outContent.toString());
+        assertEquals("test" + symbol + "test", outContent.toString());
     }
 
     @Test
     void outMain()
     {
         Main.printHelp();
-        String text = "=== HELP START===\n" +
-                "$> Quit program : .quit\n" +
-                "$> Verbose mode : .verbose <true|false> \n" +
-                "$> Please enter an expression to evaluate or .quit to exit \n" +
-                "$> To change the notation, use the command .mode <mode> where <mode> is cartesian, polar, exponential, scientific or e_notation \n" +
-                "$> To change the notation, use the command .notation <notation> where <notation> is infix, prefix, postfix \n" +
-                "$> To change the number of decimal, use the command .decim <number> where <number> is the number of decimal you want (15 by default) \n" +
-                "$> List of operators : [  +  -  *  /  comb  gcd  //  !  %  pgcd  ^  ppcm  prime  modulus  sqrt]\n" +
-                "=== HELP END===\n\n" ;
+        String text = "=== HELP START==="+ symbol +
+                "$> Quit program : .quit"+ symbol +
+                "$> Verbose mode : .verbose <true|false> "+  symbol +
+                "$> Please enter an expression to evaluate or .quit to exit " + symbol +
+                "$> To change the notation, use the command .mode <mode> where <mode> is cartesian, polar, exponential, scientific or e_notation " + symbol +
+                "$> To change the notation, use the command .notation <notation> where <notation> is infix, prefix, postfix " + symbol +
+                "$> To change the number of decimal, use the command .decim <number> where <number> is the number of decimal you want (15 by default) " + symbol +
+                "$> List of operators : [  +  -  *  /  comb  gcd  //  !  %  pgcd  ^  ppcm  prime  modulus  sqrt]" + symbol +
+                "=== HELP END===" + symbol + symbol ;
         assertEquals(text, outContent.toString());
     }
 
@@ -56,17 +65,17 @@ class TestCLi
     void testError()
     {
         Main.printError("test");
-        assertEquals("!!> test\n", outContent.toString());
+        assertEquals("!!> test" + symbol, outContent.toString());
     }
 
     @Test
     void testPrintMenu()
     {
         Main.printMenu();
-        String text = "$> Please enter an expression to evaluate or .quit to exit \n" +
-                "$> To change the notation, use the command .mode <mode> where <mode> is cartesian, polar, exponential, scientific or e_notation \n" +
-                "$> To change the notation, use the command .notation <notation> where <notation> is infix, prefix, postfix \n" +
-                "$> To change the number of decimal, use the command .decim <number> where <number> is the number of decimal you want (15 by default) \n";
+        String text = "$> Please enter an expression to evaluate or .quit to exit " + symbol +
+                "$> To change the notation, use the command .mode <mode> where <mode> is cartesian, polar, exponential, scientific or e_notation " + symbol +
+                "$> To change the notation, use the command .notation <notation> where <notation> is infix, prefix, postfix " + symbol +
+                "$> To change the number of decimal, use the command .decim <number> where <number> is the number of decimal you want (15 by default) "+ symbol;
         assertEquals(text, outContent.toString());
     }
 
@@ -74,7 +83,7 @@ class TestCLi
     void testPrintOperator()
     {
         Main.printOperator();
-        assertEquals("$> List of operators : [  +  -  *  /  comb  gcd  //  !  %  pgcd  ^  ppcm  prime  modulus  sqrt]\n", outContent.toString());
+        assertEquals("$> List of operators : [  +  -  *  /  comb  gcd  //  !  %  pgcd  ^  ppcm  prime  modulus  sqrt]" +symbol, outContent.toString());
     }
 
     @Test
@@ -82,7 +91,7 @@ class TestCLi
     {
         System.setIn(new ByteArrayInputStream("1 + 2".getBytes()));
         Main.get_input();
-        assertEquals("$>>> $> 3\n", outContent.toString());
+        assertEquals("$>>> $> 3" +symbol, outContent.toString());
 
         System.setIn(new ByteArrayInputStream(".mode binary".getBytes()));
         Main.get_input();
