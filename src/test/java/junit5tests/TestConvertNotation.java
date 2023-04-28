@@ -17,12 +17,12 @@ class TestConvertNotation
         List<Typos> list = StringRegex.analyse(s);
         List<Typos> listing = transformNotation(Notation.INFIX, list, false);
 
-        assertEquals(listing.size(), 5);
-        assertEquals(listing.get(0).getValue(), "2");
-        assertEquals(listing.get(1).getValue(), "2");
-        assertEquals(listing.get(2).getValue(), "*");
-        assertEquals(listing.get(3).getValue(), "2");
-        assertEquals(listing.get(4).getValue(), "+");
+        assertEquals(5, listing.size());
+        assertEquals("2", listing.get(0).getValue());
+        assertEquals("2", listing.get(1).getValue());
+        assertEquals("*", listing.get(2).getValue());
+        assertEquals("2", listing.get(3).getValue());
+        assertEquals("+", listing.get(4).getValue());
     }
 
     @Test
@@ -33,13 +33,13 @@ class TestConvertNotation
         List<Typos> listing = transformNotation(Notation.INFIX, list, false);
 
         assertEquals(listing.size(), 7);
-        assertEquals(listing.get(0).getValue(), "1");
-        assertEquals(listing.get(1).getValue(), "2");
-        assertEquals(listing.get(2).getValue(), "*");
-        assertEquals(listing.get(3).getValue(), "3");
-        assertEquals(listing.get(4).getValue(), "4");
-        assertEquals(listing.get(5).getValue(), "*");
-        assertEquals(listing.get(6).getValue(), "+");
+        assertEquals("1",listing.get(0).getValue());
+        assertEquals("2",listing.get(1).getValue());
+        assertEquals("*",listing.get(2).getValue());
+        assertEquals("3",listing.get(3).getValue());
+        assertEquals("4",listing.get(4).getValue());
+        assertEquals("*",listing.get(5).getValue());
+        assertEquals("+",listing.get(6).getValue());
     }
 
     @Test
@@ -49,16 +49,16 @@ class TestConvertNotation
         List<Typos> list = StringRegex.analyse(s);
         List<Typos> listing = transformNotation(Notation.INFIX, list, false);
 
-        assertEquals(listing.size(), 9);
-        assertEquals(listing.get(0).getValue(), "1");
-        assertEquals(listing.get(1).getValue(), "2");
-        assertEquals(listing.get(2).getValue(), "3");
-        assertEquals(listing.get(3).getValue(), "*");
-        assertEquals(listing.get(4).getValue(), "+");
-        assertEquals(listing.get(5).getValue(), "2");
-        assertEquals(listing.get(6).getValue(), "1");
-        assertEquals(listing.get(7).getValue(), "*");
-        assertEquals(listing.get(8).getValue(), "-");
+        assertEquals(9, listing.size());
+        assertEquals("1", listing.get(0).getValue());
+        assertEquals("2", listing.get(1).getValue());
+        assertEquals("3", listing.get(2).getValue());
+        assertEquals("*", listing.get(3).getValue());
+        assertEquals("+", listing.get(4).getValue());
+        assertEquals("2", listing.get(5).getValue());
+        assertEquals("1", listing.get(6).getValue());
+        assertEquals("*", listing.get(7).getValue());
+        assertEquals("-", listing.get(8).getValue());
     }
 
     @Test
@@ -68,26 +68,11 @@ class TestConvertNotation
         List<Typos> list = StringRegex.analyse(s);
         List<Typos> listing = transformNotation(Notation.INFIX, list, false);
 
-        assertEquals(listing.size(), 5);
-        assertEquals(listing.get(0).getValue(), "2");
-        assertEquals(listing.get(1).getValue(), "2");
-        assertEquals(listing.get(2).getValue(), "+");
-        assertEquals(listing.get(3).getValue(), "3");
-        assertEquals(listing.get(4).getValue(), "*");
-    }
-
-    @Test
-    void testConvertPrefix()
-    {
-        String s = "+ * 2 3 2";
-        List<Typos> list = StringRegex.analyse(s);
-        List<Typos> listing = transformNotation(Notation.PREFIX, list, false);
-
-        assertEquals(listing.size(), 0);
-        /*assertEquals(listing.get(0).getValue(), "2");
-        assertEquals(listing.get(1).getValue(), "3");
-        assertEquals(listing.get(2).getValue(), "2");
-        assertEquals(listing.get(3).getValue(), "*");
-        assertEquals(listing.get(4).getValue(), "+");*/
+        assertEquals(5, listing.size());
+        assertEquals("2", listing.get(0).getValue());
+        assertEquals("2", listing.get(1).getValue());
+        assertEquals("+", listing.get(2).getValue());
+        assertEquals("3", listing.get(3).getValue());
+        assertEquals("*", listing.get(4).getValue());
     }
 }

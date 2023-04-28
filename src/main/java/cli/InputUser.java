@@ -224,6 +224,13 @@ public class InputUser
         return this.mode;
     }
 
+    public Notation getNotationCompute()
+    {
+        if(this.notation.equals(Notation.INFIX))
+            return Notation.POSTFIX;
+        return this.notation;
+    }
+
     /**
      * @return the number of decimal
      */
@@ -280,7 +287,7 @@ public class InputUser
                 if(s.getOperator().getNumberArgs()==1)
                     list_of_expression_data.add(new MyNumber(new BigDecimal(0)));
                 args = 0;
-                e = getOperator(s, list_of_expression_data, Notation.POSTFIX);
+                e = getOperator(s, list_of_expression_data, getNotationCompute());
                 list_of_expression_data.clear();
 
 

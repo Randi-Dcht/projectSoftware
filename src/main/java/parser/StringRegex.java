@@ -20,8 +20,8 @@ public class StringRegex
     private StringRegex() {}
 
 
-    public static final String REGEX_OPERATOR = "[+\\-*/combgcd//!%^ppcmprimesqrtmodulus]";
-    public static final List<String> REGEX_STRING_OPERATOR = Arrays.asList("comb","gcd","ppcm","pgcd","prime","sqrt","modulus");
+    private static final String REGEX_OPERATOR = "[+\\-*/combgcd//!%^ppcmprimesqrtmodulus]";
+    private static final List<String> REGEX_STRING_OPERATOR = Arrays.asList("comb","gcd","ppcm","pgcd","prime","sqrt","modulus");
 
 
     /**

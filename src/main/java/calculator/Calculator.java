@@ -1,5 +1,6 @@
 package calculator;
 
+import cli.Main;
 import visitor.Evaluator;
 
 /**
@@ -26,9 +27,9 @@ public class Calculator {
      */
     public void print(Expression e)
     {
-        System.out.println("The result of evaluating expression " + e);
-        System.out.println("is: " + eval(e) + ".");
-        System.out.println();
+        Main.printing("The result of evaluating expression " + e, true);
+        Main.printing("is: " + eval(e) + ".", true);
+        Main.printing("\n", false);
     }
 
     /**
@@ -39,10 +40,10 @@ public class Calculator {
     public void printExpressionDetails(Expression e)
     {
         print(e);
-        System.out.print("It contains " + e.countDepth() + " levels of nested expressions, ");
-        System.out.print(e.countOps() + " operations");
-        System.out.println(" and " + e.countNbs() + " numbers.");
-        System.out.println();
+        Main.printing("It contains " + e.countDepth() + " levels of nested expressions, ", false);
+        Main.printing(e.countOps() + " operations", false);
+        Main.printing(" and " + e.countNbs() + " numbers.", true);
+        Main.printing("\n", false);
     }
 
     /**
