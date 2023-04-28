@@ -50,12 +50,10 @@ public final class Divides extends Operation
 
     /**
      * The actual computation of the (binary) arithmetic division of two BigDecimal number
-     *
      * @param l The first BigDecimal number
      * @param r The second BigDecimal number that should divide the first
      * @return The BigDecimal number that is the result of the division
      */
-
     public static  MyNumber divNumber(MyNumber l, MyNumber r){
 
         BigDecimal newVal;
@@ -96,7 +94,6 @@ public final class Divides extends Operation
 
     /**
      * The actual computation of the (binary) arithmetic division of two BigDecimal number
-     *
      * @param l The first BigDecimal number
      * @param r The second BigDecimal number that should divide the first
      * @return The BigDecimal number that is the result of the division

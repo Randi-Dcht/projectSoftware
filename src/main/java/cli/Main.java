@@ -37,6 +37,11 @@ public class Main
     }
 
 
+    /**
+     * Print on console
+     * @param message : string to print in console
+     * @param lineReturn : boolean
+     */
     public static void printing(String message, boolean lineReturn)
     {
         if (lineReturn)
@@ -46,6 +51,10 @@ public class Main
     }
 
 
+    /**
+     * Print the error in console
+     * @param message : error to print
+     */
     public static void printError(String message)
     {
         printing("!!> " + message, true);
@@ -63,6 +72,10 @@ public class Main
         printing("$> To change the number of decimal, use the command .decim <number> where <number> is the number of decimal you want (15 by default) ", true);
     }
 
+    /**
+     * Print the list of operator
+     * @see ListOperator
+     */
     public static void printOperator()
     {
         printing("$> List of operators : [", false);
@@ -71,11 +84,17 @@ public class Main
         printing("]", true);
     }
 
-
+    /**
+     * @return the mode
+     */
     public static NumberNotation getMode() {
         return mode;
     }
 
+    /**
+     * Update the mode
+     * @param mode is the new mode
+     */
     public static void setMode(NumberNotation mode) {
         Main.mode = mode;
 
@@ -83,20 +102,26 @@ public class Main
             printing("$> Warning : [base(integer)]x[notation]", true);
     }
 
+    /**
+     * @param mode : string of mode
+     */
     public static void setMode(String mode)
     {
         setMode(InputUser.getMode(mode));
     }
 
+
+    /**
+     * @return the decimal of number
+     */
     public static int getDecimalNumber() {
         return decimal_number;
     }
+
+
     /**
      * Get the input of the user or wait the command
      */
-
-
-
     public static void get_input()
     {
         printing("$>>> ", false);

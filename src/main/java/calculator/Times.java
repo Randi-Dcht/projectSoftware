@@ -14,7 +14,6 @@ import java.util.List;
 public final class Times extends Operation {
     /**
      * Class constructor specifying a number of Expressions to multiply.
-     *
      * @param elist The list of Expressions to multiply
      * @throws IllegalConstruction If an empty list of expressions if passed as parameter
      * @see #Times(List<Expression>,Notation)
@@ -26,7 +25,6 @@ public final class Times extends Operation {
     /**
      * Class constructor specifying a number of Expressions to multiply,
      * as well as the Notation used to represent the operation.
-     *
      * @param elist The list of Expressions to multiply
      * @param n     The Notation to be used to represent the operation
      * @throws IllegalConstruction If an empty list of expressions if passed as parameter
@@ -42,7 +40,6 @@ public final class Times extends Operation {
 
     /**
      * The actual computation of the (binary) arithmetic multiplication of two BigDecimal number
-     *
      * @param l The first BigDecimal number
      * @param r The second BigDecimal number that should be multiplied with the first
      * @return The BigDecimal number that is the result of the multiplication
@@ -89,12 +86,9 @@ public final class Times extends Operation {
 
     /**
      * The actual computation of the (binary) arithmetic multiplication of two BigDecimal number
-     *
      * @param l The first BigDecimal number
      * @param r The second BigDecimal number that should be multiplied with the first
      * @return The BigDecimal number that is the result of the multiplication
      */
-
-    //public int op(int l, int r) { return (l*r); }
     public MyNumber op(MyNumber l, MyNumber r) {return timesNumber(l,r);}
 }
