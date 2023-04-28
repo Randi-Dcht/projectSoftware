@@ -30,10 +30,10 @@ public class Main
     {
         printing("=== HELP START===", true);
         printing("$> Quit program : .quit", true);
-        printing("$> Verbose mode : .verbose <true|false> ", true);
+        printing("$> Verbose mode : .verbose <true|false>", true);
         printMenu();
         printOperator();
-        printing("=== HELP END===\n", true);
+        printing("=== HELP END===", true);
     }
 
 
@@ -66,10 +66,10 @@ public class Main
      */
     public static void printMenu()
     {
-        printing("$> Please enter an expression to evaluate or .quit to exit ", true);
-        printing("$> To change the notation, use the command .mode <mode> where <mode> is cartesian, polar, exponential, scientific or e_notation ", true);
-        printing("$> To change the notation, use the command .notation <notation> where <notation> is infix, prefix, postfix ", true);
-        printing("$> To change the number of decimal, use the command .decim <number> where <number> is the number of decimal you want (15 by default) ", true);
+        printing("$> Please enter an expression to evaluate or .quit to exit", true);
+        printing("$> To change the notation, use the command .mode <mode> where <mode> is cartesian, polar, exponential, scientific or e_notation", true);
+        printing("$> To change the notation, use the command .notation <notation> where <notation> is infix, prefix, postfix", true);
+        printing("$> To change the number of decimal, use the command .decim <number> where <number> is the number of decimal you want (15 by default)", true);
     }
 
     /**

@@ -49,15 +49,15 @@ class TestCLi
     void outMain()
     {
         Main.printHelp();
-        String text = "=== HELP START==="+ symbol +
-                "$> Quit program : .quit"+ symbol +
-                "$> Verbose mode : .verbose <true|false> "+  symbol +
-                "$> Please enter an expression to evaluate or .quit to exit " + symbol +
-                "$> To change the notation, use the command .mode <mode> where <mode> is cartesian, polar, exponential, scientific or e_notation " + symbol +
-                "$> To change the notation, use the command .notation <notation> where <notation> is infix, prefix, postfix " + symbol +
-                "$> To change the number of decimal, use the command .decim <number> where <number> is the number of decimal you want (15 by default) " + symbol +
+        String text = "=== HELP START===" + symbol +
+                "$> Quit program : .quit" + symbol +
+                "$> Verbose mode : .verbose <true|false>" +  symbol +
+                "$> Please enter an expression to evaluate or .quit to exit" + symbol +
+                "$> To change the notation, use the command .mode <mode> where <mode> is cartesian, polar, exponential, scientific or e_notation" + symbol +
+                "$> To change the notation, use the command .notation <notation> where <notation> is infix, prefix, postfix" + symbol +
+                "$> To change the number of decimal, use the command .decim <number> where <number> is the number of decimal you want (15 by default)" + symbol +
                 "$> List of operators : [  +  -  *  /  comb  gcd  //  !  %  pgcd  ^  ppcm  prime  modulus  sqrt]" + symbol +
-                "=== HELP END===" + symbol + symbol ;
+                "=== HELP END===" + symbol ;
         assertEquals(text, outContent.toString());
     }
 
@@ -72,10 +72,10 @@ class TestCLi
     void testPrintMenu()
     {
         Main.printMenu();
-        String text = "$> Please enter an expression to evaluate or .quit to exit " + symbol +
-                "$> To change the notation, use the command .mode <mode> where <mode> is cartesian, polar, exponential, scientific or e_notation " + symbol +
-                "$> To change the notation, use the command .notation <notation> where <notation> is infix, prefix, postfix " + symbol +
-                "$> To change the number of decimal, use the command .decim <number> where <number> is the number of decimal you want (15 by default) "+ symbol;
+        String text = "$> Please enter an expression to evaluate or .quit to exit" + symbol +
+                "$> To change the notation, use the command .mode <mode> where <mode> is cartesian, polar, exponential, scientific or e_notation" + symbol +
+                "$> To change the notation, use the command .notation <notation> where <notation> is infix, prefix, postfix" + symbol +
+                "$> To change the number of decimal, use the command .decim <number> where <number> is the number of decimal you want (15 by default)"+ symbol;
         assertEquals(text, outContent.toString());
     }
 
