@@ -73,6 +73,11 @@ class TestDivides {
 	}
 
 	@Test
+	void testToString() {
+		assertSame(-1, Divides.divNumber(new MyNumber(2), new MyNumber(0)).getInteger());
+	}
+
+	@Test
 	void testNullParamList() {
 		params = null;
 		assertThrows(IllegalConstruction.class, () -> op = new Divides(params));
