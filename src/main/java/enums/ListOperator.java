@@ -1,5 +1,8 @@
 package enums;
 
+/**
+ * List of operator in calculator
+ */
 public enum ListOperator
 {
     ADD("+", 1, 2),
@@ -19,10 +22,19 @@ public enum ListOperator
     SQRT("sqrt", 4, 1),
     ;
 
+    /**Value of the operator*/
     private final String value;
+    /**Priority of the operator*/
     private final int priority;
+    /**Number of arguments of the operator*/
     private final int numberArgs;
 
+    /**
+     * Constructor
+     * @param value : value of the operator
+     * @param priority : priority of the operator
+     * @param numberArgs : number of arguments of the operator
+     */
     ListOperator(String value, int priority, int numberArgs)
     {
         this.value = value;
@@ -30,16 +42,30 @@ public enum ListOperator
         this.numberArgs = numberArgs;
     }
 
+    /**
+     * Get the value
+     * @return the operator
+     */
     public String getValue()
     {
         return value;
     }
 
+
+    /**
+     * Get the priority
+     * @return the priority
+     */
     public int getPriority()
     {
         return priority;
     }
 
+
+    /**
+     * Get the number of arguments
+     * @return the number of arguments
+     */
     public int getNumberArgs()
     {
         return numberArgs;

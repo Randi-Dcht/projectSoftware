@@ -17,7 +17,6 @@ import static java.lang.Math.pow;
 /**
  * MyNumber is a concrete class that represents arithmetic numbers,
  * which are a special kind of Expressions, just like operations are.
- *
  * @see Expression
  * @see Operation
  */
@@ -46,38 +45,34 @@ public class MyNumber implements Expression
 
 
     /** getter method to obtain the value contained in the object
-     *
      * @return BigDecimal number of the real part contained in the object
      */
   public BigDecimal getValue() { return value; }
 
     /** getter method to obtain the exp contained in the object
-     *
      * @return int number contained in the object
      */
     public int getexp() { return exp; }
 
     /** getter method to obtain the value contained in the object
-     *
      * @return The integer number of the imaginary part contained in the object
      */
   public BigDecimal getImaginary() { return imaginary; }
 
+    /**
+     * @return the imaginary number for complex
+     */
     public int getImaginaryExp() { return imaginaryExp; }
+
 
     /**
      * Constructor method
-     *
      * @param value  TBigDecimal value to be contained in the object
      */
-    public MyNumber(int value)
+    public /*constructor*/ MyNumber(int value)
     {
         this(new BigDecimal(value));
     }
-
-
-
-
     public /*constructor*/ MyNumber(BigDecimal v) {
 
         list_val = decimalRefactor(v,0);
@@ -100,7 +95,6 @@ public class MyNumber implements Expression
         imaginary = tmp.round(new MathContext(decimalNumber));
         imaginaryExp = 0;
     }
-
     public /*constructor*/ MyNumber(BigDecimal v, BigDecimal i) {
 
         list_val = decimalRefactor(v,0);
@@ -111,7 +105,6 @@ public class MyNumber implements Expression
         imaginary=new BigDecimal(list_i[0]).round(new MathContext(decimalNumber));
         imaginaryExp= (parseInt( list_i[1]));
     }
-
     public /*constructor*/ MyNumber(BigDecimal v, int e, BigDecimal i, int ie) {
 
         list_val = decimalRefactor(v,e);
@@ -123,7 +116,6 @@ public class MyNumber implements Expression
         imaginaryExp= (parseInt( list_i[1]));
 
     }
-
     public /*constructor*/ MyNumber(String number) {
 
         String[] parts = number.split("(?=[-+i])|(?<=[-+i])");
@@ -144,10 +136,6 @@ public class MyNumber implements Expression
         imaginary=new BigDecimal(list_i[0]).round(new MathContext(decimalNumber));
         imaginaryExp= (parseInt( list_i[1]));
     }
-
-
-
-
     public /*constructor*/ MyNumber(String binaryValue, int base)
     {
         this(new BigDecimal(new BigInteger(binaryValue, base)));
@@ -159,7 +147,6 @@ public class MyNumber implements Expression
     /**
      * accept method to implement the visitor design pattern to traverse arithmetic expressions.
      * Each number will pass itself to the visitor object to get processed by the visitor.
-     *
      * @param v	The visitor object
      */
   public void accept(Visitor v) {
@@ -169,7 +156,6 @@ public class MyNumber implements Expression
 
     /**
      * The depth of a number expression is always 0
-     *
      * @return The depth of a number expression
      */
   public int countDepth() {
@@ -178,7 +164,6 @@ public class MyNumber implements Expression
 
     /**
      * The number of operations contained in a number expression is always 0
-     *
      * @return The number of operations contained in a number expression
      */
   public int countOps() {
@@ -187,7 +172,6 @@ public class MyNumber implements Expression
 
     /**
      * The number of numbers contained in a number expression is always 1
-     *
      * @return The number of numbers contained in  a number expression
      */
   public int countNbs() {
@@ -196,23 +180,37 @@ public class MyNumber implements Expression
 
     /**
      * Convert a number into a String to allow it to be printed.
-     *
      * @return	The String that is the result of the conversion.
      */
-
     public boolean isComplex(){
         return !(imaginary.signum() == 0);
     }
 
+
+    /**
+     * @param v : the number
+     * @param e : pow
+     * @return number*/
     public BigDecimal applyExp(BigDecimal v, int e){
         return v.multiply(BigDecimal.valueOf(pow(10, e)));
     }
 
+
+    /**
+     * @return the base of number
+     */
     public int getBase()
     {
         return base;
     }
 
+
+    /**
+     * Update the decimal of number
+     * @param e : number of decimal
+     * @param v : number
+     * @return array of string
+     */
     public String[] decimalRefactor(BigDecimal v, int e){
         while ( v.compareTo(BigDecimal.valueOf(0.1)) < 0 && v.compareTo(BigDecimal.valueOf(-0.1)) > 0 && !((v.round(new MathContext(decimalNumber))).compareTo(BigDecimal.ZERO) == 0))  {
             v = (v.multiply(BigDecimal.valueOf(10)));
@@ -225,13 +223,18 @@ public class MyNumber implements Expression
     }
     
 
+    /**
+     * @return String of my number
+     */
     @Override
     public String toString() {
         return toString(notation);
     }
 
 
-
+    /**
+     * @return String of my number
+     * @param n is the notation of the number*/
     public final String toString(NumberNotation n)
     {
         Double real = applyExp(this.value,this.exp).round(new MathContext(decimalNumber)).doubleValue();
@@ -295,7 +298,6 @@ public class MyNumber implements Expression
 
 
   /** Two MyNumber expressions are equal if the values they contain are equal
-   *
    * @param o The object to compare to
    * @return  A boolean representing the result of the equality test
    */
@@ -329,7 +331,6 @@ public class MyNumber implements Expression
     /** The method hashCode needs to be overridden it the equals method is overridden;
      * 	otherwise there may be problems when you use your object in hashed collections
      * 	such as HashMap, HashSet, LinkedHashSet.
-     *
      * @return	The result of computing the hash.
      */
   @Override
@@ -338,6 +339,9 @@ public class MyNumber implements Expression
   }
 
 
+  /**
+   * @return the integer of the number
+   */
   public int getInteger()
     {
         return value.intValue();

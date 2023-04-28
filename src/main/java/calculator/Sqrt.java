@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.List;
 
+/**
+ * Complex operation to compute the square root of a number
+ */
 public class Sqrt extends Operation
 {
     public /*constructor*/ Sqrt(List<Expression> elist) throws IllegalConstruction {
@@ -13,7 +16,6 @@ public class Sqrt extends Operation
     /**
      * Class constructor specifying a number of Expressions to square root,
      * as well as the Notation used to represent the operation.
-     *
      * @param elist The list of Expressions to multiply
      * @param n The Notation to be used to represent the operation
      * @throws IllegalConstruction    If an empty list of expressions if passed as parameter
@@ -26,6 +28,10 @@ public class Sqrt extends Operation
         neutral = 0;
     }
 
+
+    /**
+     * @return the sqrt of number
+     */
     public MyNumber op(MyNumber l, MyNumber r) {
         BigDecimal a = l.getValue();
         int exp = l.getexp();

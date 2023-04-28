@@ -4,6 +4,10 @@ import calculator.*;
 
 import java.util.List;
 
+/**
+ * Class to implement : pow
+ * @author randi-dcht
+ */
 public class Pow extends Operation
 {
     /**

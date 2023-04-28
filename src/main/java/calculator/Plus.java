@@ -19,7 +19,6 @@ public final class Plus extends Operation
 
   /**
    * Class constructor specifying a number of Expressions to add.
-   *
    * @param elist The list of Expressions to add
    * @throws IllegalConstruction    If an empty list of expressions if passed as parameter
    * @see #Plus(List<Expression>,Notation)
@@ -31,7 +30,6 @@ public final class Plus extends Operation
   /**
    * Class constructor specifying a number of Expressions to add,
    * as well as the Notation used to represent the operation.
-   *
    * @param elist The list of Expressions to add
    * @param n The Notation to be used to represent the operation
    * @throws IllegalConstruction    If an empty list of expressions if passed as parameter
@@ -44,6 +42,9 @@ public final class Plus extends Operation
   	neutral = 0;
   }
 
+  /**
+   * @return Addition of two number
+   */
 public static MyNumber addition(BigDecimal l, int lExp, BigDecimal r, int rExp){
     BigDecimal newVal;
     int exp;
@@ -66,6 +67,12 @@ public static MyNumber addition(BigDecimal l, int lExp, BigDecimal r, int rExp){
     return new MyNumber(newVal,exp);
 }
 
+
+/**
+ * @return number + number
+ * @param r : number
+ * @param l : number
+ */
 public static MyNumber addNumber(MyNumber l, MyNumber r){
 
     BigDecimal lValue =  l.getValue();
@@ -89,7 +96,6 @@ public static MyNumber addNumber(MyNumber l, MyNumber r){
 
   /**
    * The actual computation of the (binary) arithmetic addition of two integers
-   *
    * @param l The first BigDecimal number
    * @param r The second BigDecimal number that should be added to the first
    * @return The BigDecimal number that is the result of the addition

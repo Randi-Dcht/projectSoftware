@@ -62,7 +62,6 @@ public class InputUser
      * @param input : string input of user
      * @return int of the string
      */
-
     public static int getNumber(String input){
         try {
             Integer.parseInt(input);
@@ -79,7 +78,6 @@ public class InputUser
      * @return notation : E_notation, scientific, polar, exponential, binary, cartesian
      *                       default : cartesian
      */
-
     public static NumberNotation getMode(String input)
     {
         NumberNotation notation;
@@ -202,21 +200,33 @@ public class InputUser
         this.user_input_list = inputUser;
     }
 
+    /**
+     * @return list of user input
+     */
     public List<Typos> getUserInput()
     {
         return this.user_input_list;
     }
 
+    /**
+     * @return the notation
+     */
     public Notation getNotation()
     {
         return this.notation;
     }
 
+    /**
+     * @return the mode
+     */
     public NumberNotation getMode()
     {
         return this.mode;
     }
 
+    /**
+     * @return the number of decimal
+     */
     public int getDecimalNumber()
     {
         return this.decimalNumber;

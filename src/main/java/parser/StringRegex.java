@@ -9,15 +9,26 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
+/**
+ * Class to process the input of user
+ */
 public class StringRegex
 {
+    /**
+     * Constructor
+     */
     private StringRegex() {}
 
 
     public static final String REGEX_OPERATOR = "[+\\-*/combgcd//!%^ppcmprimesqrtmodulus]";
     public static final List<String> REGEX_STRING_OPERATOR = Arrays.asList("comb","gcd","ppcm","pgcd","prime","sqrt","modulus");
 
+
+    /**
+     * Method to analyse the input of user
+     * @param str : string input of user
+     * @return list of string with type
+     */
     public static List<Typos> analyse(String str)
     {
         List<Typos> list = new ArrayList<>();

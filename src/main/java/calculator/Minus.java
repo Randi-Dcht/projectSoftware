@@ -30,7 +30,6 @@ public final class Minus extends Operation {
     /**
      * Class constructor specifying a number of Expressions to subtract,
      * as well as the Notation used to represent the operation.
-     *
      * @param elist The list of Expressions to subtract
      * @param n     The Notation to be used to represent the operation
      * @throws IllegalConstruction If an empty list of expressions if passed as parameter
@@ -43,6 +42,13 @@ public final class Minus extends Operation {
         neutral = 0;
     }
 
+
+    /**
+     * Return the minimum number between two number
+     * @param l : number
+     * @param r : number
+     * @return number
+     */
     public static MyNumber subtraction(BigDecimal l, int lExp, BigDecimal r, int rExp){
         BigDecimal newVal;
         int exp;
@@ -65,6 +71,13 @@ public final class Minus extends Operation {
 
     }
 
+
+    /**
+     * Return the minimum number between two number
+     * @param l : number
+     * @param r : number
+     * @return number
+     */
     public static MyNumber minNumber(MyNumber l, MyNumber r){
         BigDecimal lValue = l.getValue();
         BigDecimal rValue = r.getValue();
@@ -85,7 +98,6 @@ public final class Minus extends Operation {
 
     /**
      * The actual computation of the (binary) arithmetic subtraction of two integers
-     *
      * @param l The first BigDecimal number
      * @param r The second BigDecimal number that should be subtracted from the first
      * @return The BigDecimal number that is the result of the subtraction
