@@ -10,8 +10,8 @@ class TestBasesNumber
     void test_binary_2()
     {
         MyNumber abinary = new MyNumber( "101", 2);
-        assertEquals(abinary.getBase(), 2);
-        assertEquals(abinary.getInteger(), 5);
+        assertEquals(2, abinary.getBase());
+        assertEquals(5, abinary.getInteger());
     }
 
 
@@ -19,15 +19,15 @@ class TestBasesNumber
     void test_binary_16()
     {
         MyNumber abinary = new MyNumber( "A1", 16);
-        assertEquals(abinary.getBase(), 16);
-        assertEquals(abinary.getInteger(), 161);
+        assertEquals(16, abinary.getBase());
+        assertEquals(161, abinary.getInteger());
     }
 
     @Test
     void test_binary_8()
     {
         MyNumber abinary = new MyNumber( "16", 8);
-        assertEquals(abinary.getBase(), 8);
-        assertEquals(abinary.getInteger(), 14);
+        assertEquals(8, abinary.getBase());
+        assertEquals(14, abinary.getInteger());
     }
 }

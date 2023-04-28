@@ -76,8 +76,8 @@ public class ConvertNotation
         if (isPrint)
         {
             for (Typos word : array)
-                System.out.print(word.getValue() + " ");
-            System.out.println(" ");
+                Main.printing(word.getValue() + " ",false);
+            Main.printing("\n", false);
         }
 
         return array;

@@ -90,11 +90,11 @@ class TestCLi
 
         System.setIn(new ByteArrayInputStream(".decim 5".getBytes()));
         Main.get_input();
-        assertEquals(Main.getDecimalNumber(), 5);
+        assertEquals(5, Main.getDecimalNumber());
 
         System.setIn(new ByteArrayInputStream(".decim 15".getBytes()));
         Main.get_input();
-        assertEquals(Main.getDecimalNumber(), 15);
+        assertEquals(15, Main.getDecimalNumber());
 
         Main.setMode("cartesian");
     }
@@ -110,29 +110,29 @@ class TestCLi
     void test_mode()
     {
         Main.setMode("binary");
-        assertEquals(Main.getMode(), NumberNotation.BINARY);
+        assertEquals(NumberNotation.BINARY, Main.getMode());
 
         Main.setMode("cartesian");
-        assertEquals(Main.getMode(), NumberNotation.CARTESIAN);
+        assertEquals(NumberNotation.CARTESIAN, Main.getMode());
 
         Main.setMode("exponential");
-        assertEquals(Main.getMode(), NumberNotation.EXPONENTIAL);
+        assertEquals(NumberNotation.EXPONENTIAL, Main.getMode());
 
         Main.setMode("scientific");
-        assertEquals(Main.getMode(), NumberNotation.SCIENTIFIC);
+        assertEquals(NumberNotation.SCIENTIFIC, Main.getMode());
 
         Main.setMode("e_notation");
-        assertEquals(Main.getMode(), NumberNotation.E_NOTATION);
+        assertEquals(NumberNotation.E_NOTATION, Main.getMode());
 
         Main.setMode("polar");
-        assertEquals(Main.getMode(), NumberNotation.POLAR);
+        assertEquals(NumberNotation.POLAR, Main.getMode());
 
     }
 
     @Test
     void testDecimal()
     {
-        assertEquals(Main.getDecimalNumber(), 15);
+        assertEquals(15, Main.getDecimalNumber());
     }
 
 }
