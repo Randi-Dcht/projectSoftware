@@ -290,9 +290,7 @@ public class MyNumber implements Expression
 
             //string to print in the case of a binary number
             case BINARY ->
-                    String.format("%s%s", "", (value.signum() == 0 && imaginary.signum() != 0) ? String.format("i*%s", imaginary) :
-                            (imaginary.signum() == 0) ? String.format("%s", value) :
-                                    String.format("%s + i*%s", value,imaginary));
+                    Integer.toString(getInteger(), getBase());
         };
       }
 

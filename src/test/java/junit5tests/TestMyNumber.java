@@ -69,6 +69,7 @@ class TestMyNumber {
 		assertEquals(new MyNumber(value).toString(), number.toString());
 		assertEquals(new MyNumber(value,imaginary).toString(), complexNumber.toString());
 		assertEquals(new MyNumber(new BigDecimal(0),imaginary).toString(), onlyComplexNumber.toString());
+		assertEquals("10", new MyNumber("1010", 2).toString());
 	}
 
 }
