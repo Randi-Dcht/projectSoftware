@@ -11,7 +11,7 @@
 ![Coverage](.github/badges/jacoco.svg)
 ![Branches](.github/badges/branches.svg)
 
-## SonarCloud (informations)
+## SonarCloud
 
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=Randi-Dcht_projectSoftware)](https://sonarcloud.io/summary/new_code?id=Randi-Dcht_projectSoftware)
 
@@ -19,6 +19,10 @@
 ## See the wiki :
 
 > https://github.com/Randi-Dcht/projectSoftware/wiki
+
+## Video :
+
+> https://alumniumonsac-my.sharepoint.com/:f:/g/personal/190134_umons_ac_be/Eio_pvKapIlMg2Ubdb3D5D8BOL_NzU_7cCOBzHGVSg99_Q?e=duI7Rg
 
 ## About
 
