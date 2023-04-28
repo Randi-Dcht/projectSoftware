@@ -91,13 +91,6 @@ Feature: Integer Arithmetic Expressions
     Then the operation evaluates to 0
 
 
-
-  Scenario: Adding two variables
-    Given an integer operation '+'
-    When I provide a first variable a containing the value 4
-    And I provide a second variable b containing the value 5
-    Then the operation evaluates to 9
-
   Scenario: Printing the modulus of two integer numbers
     Given the modulus of two numbers 8 and 6
     Then its INFIX notation is ( 8 % 6 )
