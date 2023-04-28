@@ -285,6 +285,7 @@ public class Main
         printing("$> Calculator Cucumber\n This is a calculator that can be used to perform basic arithmetic operations.\n", false);
         printMenu();
         printOperator();
+        printMemory();
         memory.loadMemory();
         log.loadLog();
         while(isRunning)

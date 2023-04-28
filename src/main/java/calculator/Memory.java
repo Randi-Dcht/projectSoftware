@@ -213,6 +213,7 @@ public class Memory {
                 bufferedWriter.newLine();
             }
             bufferedWriter.close();
+            fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -242,6 +243,7 @@ public class Memory {
                 Expression expression = convertStringToExpression(data[3]);
                 memory.add(new Variable(name, number, expression, timeStamp));
             }
+            sc.close();
         } catch (Exception e) {
             System.out.println("Error reading log or memory file");
             System.out.println(e.getMessage());
