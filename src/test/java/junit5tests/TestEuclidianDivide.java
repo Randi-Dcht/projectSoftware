@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class TestEuclidianDivide
+class TestEuclidianDivide
 {
     @Test
     void testConstructor1()

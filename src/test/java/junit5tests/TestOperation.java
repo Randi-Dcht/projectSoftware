@@ -34,7 +34,7 @@ class TestOperation {
 	}
 
 	@Test
-	void testNotEquals(){ assertNotEquals(o,null);}
+	void testNotEquals(){ assertNotEquals(null,o);}
 
 	@Test
 	void testCountDepth() {
