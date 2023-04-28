@@ -351,7 +351,7 @@ public class CalculatorSteps {
 		MyNumber number = new MyNumber(new BigDecimal(arg0),arg1);
 		MyNumber a= new MyNumber(new BigDecimal(0));
 		assertEquals(number,number);
-		assertNotEquals(number,null);
+		assertNotEquals(null, number);
 		assertNotEquals(number,a);
 
 	}

@@ -144,25 +144,26 @@ public class Main
         {
             if (listInput.get(0).equals(".quit"))
                 isRunning = false;
-            else if (listInput.get(0).equals(".mode") && listInput.size() == 2){
-                setMode(listInput.get(1));
-                printing("$> Mode : " + mode.toString(), true);
-            }
-            else if (listInput.get(0).equals(".notation") && listInput.size() == 2)
-            {
-                notation = InputUser.getNotation(listInput.get(1));
-                printing("$> Notation : " + notation.toString(), true);
-            }
-            else if (listInput.get(0).equals(".decim") && listInput.size() == 2)
-            {
-                decimal_number = InputUser.getNumber(listInput.get(1));
-                printing("$> Number of decimals : " + decimal_number, true);
-            }
-            else if (listInput.get(0).equals(".verbose") && listInput.size() == 2)
-                verbose = listInput.get(1).equals("true");
             else if (listInput.get(0).equals(".help"))
                 printHelp();
-
+            else if (listInput.size() == 2)
+            {
+                switch (listInput.get(0)) {
+                    case ".mode" -> {
+                        setMode(listInput.get(1));
+                        printing("$> Mode : " + mode.toString(), true);
+                    }
+                    case ".notation" -> {
+                        notation = InputUser.getNotation(listInput.get(1));
+                        printing("$> Notation : " + notation.toString(), true);
+                    }
+                    case ".decim" -> {
+                        decimal_number = InputUser.getNumber(listInput.get(1));
+                        printing("$> Number of decimals : " + decimal_number, true);
+                    }
+                    case ".verbose" -> verbose = listInput.get(1).equals("true");
+                }
+            }
             else
             {
                 inputUser_instance.setUserInput(StringRegex.analyse(inputUser));
