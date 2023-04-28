@@ -204,7 +204,7 @@ public class Memory {
      * Save the memory or the log
      * @param memoryFile the name of the file
      */
-    private void save(String memoryFile) {
+    public void save(String memoryFile) {
         try {
             FileWriter fileWriter = new FileWriter(path + memoryFile);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
