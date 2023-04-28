@@ -18,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class TestCLi
 {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final ByteArrayInputStream  inContent  = new ByteArrayInputStream("1 + 2".getBytes());
     private final PrintStream originalOut = System.out;
     private final InputStream originalIn  = System.in;
 
@@ -78,10 +77,33 @@ class TestCLi
         assertEquals("$> List of operators : [  +  -  *  /  comb  gcd  //  !  %  pgcd  ^  ppcm  prime  modulus  sqrt]\n", outContent.toString());
     }
 
+    @Test
+    void testInputUser()
+    {
+        System.setIn(new ByteArrayInputStream("1 + 2".getBytes()));
+        Main.get_input();
+        assertEquals("$>>> $> 3\n", outContent.toString());
+
+        System.setIn(new ByteArrayInputStream(".mode binary".getBytes()));
+        Main.get_input();
+        assertEquals(Main.getMode(), NumberNotation.BINARY);
+
+        System.setIn(new ByteArrayInputStream(".decim 5".getBytes()));
+        Main.get_input();
+        assertEquals(Main.getDecimalNumber(), 5);
+
+        System.setIn(new ByteArrayInputStream(".decim 15".getBytes()));
+        Main.get_input();
+        assertEquals(Main.getDecimalNumber(), 15);
+
+        Main.setMode("cartesian");
+    }
+
     @AfterEach
     void restoreStreams()
     {
         System.setOut(originalOut);
+        System.setIn(originalIn);
     }
 
     @Test
