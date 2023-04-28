@@ -1,5 +1,6 @@
 package junit5tests;
 
+import calculator.Notation;
 import calculator.NumberNotation;
 import cli.Main;
 import org.junit.After;
@@ -7,12 +8,16 @@ import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import parser.StringRegex;
+import parser.Typos;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.List;
 
+import static cli.ConvertNotation.transformNotation;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TestCLi
@@ -84,6 +89,16 @@ class TestCLi
     {
         Main.printOperator();
         assertEquals("$> List of operators : [  +  -  *  /  comb  gcd  //  !  %  pgcd  ^  ppcm  prime  modulus  sqrt]" +symbol, outContent.toString());
+    }
+
+    @Test
+    void testPrintTransform()
+    {
+        String s = "2 2 +";
+        List<Typos> list = StringRegex.analyse(s);
+        List<Typos> listing = transformNotation(Notation.INFIX, list, true);
+        String txt = "2 2 + " + symbol;
+        assertEquals(txt, outContent.toString());
     }
 
     @Test
